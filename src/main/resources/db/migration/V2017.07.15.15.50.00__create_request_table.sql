@@ -1,0 +1,33 @@
+DECLARE n_request NUMBER(10);
+
+BEGIN
+   SELECT COUNT(*) INTO n_request FROM tab WHERE tname='REQUEST';
+
+   IF (n_request = 0) THEN
+      EXECUTE IMMEDIATE
+      'CREATE TABLE REQUEST (
+          ID NUMBER(10) NOT NULL PRIMARY KEY,
+          USER_ID NUMBER(10) NOT NULL,
+          CUSTOMER_ID NUMBER(10) NOT NULL,
+          REQUEST_DATE DATE NOT NULL,
+          ARRIVAL_DATE DATE NOT NULL,
+          DEPARTURE_DATE DATE NOT NULL,
+          FOREIGN KEY (USER_ID) REFERENCES USERS(ID),
+          FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMER(ID) ) ';
+
+      EXECUTE IMMEDIATE
+      'CREATE SEQUENCE request_id_incr START WITH 1';
+
+      EXECUTE IMMEDIATE
+      'CREATE OR REPLACE TRIGGER ID_REQUEST
+          BEFORE INSERT ON REQUEST
+          FOR EACH ROW
+
+          BEGIN
+            SELECT request_id_incr.NEXTVAL
+            INTO   :new.id
+            FROM   dual;
+          END; ';
+   END IF;
+END;
+

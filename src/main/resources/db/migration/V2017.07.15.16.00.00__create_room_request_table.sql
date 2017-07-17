@@ -1,0 +1,15 @@
+DECLARE n_room_request NUMBER(10);
+
+BEGIN
+   SELECT COUNT(*) INTO n_room_request FROM tab WHERE tname='ROOM_REQUEST';
+
+   IF (n_room_request = 0) THEN
+      EXECUTE IMMEDIATE
+      'CREATE TABLE ROOM_REQUEST (
+          ROOM_ID NUMBER(10) NOT NULL,
+          REQUEST_ID NUMBER(10) NOT NULL,
+          FOREIGN KEY (ROOM_ID) REFERENCES ROOM(ID),
+          FOREIGN KEY (REQUEST_ID) REFERENCES REQUEST(ID) ) ';
+   END IF;
+END;
+
