@@ -1,0 +1,36 @@
+DECLARE n_user NUMBER(10);
+
+BEGIN
+   SELECT COUNT(*) INTO n_user FROM tab WHERE tname='USERS';
+
+   IF (n_user = 0) THEN
+      EXECUTE IMMEDIATE
+      'CREATE TABLE USERS (
+          ID NUMBER(10) NOT NULL PRIMARY KEY,
+          LAST_NAME VARCHAR2(20) NOT NULL ,
+          FIRST_NAME VARCHAR2(20) NOT NULL,
+          USER_ROLE VARCHAR2(20) NOT NULL,
+          BIRTH_DATE DATE,
+          HIRE_DATE DATE NOT NULL,
+          DEPARTURE_DATE DATE,
+          PHONE_NUMBER NUMBER(20),
+          IMAGE_PATH VARCHAR2(100),
+          USER_EMAIL VARCHAR2(100) NOT NULL,
+          USER_PASSWORD VARCHAR2(20) NOT NULL )';
+
+      EXECUTE IMMEDIATE
+      'CREATE SEQUENCE user_id_incr START WITH 1';
+
+      EXECUTE IMMEDIATE
+      'CREATE OR REPLACE TRIGGER ID_USER
+          BEFORE INSERT ON USERS
+          FOR EACH ROW
+
+          BEGIN
+            SELECT user_id_incr.NEXTVAL
+            INTO   :new.id
+            FROM   dual;
+          END; ';
+   END IF;
+END;
+
