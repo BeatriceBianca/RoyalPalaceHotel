@@ -8,9 +8,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"configuration", "ro.hotel.royalpalace.model", "ro.hotel.royalpalace.main", "controller", "ro.hotel.royalpalace.service", "ro.hotel.royalpalace.auxiliary"})
-@EnableJpaRepositories("ro.hotel.royalpalace.repository")
-@EntityScan(basePackages = {"ro.hotel.royalpalace.model"})
+@ComponentScan({"configuration", "com.hotel.royalpalace.model", "com.hotel.royalpalace.main", "controller",
+		"com.hotel.royalpalace.service", "com.hotel.royalpalace.auxiliary", "com.hotel.royalpalace.repository"})
+@EnableJpaRepositories("com.hotel.royalpalace.repository")
+@EntityScan(basePackages = {"com.hotel.royalpalace.model"})
 @EnableScheduling
 public class RoyalpalaceApplication {
 
