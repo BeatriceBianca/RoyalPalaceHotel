@@ -1,0 +1,51 @@
+body {
+    background: url("/img/entrance.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.container input {
+    background-color: rgba(242, 197, 120, 1);
+    border: none;
+    width: 80%;
+    height: 10%;
+    margin-top: 5%;
+    margin-left: 9%;
+    font-size: 16px;
+    outline: none;
+}
+
+.container div {
+    margin-top: 6%;
+    font-size: 20px;
+    color: rgb(242, 197, 120);
+    text-align: center;
+}
+
+.container {
+    background-color: rgba(30, 13, 0, 0.95);
+    width: 15%;
+    height: 40%;
+    position: absolute;
+    top: 40%;
+    bottom: 0;
+    left: 0;
+    right: -0.75%;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.login-button {
+    background-color: rgba(242, 197, 120, 1);
+    border: none;
+    width: 60%;
+    height: 10%;
+    margin-top: 23%;
+    margin-left: 20%;
+    font-size: 16px;
+    font-family: 'Rye' ;
+    outline: none;
+    cursor: pointer;
+}
