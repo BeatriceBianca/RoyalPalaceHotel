@@ -1,6 +1,5 @@
 package controller;
 
-import com.hotel.royalpalace.model.User;
 import com.hotel.royalpalace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +19,6 @@ public class BaseController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getLoginPage(@RequestParam(value="name", required=false) String name, Model model){
-
-        User myUser = userService.getByLastName("LUCA");
-        name = myUser.getFirstName();
-        model.addAttribute("name", name);
-
         return "login";
     }
 }

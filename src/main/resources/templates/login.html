@@ -2,10 +2,21 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
-    <title>Title</title>
+    <title>Royal Palace Hotel</title>
+
+    <link rel="icon"
+          type="image/x-icon"
+          href="/img/crown.ico" />
+    <link href='https://fonts.googleapis.com/css?family=Rye' rel='stylesheet' />
+    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
 </head>
 <body>
-    Hello,
-    <span th:text="${name}"></span>
+    <div class="container">
+        <div>Email</div>
+        <input type="text" id="username"/><br/><br/>
+        <div>Password</div>
+        <input type="password" id="password" />
+        <button class="login-button">Get In</button>
+    </div>
 </body>
 </html>
