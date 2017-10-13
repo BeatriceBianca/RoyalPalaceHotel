@@ -17,7 +17,8 @@ body {
     outline: none;
 }
 
-.container div {
+.container label {
+    display: block;
     margin-top: 6%;
     font-size: 20px;
     color: rgb(242, 197, 120);

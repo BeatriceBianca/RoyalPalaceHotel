@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" ng-app="RoyalPalaceHotel">
 <head>
     <meta charset="UTF-8" />
     <title>Royal Palace Hotel</title>
@@ -8,16 +8,23 @@
           type="image/x-icon"
           href="/img/crown.ico" />
     <link href='https://fonts.googleapis.com/css?family=Rye' rel='stylesheet' />
-    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"/>
+
 </head>
-<body>
-    <div class="container">
-        <div>Email</div>
-        <input type="text" id="email" name="email" /><br/><br/>
-        <div>Password</div>
-        <input type="password" id="password" name="password"/>
-        <button class="login-button">Get In</button>
-    </div>
+<body ng-controller="LoginController">
+<form class="container" name="login">
+
+    <label for="email"> Email: </label>
+    <input type="text" id="email" name="email" ng-model="email" required="required"/><br/><br/>
+    <label for="password"> Password </label>
+    <input type="password" id="password" name="password" ng-model="password" required="required"/>
+    <button type="submit" class="login-button" ng-click="loginFct()">Get In</button>
+</form>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript" src="/js/module.js"></script>
+<script type="text/javascript" src="/js/LoginController.js"></script>
+<script type="text/javascript" src="/js/LoginService.js"></script>
+<link rel="stylesheet" type="text/css" href="/styles/login.css"/>
 </body>
 </html>
