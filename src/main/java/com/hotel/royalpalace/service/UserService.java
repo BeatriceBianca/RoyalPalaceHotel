@@ -9,5 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UserService {
 
     @Transactional(readOnly = true)
-    User getByLastName(String name);
+    User getUser(String email, String password);
 }
