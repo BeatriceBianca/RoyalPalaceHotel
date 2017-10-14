@@ -43,10 +43,51 @@ body {
     border: none;
     width: 60%;
     height: 10%;
-    margin-top: 23%;
+    margin-top: 18%;
     margin-left: 20%;
     font-size: 16px;
     font-family: 'Rye' ;
     outline: none;
     cursor: pointer;
+}
+
+#errorContainer, #errorCircle1, #errorCircle2, #errorContainer span {
+    color: rgb(242, 197, 120);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    border-radius: 45%;
+    background-color: rgb(30, 13, 0);
+    display: none;
+}
+
+#errorContainer span {
+    top: 29%;
+    text-align: center;
+    background-color: transparent;
+}
+
+#errorContainer {
+    width: 11%;
+    height: 22%;
+    top: 20%;
+    right: -40%;
+    border: solid 4px rgb(242, 197, 120);
+}
+
+#errorCircle1 {
+    width: 15px;
+    height: 15px;
+    top: 35%;
+    right: -18%;
+    border: solid 1px rgb(242, 197, 120);
+}
+
+#errorCircle2 {
+    width: 20px;
+    height: 20px;
+    top: 30%;
+    right: -25%;
+    border: solid 2px rgb(242, 197, 120);
 }
