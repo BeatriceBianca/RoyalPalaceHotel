@@ -36,18 +36,23 @@ public class BaseController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody UserInfo userInfo) {
 
-        User user = userService.getUser(userInfo.getEmail(), userInfo.getPassword());
+        try {
+            User user = userService.getUser(userInfo.getEmail(), userInfo.getPassword());
 
-        if (user == null) {
-            return new ResponseEntity<>("", HttpStatus.OK);
-        } else {
-            if (user.getUserRole().equals("MANAGER")) {
-                return new ResponseEntity<>("manager", HttpStatus.OK);
-            } else if (user.getUserRole().equals("MAID")) {
-                return new ResponseEntity<>("maid", HttpStatus.OK);
+            if (user == null) {
+                return new ResponseEntity<>("User not found", HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("receptionist", HttpStatus.OK);
+                if (user.getUserRole().equals("MANAGER")) {
+                    return new ResponseEntity<>("manager", HttpStatus.OK);
+                } else if (user.getUserRole().equals("MAID")) {
+                    return new ResponseEntity<>("maid", HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>("receptionist", HttpStatus.OK);
+                }
             }
         }
+       catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("Incorrect password", HttpStatus.OK);
+       }
     }
 }

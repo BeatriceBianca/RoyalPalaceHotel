@@ -21,10 +21,14 @@ public class UserServiceImpl implements UserService{
 
         try {
             User user = userRepository.getByUserEmail(email);
-            if (user.getUserPassword().equals(Encryption.computeMD5(password))) {
-                return user;
-            } else {
+            if (user == null) {
                 return null;
+            } else {
+                if (user.getUserPassword().equals(Encryption.computeMD5(password))) {
+                    return user;
+                } else {
+                    throw new IllegalArgumentException();
+                }
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
