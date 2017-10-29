@@ -11,13 +11,13 @@
 
 </head>
 <body ng-controller="LoginController">
-<form class="container" name="login">
+<form class="container" name="login" action="login" method="POST">
 
-    <label for="email"> Email: </label>
-    <input type="text" id="email" name="email" ng-model="email" required="required"/><br/><br/>
+    <label for="username"> Email: </label>
+    <input type="text" id="username" name="username" required="required"/><br/><br/>
     <label for="password"> Password </label>
-    <input type="password" id="password" name="password" ng-model="password" required="required"/>
-    <button type="submit" class="login-button" ng-click="loginFct()">Get In</button>
+    <input type="password" id="password" name="password" required="required"/>
+    <button type="submit" class="login-button">Get In</button>
 </form>
 <div id="errorCircle1"></div>
 <div id="errorCircle2"></div>

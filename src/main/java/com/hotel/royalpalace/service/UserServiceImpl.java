@@ -35,4 +35,14 @@ public class UserServiceImpl implements UserService{
         }
         return null;
     }
+
+    public User getByUserEmail(String email) {
+        try {
+            User user = userRepository.getByUserEmail(email);
+            return user;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -6,53 +6,33 @@ import com.hotel.royalpalace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Beatrice Bianca on 16-Jul-17.
  */
 @Controller
-@RequestMapping("")
 public class BaseController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String getLoginPage(){
-        return "login";
-    }
-
-    @RequestMapping(value = "/manager", method = RequestMethod.GET)
-    public String getManagerPage(){
-        return "manager";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity login(@RequestBody UserInfo userInfo) {
-
-        try {
-            User user = userService.getUser(userInfo.getEmail(), userInfo.getPassword());
-
-            if (user == null) {
-                return new ResponseEntity<>("User not found", HttpStatus.OK);
-            } else {
-                if (user.getUserRole().equals("MANAGER")) {
-                    return new ResponseEntity<>("manager", HttpStatus.OK);
-                } else if (user.getUserRole().equals("MAID")) {
-                    return new ResponseEntity<>("maid", HttpStatus.OK);
-                } else {
-                    return new ResponseEntity<>("receptionist", HttpStatus.OK);
-                }
-            }
+    @ModelAttribute("currentUserEmail")
+    public String getCurrentUserEmail() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            return null;
         }
-       catch (IllegalArgumentException e) {
-            return new ResponseEntity<>("Incorrect password", HttpStatus.OK);
-       }
+        return authentication.getName();
+    }
+
+    @ModelAttribute("currentUser")
+    public User getCurrentUser() {
+        String userEmail = getCurrentUserEmail();
+        return userService.getByUserEmail(userEmail);
     }
 }
