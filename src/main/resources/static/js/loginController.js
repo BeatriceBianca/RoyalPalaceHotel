@@ -6,11 +6,11 @@ LoginApp.controller('LoginController', ['$scope', 'LoginService',
         $('#errorCircle2').css('display','none');
         $('#errorContainer span').css('display','none')
                                  .text("");
-        $scope.loginFct = function() {
-            var UserData = {
-                email: $scope.email,
-                password: $scope.password
-            };
-            LoginService.LoginValidate(UserData);
-        }
+        // $scope.loginFct = function() {
+        //     var UserData = {
+        //         email: $scope.email,
+        //         password: $scope.password
+        //     };
+        //     LoginService.LoginValidate(UserData);
+        // }
 }]);

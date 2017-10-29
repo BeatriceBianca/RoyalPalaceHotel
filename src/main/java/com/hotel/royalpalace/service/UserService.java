@@ -10,4 +10,7 @@ public interface UserService {
 
     @Transactional(readOnly = true)
     User getUser(String email, String password);
+
+    @Transactional(readOnly = true)
+    User getByUserEmail(String email);
 }
