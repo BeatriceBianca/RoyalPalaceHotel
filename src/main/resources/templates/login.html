@@ -3,12 +3,37 @@
 <head>
     <meta charset="UTF-8" />
     <title>Royal Palace Hotel</title>
+
+    <link rel="icon"
+          type="image/x-icon"
+          href="/img/hotel-ico.ico" />
+    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
+
 </head>
-<body>
+<body ng-controller="loginController as login">
 
+<div class="login-container">
+    <div class="login-top">
+        <img src="/img/hotel-logo.png"/>
+    </div>
+    <div class="login-bottom">
+        <form name="login" action="login" method="POST">
+            <input name="username" type="text" placeholder="Email" /><br/><br/>
+            <input name="password" type="password" placeholder="Password" /><br/>
 
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+            <button class="button" type="submit">Sign in</button>
+        </form>
+    </div>
+</div>
+<div class="forgot-password">
+    Forgot <span ng-click="login.forgotPass">Password</span>?
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<script type="text/javascript" src="/js/module.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular-ui-router/1.0.0-rc.1/angular-ui-router.min.js"></script>
+<script src="/js/module.js"></script>
+<script src="/js/login/login.controller.js"></script>
+<script src="/js/login/login.service.js"></script>
+
 </body>
 </html>

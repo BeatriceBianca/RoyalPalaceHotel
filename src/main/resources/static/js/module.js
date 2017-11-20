@@ -1,1 +1,6 @@
-var LoginApp = angular.module('RoyalPalaceHotel', []);
+(function () {
+    'use strict';
+
+    angular.module('RoyalPalaceHotel', ['ui.router']);
+
+})();

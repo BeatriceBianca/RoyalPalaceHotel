@@ -2,6 +2,7 @@ package config;
 
 import com.hotel.royalpalace.auxiliary.Encryption;
 import com.hotel.royalpalace.model.User;
+import com.hotel.royalpalace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
