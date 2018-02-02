@@ -1,5 +1,7 @@
 package com.hotel.royalpalace.model;
 
+import com.hotel.royalpalace.model.info.UserInfo;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -89,4 +91,17 @@ public class User {
     public String getUserPassword() { return userPassword; }
 
     public void setUserPassword(String userPassword) { this.userPassword = userPassword; }
+
+    public User() {}
+
+    public User(UserInfo userInfo) {
+        this.lastName = userInfo.getLastName();
+        this.firstName = userInfo.getFirstName();
+        this.userRole = userInfo.getUserRole();
+        this.birthDate = userInfo.getBirthDate();
+        this.hireDate = userInfo.getHireDate();
+        this.phone = userInfo.getPhone();
+        this.userEmail = userInfo.getUserEmail();
+        this.userPassword = userInfo.getPassword();
+    }
 }

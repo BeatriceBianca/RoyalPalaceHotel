@@ -11,7 +11,7 @@
     function Controller($scope, LoginService, $location) {
         var _self = this;
 
-        _self.forgotPass = forgotPass;
+        $scope.forgotPass = forgotPass;
 
         function forgotPass() {
 

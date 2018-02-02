@@ -10,10 +10,34 @@
     <link rel="stylesheet" type="text/css" href="/styles/manager.css"/>
 
 </head>
-<body>
+<body ng-controller="managerController as manager">
 
+<div class="welcome">
+    <span> Welcome, {{manager.username}}! </span>
+    <button> My profile </button>
+    <button> Sign Out </button>
+</div>
+
+<div class="manager-container">
+    <div class="manager-content">
+
+        <div class="tab">
+            <button class="tablink" ng-click="manager.currentPage = 'home'">Home</button>
+            <button class="tablink" ng-click="manager.currentPage = 'newAccount'">New Account</button>
+            <button class="tablink" ng-click="manager.currentPage = 'rooms'">Hotel Rooms</button>
+            <button class="tablink" ng-click="manager.currentPage = 'reports'">Reports</button>
+            <button class="tablink" ng-click="manager.currentPage = 'guests'">Guests</button>
+        </div>
+
+        <div class="tabcontent">
+            <ng-include src="manager.getCurrentContent()"></ng-include>
+        </div>
+    </div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angular-ui-router/1.0.0-rc.1/angular-ui-router.min.js"></script>
 <script src="/js/module.js"></script>
+<script src="/js/manager/manager.controller.js"></script>
+<script src="/js/manager/manager.service.js"></script>
 </body>
 </html>
