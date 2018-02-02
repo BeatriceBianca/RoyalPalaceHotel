@@ -22,6 +22,7 @@
         var baseTestContext = 'http://localhost:8090/manager';
 
         function getCurrentContent() {
+
             return "manager/" + _self.currentPage + ".html";
         }
         
@@ -31,6 +32,13 @@
                 .then(function (response) {
                     _self.username = response.data.firstName;
                 });
+
+            $('#datetimepicker1').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+            $('#datetimepicker2').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
         }
 
         init();

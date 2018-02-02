@@ -26,6 +26,9 @@ public class ManagerController {
     @RequestMapping(value = "")
     public String getManagerPage() { return "manager"; }
 
+    @RequestMapping(value = "/manager")
+    public String getManager1Page() { return "manager"; }
+
     @RequestMapping(value = "/home")
     public String getHomeContent() { return "home"; }
 

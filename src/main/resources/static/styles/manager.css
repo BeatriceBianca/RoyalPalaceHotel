@@ -89,3 +89,7 @@ div.tab button.active {
     margin-left: 5em;
     margin-bottom: 1em;
 }
+
+.newAccount-button {
+    text-align: right;
+}

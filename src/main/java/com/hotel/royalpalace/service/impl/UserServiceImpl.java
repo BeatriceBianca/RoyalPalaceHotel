@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    @Transactional(readOnly = true)
     public void createUser(UserInfo userInfo) throws NoSuchAlgorithmException {
 
         userInfo.setPassword(Encryption.computeMD5("parola"));
