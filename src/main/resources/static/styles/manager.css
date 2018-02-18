@@ -48,9 +48,13 @@ div.tab button:hover {
     background-color: white;
 }
 
+div.tab a {
+    text-decoration: none;
+}
+
 /* Create an active/current "tab button" class */
-div.tab button.active {
-    background-color: #ccc;
+div.tab .active {
+    background-color: white;
 }
 
 /* Style the tab content */
@@ -62,6 +66,9 @@ div.tab button.active {
     background-color: white;
 }
 
+.tabcontent>div {
+    margin-top: 3%;
+}
 .welcome {
     float: right;
     margin-top: 1%;
@@ -71,6 +78,10 @@ div.tab button.active {
 
 .welcome span {
     color: white;
+}
+
+.welcome a {
+    text-decoration: none;
 }
 
 #title {
@@ -90,6 +101,64 @@ div.tab button.active {
     margin-bottom: 1em;
 }
 
-.newAccount-button {
+.newAccount-button, .editAccount-button, .changePassword-button {
     text-align: right;
+}
+
+.newAccount, .editAccount {
+    display: flex;
+}
+
+.editPage {
+    width: 80% !important;
+    margin-left: 10%!important;
+}
+
+.editPage .account-menu {
+    text-align: center;
+}
+
+.account-menu button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+    margin-bottom: 3%;
+    color: #2e0f2b;
+}
+
+.account-menu #changePassword {
+    border-left: 1px solid #2e0f2b;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-bottom: 1px solid #2e0f2b;
+    opacity: 0.5;
+}
+
+.account-menu #myProfile {
+    border-right: 1px solid #2e0f2b;
+    padding-right: 3%;
+    padding-left: 3%;
+    border-bottom: 1px solid #2e0f2b;
+    opacity: 0.5;
+}
+
+.account-menu .account-menu-activ {
+    color: #2e0f2b;
+    background-color: #996083;
+    opacity: 1!important;
+}
+
+.changePassword .form-group {
+    width: 50%;
+    height: 15%;
+}
+
+.right-content {
+    width: 50%;
+    margin-left: 5%;
+}
+
+.left-content {
+    width: 50%;
+    margin-right: 5%;
 }

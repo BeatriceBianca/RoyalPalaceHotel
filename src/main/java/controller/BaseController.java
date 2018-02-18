@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
 
 @Controller
@@ -21,7 +22,9 @@ public class BaseController {
     public String redirectToLogin() { return "redirect:login"; }
 
     @RequestMapping(value = "/login")
-    public String getLoginPage() { return "login"; }
+    public String getLoginPage() {
+        return "login";
+    }
 
     @RequestMapping(value = "/success", method = RequestMethod.GET)
     public String successRedirect() throws NoSuchAlgorithmException {
@@ -44,5 +47,21 @@ public class BaseController {
         }
 
         return "redirect:/error";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/maid", method = RequestMethod.GET)
+    public String maid(HttpServletRequest request) {
+        return "maid";
+    }
+
+    @RequestMapping(value = "/receptionist", method = RequestMethod.GET)
+    public String receptionist(HttpServletRequest request) {
+        return "receptionist";
     }
 }

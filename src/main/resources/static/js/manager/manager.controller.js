@@ -6,39 +6,51 @@
         .module('RoyalPalaceHotel')
         .controller('managerController', Controller);
 
-    Controller.$inject = ['$scope', 'ManagerService', '$window'];
+    Controller.$inject = ['$scope', 'ManagerService', '$window', '$state', '$filter'];
 
-    function Controller($scope, ManagerService, $window) {
+    function Controller($scope, ManagerService, $window, $state, $filter) {
         var _self = this;
 
-
-        _self.getCurrentContent = getCurrentContent;
-        
         _self.username = "";
-        _self.currentPage = "home";
         _self.dataLoading = false;
+        _self.currentUserPassword = "";
+        _self.currentState = 'home';
         _self.user = [];
+        _self.newUser = [];
+
+        _self.encryptMd5 = encryptMd5;
 
         var baseTestContext = 'http://localhost:8090/manager';
-
-        function getCurrentContent() {
-
-            return "manager/" + _self.currentPage + ".html";
-        }
         
         function init() {
+
             ManagerService
                 .getCurrentUser()
                 .then(function (response) {
                     _self.username = response.data.firstName;
+                    _self.user = response.data;
+                    _self.user.birthDate = $filter('date')(response.data.birthDate, "yyyy/MM/dd");
+                    _self.user.hireDate = $filter('date')(response.data.hireDate, "yyyy/MM/dd");
+                    _self.currentUserPassword = response.data.userPassword;
                 });
 
             $('#datetimepicker1').datetimepicker({
-                format: 'DD/MM/YYYY'
+                format: 'YYYY/MM/DD'
             });
             $('#datetimepicker2').datetimepicker({
-                format: 'DD/MM/YYYY'
+                format: 'YYYY/MM/DD'
             });
+
+            if ($state.current.name !== 'default' && $state.current.name !== '') {
+                _self.currentState = $state.current.name;
+            }
+
+            $('.menu-div a button').removeClass('active');
+            $('#'+_self.currentState).addClass('active');
+        }
+
+        function encryptMd5(pass) {
+            return $.md5(pass);
         }
 
         init();

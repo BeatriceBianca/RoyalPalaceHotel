@@ -2,69 +2,70 @@
 
     <div class="col-md-6 col-md-offset-3">
         <h2 id="title">Create new account</h2>
-        <form name="form" action="manager/addUser" method="post" role="form">
+        <form name="form" action="manager/addUser" method="post" role="form" >
 
-            <div class="left-content">
-                <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty &amp;&amp; form.lastName.$error.required }">
-                    <label for="lastName">Last name</label>
-                    <input type="text" name="lastName" id="lastName" class="form-control" ng-model="manager.user.lastName" required="required" />
-                    <span ng-show="form.lastName.$dirty &amp;&amp; form.lastName.$error.required" class="help-block">Last name is required</span>
+            <div class="newAccount">
+                <div class="left-content">
+                    <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty &amp;&amp; form.lastName.$error.required }">
+                        <label for="lastName">Last name</label>
+                        <input type="text" name="lastName" id="lastName" class="form-control" ng-model="manager.newUser.lastName" required="required" />
+                        <span ng-show="form.lastName.$dirty &amp;&amp; form.lastName.$error.required" class="help-block">Last name is required</span>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty &amp;&amp; form.firstName.$error.required }">
+                        <label for="firstName">First name</label>
+                        <input type="text" name="firstName" id="firstName" class="form-control" ng-model="manager.newUser.firstName" required="required" />
+                        <span ng-show="form.firstName.$dirty &amp;&amp; form.firstName.$error.required" class="help-block">First name is required</span>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error': form.userEmail.$dirty &amp;&amp; form.userEmail.$error.required }">
+                        <label for="userEmail">Email</label>
+                        <input type="text" name="userEmail" id="userEmail" class="form-control" ng-model="manager.newUser.userEmail" required="required" />
+                        <span ng-show="form.userEmail.$dirty &amp;&amp; form.userEmail.$error.required" class="help-block">Email is required</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userRole">Role</label>
+                        <select name="userRole" id="userRole" class="form-control" ng-model="manager.newUser.userRole" ng-init="manager.newUser.userRole='MANAGER'">
+                            <option value="MANAGER">Manager</option>
+                            <option value="RECEPTIONIST">Receptionist</option>
+                            <option value="MAID">Maid</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty &amp;&amp; form.firstName.$error.required }">
-                    <label for="firstName">First name</label>
-                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="manager.user.firstName" required="required" />
-                    <span ng-show="form.firstName.$dirty &amp;&amp; form.firstName.$error.required" class="help-block">First name is required</span>
-                </div>
-
-                <div class="form-group" ng-class="{ 'has-error': form.email.$dirty &amp;&amp; form.email.$error.required }">
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email" class="form-control" ng-model="manager.user.email" required="required" />
-                    <span ng-show="form.email.$dirty &amp;&amp; form.email.$error.required" class="help-block">Email is required</span>
-                </div>
-
-                <div class="form-group" ng-class="{ 'has-error': form.role.$dirty &amp;&amp; form.role.$error.required }">
-                    <label for="role">Role</label>
-                    <select name="role" id="role" class="form-control" ng-model="manager.user.role" ng-init="manager.user.role='MANAGER'">
-                        <option value="MANAGER">Manager</option>
-                        <option value="RECEPTIONIST">Receptionist</option>
-                        <option value="MAID">Maid</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="right-content">
-                <div class="form-group" ng-class="{ 'has-error': form.birthDate.$dirty &amp;&amp; form.birthDate.$error.required }">
-                    <label for="birthDate">Birth date</label>
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type="text" name="birthDate" id="birthDate" class="form-control" ng-model="manager.user.birthDate" required="required" />
-                        <span class="input-group-addon">
+                <div class="right-content">
+                    <div class="form-group" ng-class="{ 'has-error': form.hireDate.$dirty &amp;&amp; form.hireDate.$error.required }">
+                        <label for="birthDate">Birth date</label>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type="text" name="birthDate" id="birthDate" class="form-control" ng-model="manager.newUser.birthDate" required="required"/>
+                            <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
+                        </div>
                     </div>
-                    <span ng-show="form.birthDate.$dirty &amp;&amp; form.birthDate.$error.required" class="help-block">Birth date is required</span>
-                </div>
 
-                <div class="form-group" ng-class="{ 'has-error': form.hireDate.$dirty &amp;&amp; form.hireDate.$error.required }">
-                    <label for="hireDate">Hire date</label>
-                    <div class='input-group date' id='datetimepicker2'>
-                        <input type="text" name="hireDate" id="hireDate" class="form-control" ng-model="manager.user.hireDate" required="required" />
-                        <span class="input-group-addon">
+                    <div class="form-group" ng-class="{ 'has-error': form.hireDate.$dirty &amp;&amp; form.hireDate.$error.required }">
+                        <label for="hireDate">Hire date</label>
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type="text" name="hireDate" id="hireDate" class="form-control" ng-model="manager.newUser.hireDate" required="required" />
+                            <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
+                        </div>
+                        <span ng-show="form.hireDate.$dirty &amp;&amp; form.hireDate.$error.required" class="help-block">Hire date is required</span>
                     </div>
-                    <span ng-show="form.hireDate.$dirty &amp;&amp; form.hireDate.$error.required" class="help-block">Hire date is required</span>
-                </div>
 
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="text" name="phone" id="phone" class="form-control" ng-model="manager.user.phone" />
-                </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" name="phone" id="phone" class="form-control" ng-model="manager.newUser.phone" />
+                    </div>
 
+                </div>
             </div>
 
             <div class="form-actions newAccount-button">
-                <button type="submit"  class="btn btn-primary">
+                <button type="submit"  class="btn btn-primary" ng-disabled="false">
                     Register</button>
             </div>
 

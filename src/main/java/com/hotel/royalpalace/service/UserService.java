@@ -10,4 +10,9 @@ public interface UserService {
     User getByUserEmail(String email);
 
     void createUser(UserInfo userInfo) throws NoSuchAlgorithmException;
+
+    void editUser(UserInfo userInfo) throws NoSuchAlgorithmException;
+
+    void changePassword(User user,String newPassword) throws NoSuchAlgorithmException;
+
 }

@@ -37,4 +37,33 @@ public class UserServiceImpl implements UserService{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void editUser(UserInfo userInfo) {
+
+        User user = this.getByUserEmail(userInfo.getUserEmail());
+
+        user.setBirthDate(userInfo.getBirthDate());
+        user.setFirstName(userInfo.getFirstName());
+        user.setLastName(userInfo.getLastName());
+        user.setPhone(userInfo.getPhone());
+
+        try {
+            usr = userRepository.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void changePassword(User user, String newPassword) throws NoSuchAlgorithmException {
+
+        user.setUserPassword(Encryption.computeMD5(newPassword));
+
+        try {
+            usr = userRepository.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
