@@ -39,8 +39,8 @@ public class User {
     @Column(name = "phone_number")
     private String phone;
 
-    @Column(columnDefinition = "varchar(255)")
-    private String imagePath;
+//    @Column(columnDefinition = "varchar(255)")
+//    private String imagePath;
 
     @Column(name = "user_email")
     private String userEmail;
@@ -79,10 +79,10 @@ public class User {
     public String getPhone() { return phone; }
 
     public void setPhone(String phone) { this.phone = phone; }
-
-    public String getImagePath() { return imagePath; }
-
-    public void setImagePath(String imagePath) { this.imagePath = imagePath; }
+//
+//    public String getImagePath() { return imagePath; }
+//
+//    public void setImagePath(String imagePath) { this.imagePath = imagePath; }
 
     public String getUserEmail() { return userEmail; }
 
