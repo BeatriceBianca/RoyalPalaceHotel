@@ -173,6 +173,7 @@ div.tab .active {
     width: 90%;
     margin: 0 auto;
     height: 100%;
+    /*padding-right: 10%;*/
 }
 
 .rooms-table {
@@ -181,6 +182,7 @@ div.tab .active {
     margin: 0 auto;
     border: 2px solid black;
     border-bottom: none;
+    float: left;
 }
 
 .rooms-table tr {
@@ -230,4 +232,42 @@ div.tab .active {
 
 .b-bottom-big {
     border-bottom: 2px solid black;
+}
+
+.elevator {
+    width: 8%;
+    height: 12vw;
+    margin: 16% auto;
+    border: 1px solid black;
+}
+
+.elevator td {
+    text-align: center;
+    margin: 50%;
+    height: 25%;
+    width: 100%;
+}
+
+.elevator td span {
+    padding: 8%;
+    border: 1px solid #996083;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.activeFloor {
+    background-color: #996083;
+    border: 1px solid black;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    color: white;
+}
+
+#myModal {
+    margin: 10% auto;
 }
