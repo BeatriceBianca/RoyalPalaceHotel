@@ -6,9 +6,15 @@
         .module('RoyalPalaceHotel')
         .controller('roomsController', Controller);
 
-    Controller.$inject = ['$scope', 'RoomsService', '$window', '$state', '$filter'];
+    Controller.$inject = ['$scope', 'RoomsService'];
 
-    function Controller($scope, RoomsService, $window, $state, $filter) {
+    function Controller($scope, RoomsService) {
+        var _self = this;
+
+        _self.isFirstFloorOpen = true;
+        _self.isSecondFloorOpen = false;
+        _self.isThirdFloorOpen = false;
+        _self.isFourthFloorOpen = false;
 
         function init() {
 

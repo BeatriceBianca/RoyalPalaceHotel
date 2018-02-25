@@ -24,8 +24,7 @@
             })
 
             .state('rooms', {
-                templateUrl: 'manager/rooms.html',
-                controller: 'roomsController'
+                templateUrl: 'manager/rooms.html'
             })
 
             .state('myProfile', {

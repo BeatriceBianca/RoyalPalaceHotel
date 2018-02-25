@@ -175,7 +175,7 @@ div.tab .active {
     height: 100%;
 }
 
-#rooms-table {
+.rooms-table {
     width: 90%;
     height: 27vw;
     margin: 0 auto;
@@ -183,12 +183,12 @@ div.tab .active {
     border-bottom: none;
 }
 
-#rooms-table tr {
+.rooms-table tr {
     width: 100%;
     height: 9%;
 }
 
-#rooms-table td {
+.rooms-table td {
     width: 10%;
 }
 
