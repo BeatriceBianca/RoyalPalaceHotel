@@ -43,6 +43,12 @@ public class ManagerController {
     @RequestMapping(value = "/guests")
     public String getGuestsContent() { return "guests"; }
 
+    @RequestMapping(value = "/newReservation")
+    public String getNewReservationContent() { return "newReservation"; }
+
+    @RequestMapping(value = "/viewReservations")
+    public String getViewReservationsContent() { return "viewReservations"; }
+
     @RequestMapping(value = "/myProfile")
     public String getMyProfileContent() { return "myProfile"; }
 

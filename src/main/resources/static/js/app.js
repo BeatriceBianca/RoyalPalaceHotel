@@ -27,6 +27,16 @@
                 controller: 'managerController'
             })
 
+            .state('newReservation', {
+                templateUrl: 'manager/newReservation.html',
+                controller: 'managerController'
+            })
+
+            .state('viewReservations', {
+                templateUrl: 'manager/viewReservations.html',
+                controller: 'managerController'
+            })
+
             .state('myProfile', {
                 templateUrl: 'manager/myProfile.html'
             })

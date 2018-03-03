@@ -12,3 +12,7 @@ CREATE PROCEDURE Alter_Room()
         END IF;
     END $$
 DELIMITER ;
+
+CALL Alter_Room();
+
+DROP PROCEDURE Alter_Room;

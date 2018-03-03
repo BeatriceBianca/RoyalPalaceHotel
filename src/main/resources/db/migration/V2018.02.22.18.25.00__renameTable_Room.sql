@@ -10,3 +10,7 @@ CREATE PROCEDURE Rename_Room()
     END IF;
   END $$
 DELIMITER ;
+
+CALL Rename_Room();
+
+DROP PROCEDURE Rename_Room;
