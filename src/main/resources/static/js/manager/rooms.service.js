@@ -14,8 +14,27 @@
                 return $http.get(URL, null);
             }
 
+            function getAllRoomTypes() {
+
+                var URL = baseTestContext + "/getAllRoomTypes";
+                return $http.get(URL, null);
+            }
+            
+            function editRoomType(room) {
+                var URL = baseTestContext + "/editRoomType";
+                return $http({
+                    method: 'POST',
+                    url: URL,
+                    data: room,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }});
+            }
+
             return {
-                getAllRooms: getAllRooms
+                getAllRooms: getAllRooms,
+                getAllRoomTypes: getAllRoomTypes,
+                editRoomType: editRoomType
             };
 
         }]);

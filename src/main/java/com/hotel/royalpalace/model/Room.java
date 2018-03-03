@@ -8,7 +8,7 @@ public class Room {
 
     @ManyToOne()
     @JoinColumn(name = "ROOM_TYPE")
-    protected RoomType roomType;
+    private RoomType roomType;
 
     @Id
     @Column(name = "id")

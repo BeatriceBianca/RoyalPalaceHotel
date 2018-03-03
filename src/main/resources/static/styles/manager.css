@@ -1,5 +1,4 @@
 body {
-    /*background: url("/img/manager2.jpg") no-repeat center center fixed;*/
     background-color: #2e0f2b;
     background-size: cover;
     height: 100%;
@@ -194,28 +193,28 @@ div.tab .active {
     width: 10%;
 }
 
-.typeAP {
-    background-color: lightsteelblue;
-}
-
 .typeSI {
-    background-color: lightpink;
-}
-
-.typeDO {
-    background-color: #f0ad4e;
-}
-
-.typeTW {
-    background-color: lightskyblue;
+    background-color: #7165b2;
 }
 
 .typeTR {
-    background-color: lightgreen;
+    background-color: #bea4d2;
+}
+
+.typeAP {
+    background-color: #f0e2f8;
+}
+
+.typeTW {
+    background-color: #bdccff;
+}
+
+.typeDO {
+    background-color: #8c9de2;
 }
 
 .Hall {
-    background-color: gray;
+    background-color: lightgrey;
 }
 
 .b-left {
@@ -270,4 +269,13 @@ div.tab .active {
 
 #myModal {
     margin: 10% auto;
+    text-align: center;
+}
+
+#rooms-page #title {
+    padding-right: 10%;
+}
+
+html {
+    overflow-y: scroll;
 }

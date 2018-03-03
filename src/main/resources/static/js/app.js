@@ -3,8 +3,7 @@
 
     angular.module('RoyalPalaceHotel', ['ui.router'])
             .config(function($stateProvider, $urlRouterProvider) {
-        //
-        // $urlRouterProvider.when('/manager', 'home');
+
         $stateProvider
 
             .state('home', {
