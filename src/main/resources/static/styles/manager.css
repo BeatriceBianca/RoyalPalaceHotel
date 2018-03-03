@@ -236,7 +236,7 @@ div.tab .active {
 .elevator {
     width: 8%;
     height: 12vw;
-    margin: 16% auto;
+    margin: 17% auto 12% auto;
     border: 1px solid black;
 }
 
@@ -278,4 +278,21 @@ div.tab .active {
 
 html {
     overflow-y: scroll;
+}
+
+.color-legend {
+    width: 70%;
+    height: 10px;
+    margin-left: auto;
+    margin-right: 18%;
+}
+
+.color-legend tr {
+    width: 100%;
+}
+
+.color-legend tr td {
+    width: 10%;
+    text-align: center;
+    padding-left: 2px;
 }
