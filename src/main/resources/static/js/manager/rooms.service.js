@@ -31,10 +31,22 @@
                     }});
             }
 
+            function editPrice(roomType) {
+                var URL = baseTestContext + "/editPrice";
+                return $http({
+                    method: 'POST',
+                    url: URL,
+                    data: roomType,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }});
+            }
+
             return {
                 getAllRooms: getAllRooms,
                 getAllRoomTypes: getAllRoomTypes,
-                editRoomType: editRoomType
+                editRoomType: editRoomType,
+                editPrice: editPrice
             };
 
         }]);

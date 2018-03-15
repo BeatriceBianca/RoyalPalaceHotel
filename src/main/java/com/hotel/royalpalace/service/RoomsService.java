@@ -14,4 +14,6 @@ public interface RoomsService {
     List<RoomType> getAllRoomTypes();
 
     void editRoomType(Room room);
+
+    void editPrice(RoomType roomType);
 }

@@ -1,0 +1,74 @@
+package controller;
+
+import com.hotel.royalpalace.model.Guest;
+import com.hotel.royalpalace.model.Request;
+import com.hotel.royalpalace.model.Room;
+import com.hotel.royalpalace.model.info.RequestInfo;
+import com.hotel.royalpalace.service.GuestService;
+import com.hotel.royalpalace.service.RequestService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Set;
+
+@Controller
+@RequestMapping("/receptionist")
+public class ReceptionistController {
+
+    @Autowired
+    GuestService guestService;
+
+    @Autowired
+    RequestService requestService;
+
+    DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
+
+    @RequestMapping(value = "")
+    public String getReceptionistPage() { return "receptionist"; }
+
+    @RequestMapping(value = "/findByCnp", method = RequestMethod.GET)
+    public ResponseEntity findByCnp(@RequestParam(value = "cnp") String cnp,
+                                    HttpServletRequest request) {
+
+        return new ResponseEntity<>(guestService.getByCnp(cnp), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getReservationsBetweenDates", method = RequestMethod.GET)
+    public ResponseEntity getReservationsBetweenDates(@RequestParam(value = "arrivalDate") String arrivalDate,
+                                                      @RequestParam(value = "departureDate") String departureDate) throws ParseException {
+
+
+        return new ResponseEntity<>(requestService.getAllReservationsBetweenDates(df.parse(arrivalDate), df.parse(departureDate)), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/saveGuest", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String saveGuest(@RequestBody Guest guest) {
+
+        requestService.saveGuest(guest);
+        return "redirect:/manager";
+    }
+
+    @RequestMapping(value = "/saveRequest", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String saveRequest(@RequestBody RequestInfo requestInfo) throws ParseException {
+
+        Set<Room> requestedRooms = requestInfo.getRooms();
+        Request request = new Request(requestInfo);
+        requestService.saveRequest(request);
+        return "redirect:/manager";
+    }
+}

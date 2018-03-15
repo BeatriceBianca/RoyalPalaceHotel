@@ -214,23 +214,23 @@ div.tab .active {
 }
 
 .typeSI {
-    background-color: #7165b2;
+    background-color: rgb(113, 101, 178);
 }
 
 .typeTR {
-    background-color: #bea4d2;
+    background-color: rgb(190, 164, 210);
 }
 
 .typeAP {
-    background-color: #f0e2f8;
+    background-color: rgb(240, 226, 248);
 }
 
 .typeTW {
-    background-color: #bdccff;
+    background-color: rgb(189, 204, 255);
 }
 
 .typeDO {
-    background-color: #8c9de2;
+    background-color: rgb(140, 157, 226);
 }
 
 .Hall {
@@ -327,6 +327,7 @@ html {
 .reservations {
     width: 80% !important;
     margin-left: 10%!important;
+    height: 10em;
 }
 
 .reservations .reservations-menu {
@@ -366,4 +367,49 @@ html {
 .reservations-menu .form-group {
     width: 50%;
     height: 15%;
+}
+
+#price {
+    width: 10%;
+}
+
+
+/*Save Reservation page*/
+
+.saveGuest-button, .saveRequest-button, .saveReservation-button {
+    text-align: right;
+}
+
+.editGuest-button, .editRequest-button {
+    text-align: left;
+}
+
+.saveGuest, .saveRequest-buttons, .saveRoom-buttons {
+    display: flex;
+}
+
+.editGuest-button, .saveRequest-button, .editRequest-button, .saveReservation-button {
+    width: 50%!important;
+}
+
+.searchByCnp {
+    width: 50%;
+    text-align: center;
+    margin: 2em auto;
+}
+
+#requestForm {
+    width: 70%;
+}
+
+.reservations .rooms-table {
+    height: 20vw;
+}
+
+.saveRoom-buttons {
+    margin-top: 2%;
+}
+
+.reservations .elevator {
+    margin-bottom: 15%;
 }

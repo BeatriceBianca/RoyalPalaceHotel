@@ -48,4 +48,14 @@ public class RoomServiceImpl implements RoomsService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void editPrice(RoomType roomType) {
+
+        try {
+            roomTypeRepository.save(roomType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

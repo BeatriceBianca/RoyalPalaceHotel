@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Auth
                 .antMatchers("/login").permitAll()
                 .antMatchers("/success").permitAll()
                 .antMatchers("/manager/**").hasAuthority("MANAGER")
-                .antMatchers("/receptionist/**").hasAuthority("RECEPTIONIST")
+                .antMatchers("/receptionist/**").hasAuthority("MANAGER")
                 .antMatchers("/maid/**").hasAuthority("MAID")
                 .anyRequest().authenticated()
                 .and()

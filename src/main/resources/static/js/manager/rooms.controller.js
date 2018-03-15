@@ -22,6 +22,15 @@
         var allRooms = [];
         _self.selectedRoom = null;
 
+        function updatePrice() {
+            var selectedValue = _self.roomTypes.find(function (type) {
+                if (type.id.toString() === $('.modal-body select').val()) {
+                    return type;
+                }
+            });
+            $('.modal-body p:last-child input').val(selectedValue.price);
+        }
+
         function editRoom() {
             RoomsService
                 .getAllRoomTypes()
@@ -36,12 +45,19 @@
                         });
 
                         $('.modal-body p:first-child').html("");
-                        $('.modal-body p:first-child').append("Room Type: " + "<select>" + options + "</select>");
+                        $('.modal-body p:first-child').append("Room Type: " + "<select id='typesList'>" + options + "</select>");
+
+                        $('.modal-body p:last-child').html("");
+                        $('.modal-body p:last-child').append("Price: " + "<input type='text' id='price' value=" + _self.selectedRoom.roomType.price +
+                            " /> <br/> <span> * You will change the price of all " + _self.selectedRoom.roomType.roomName+ " rooms </span>");
+
 
                         $('.modal-body select').val(_self.selectedRoom.roomType.id);
 
                         $('.modal-footer .editButton').html("");
                         $('.modal-footer .editButton').append("Save");
+
+                        $('#typesList').on('change', updatePrice);
                     } else {
                         _self.selectedRoom.roomType = _self.roomTypes.find(function (r) {
                             if (r.id.toString() === $('.modal-body select').val()) {
@@ -49,12 +65,29 @@
                             }
                         });
 
-                        RoomsService
-                            .editRoomType(_self.selectedRoom)
-                            .then(function (value) {
-                                $('.modal').modal('toggle');
-                                $state.reload();
-                            });
+                        if ($('.modal-body p:last-child input').val() !== _self.selectedRoom.roomType.price.toString()) {
+
+                            _self.selectedRoom.roomType.price = $('.modal-body p:last-child input').val();
+
+                            RoomsService
+                                .editPrice(_self.selectedRoom.roomType)
+                                .then(function () {
+
+                                    RoomsService
+                                        .editRoomType(_self.selectedRoom)
+                                        .then(function () {
+                                            $('.modal').modal('toggle');
+                                            $state.reload();
+                                        });
+                                });
+                        } else {
+                            RoomsService
+                                .editRoomType(_self.selectedRoom)
+                                .then(function () {
+                                    $('.modal').modal('toggle');
+                                    $state.reload();
+                                });
+                        }
                     }
                 });
         }
@@ -68,6 +101,7 @@
             $('.modal-body p:first-child').append('Room Type: ' + _self.selectedRoom.roomType.roomName);
             $('.modal-body p:nth-child(2)').append('Number of single bed: ' + _self.selectedRoom.roomType.nrSingleBed);
             $('.modal-body p:nth-child(3)').append('Number of double bed: ' + _self.selectedRoom.roomType.nrDoubleBed);
+            $('.modal-body p:nth-child(4)').append('Price: ' + _self.selectedRoom.roomType.price + " &euro;");
             $('.modal-footer .editButton').html("Edit");
             $('#myModal').modal();
         }

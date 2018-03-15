@@ -9,19 +9,16 @@
                     <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty &amp;&amp; form.lastName.$error.required }">
                         <label for="lastName">Last name</label>
                         <input type="text" name="lastName" id="lastName" class="form-control" ng-model="manager.newUser.lastName" required="required" />
-                        <span ng-show="form.lastName.$dirty &amp;&amp; form.lastName.$error.required" class="help-block">Last name is required</span>
                     </div>
 
                     <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty &amp;&amp; form.firstName.$error.required }">
                         <label for="firstName">First name</label>
                         <input type="text" name="firstName" id="firstName" class="form-control" ng-model="manager.newUser.firstName" required="required" />
-                        <span ng-show="form.firstName.$dirty &amp;&amp; form.firstName.$error.required" class="help-block">First name is required</span>
                     </div>
 
                     <div class="form-group" ng-class="{ 'has-error': form.userEmail.$dirty &amp;&amp; form.userEmail.$error.required }">
                         <label for="userEmail">Email</label>
                         <input type="text" name="userEmail" id="userEmail" class="form-control" ng-model="manager.newUser.userEmail" required="required" />
-                        <span ng-show="form.userEmail.$dirty &amp;&amp; form.userEmail.$error.required" class="help-block">Email is required</span>
                     </div>
 
                     <div class="form-group">
@@ -40,8 +37,8 @@
                         <div class='input-group date' id='datetimepicker1'>
                             <input type="text" name="birthDate" id="birthDate" class="form-control" ng-model="manager.newUser.birthDate" required="required"/>
                             <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
                         </div>
                     </div>
 
@@ -53,8 +50,7 @@
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                         </div>
-                        <span ng-show="form.hireDate.$dirty &amp;&amp; form.hireDate.$error.required" class="help-block">Hire date is required</span>
-                    </div>
+                        </div>
 
                     <div class="form-group">
                         <label for="phone">Phone</label>

@@ -39,9 +39,19 @@ public class RoomsController {
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String editRoomType(@RequestBody Room room,
-                           HttpServletRequest request) throws NoSuchAlgorithmException {
+                           HttpServletRequest request) {
 
         roomsService.editRoomType(room);
+        return "redirect:/manager";
+    }
+
+    @RequestMapping(value = "/manager/editPrice", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String editPrice(@RequestBody RoomType roomType,
+                            HttpServletRequest request) {
+
+        roomsService.editPrice(roomType);
         return "redirect:/manager";
     }
 }
