@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -23,8 +24,8 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     @Transactional(readOnly = true)
-    public Set<Request> getAllReservationsBetweenDates(Date arrivalDate, Date departureDate) {
-        return requestRepository.getAllReservations();
+    public List<Request> getAllReservationsBetweenDates(Date arrivalDate, Date departureDate) {
+        return requestRepository.findAllByArrivalDateLessThanEqualAndDepartureDateGreaterThanEqual(departureDate, arrivalDate);
     }
 
     @Override

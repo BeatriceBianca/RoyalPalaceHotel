@@ -4,11 +4,12 @@ import com.hotel.royalpalace.model.Guest;
 import com.hotel.royalpalace.model.Request;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 public interface RequestService {
 
-    Set<Request> getAllReservationsBetweenDates(Date arrivalDate, Date departureDate);
+    List<Request> getAllReservationsBetweenDates(Date arrivalDate, Date departureDate);
 
     void saveGuest(Guest guest);
 
