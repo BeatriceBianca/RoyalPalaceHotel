@@ -26,11 +26,12 @@ body {
     height: 105%;
     display: block;
     margin: auto;
+    width: 75%;
 }
 
 .login-container .login-bottom {
     background: white;
-    height: 60%;
+    height: 55%;
     text-align: center;
 }
 
@@ -65,17 +66,23 @@ body {
 }
 
 .forgot-password {
-    position: absolute;
-    top: 90%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    left:40%;
+    margin-top: 3%;
+    height: 5%;
 }
 
 .forgot-password span {
     font-weight: bold;
     cursor: pointer;
+}
+
+@media only screen and (max-device-width: 700px) {
+    .login-container {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .login-container {
+        width: 70%;
+    }
 }

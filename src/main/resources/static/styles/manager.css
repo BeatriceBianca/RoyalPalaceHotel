@@ -6,8 +6,13 @@ body {
     height: 100%;
 }
 
-.manager-container {
+.manager {
     position: absolute;
+    height: 95%;
+    width: 100%;
+}
+
+.manager-container {
     height: 90%;
     width: 100%;
     top: 10%;
@@ -76,11 +81,17 @@ div.tab .active {
     height: 100%;
 }
 
+.footer {
+    width: 100%;
+    height: auto;
+    color: white;
+    text-align: center;
+}
+
 .welcome {
-    float: right;
-    margin-top: 1%;
-    margin-right: 5%;
-    display: inline;
+    height: 10%;
+    width: 100%;
+    text-align: right;
 }
 
 .welcome span {

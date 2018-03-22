@@ -17,27 +17,32 @@
 </head>
 <body ng-controller="managerController as manager">
 
-<div class="welcome">
-    <span> Welcome, {{manager.username}}! </span>
-    <a ui-sref="myProfile"><button> My profile </button></a>
-    <a href="/logout"><button> Sign Out </button></a>
-</div>
+<div class="manager">
+    <div class="welcome">
+        <span> Welcome, {{manager.username}}! </span>
+        <a ui-sref="myProfile"><button> My profile </button></a>
+        <a href="/logout"><button> Sign Out </button></a>
+    </div>
 
-<div class="manager-container">
-    <div class="manager-content">
+    <div class="manager-container">
+        <div class="manager-content">
 
-        <div class="tab menu-div">
-            <a ui-sref="home"><button id="home">Home</button></a>
-            <a ui-sref="newAccount"><button id="newAccount">New Account</button></a>
-            <a ui-sref="rooms"><button id="rooms">Hotel Rooms</button></a>
-            <a ui-sref="newReservation"><button id="newReservation">Reservations</button></a>
-            <a ui-sref="reports"><button id="reports">Reports</button></a>
-            <a ui-sref="guests"><button id="guests">Guests</button></a>
+            <div class="tab menu-div">
+                <a ui-sref="home"><button id="home">Home</button></a>
+                <a ui-sref="newAccount"><button id="newAccount">New Account</button></a>
+                <a ui-sref="rooms"><button id="rooms">Hotel Rooms</button></a>
+                <a ui-sref="newReservation"><button id="newReservation">Reservations</button></a>
+                <a ui-sref="reports"><button id="reports">Reports</button></a>
+                <a ui-sref="guests"><button id="guests">Guests</button></a>
+            </div>
+
+            <div class="tabcontent">
+                <div ui-view=""></div>
+            </div>
         </div>
-
-        <div class="tabcontent">
-            <div ui-view=""></div>
-        </div>
+    </div>
+    <div class="footer">
+        <p>@2018 Royal Palace Hotel</p>
     </div>
 </div>
 
