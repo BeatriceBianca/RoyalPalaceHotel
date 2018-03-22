@@ -4,9 +4,9 @@
 
     angular
         .module('RoyalPalaceHotel')
-        .factory('LoginService', ['$http', function($http) {
+        .factory('LoginService', ['$http', '$location', function($http, $location) {
 
-            var baseTestContext = 'http://localhost:8090';
+            var baseTestContext = "http://" + location.host;
 
             return {
 

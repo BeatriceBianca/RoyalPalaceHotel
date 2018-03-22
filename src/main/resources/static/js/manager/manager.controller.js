@@ -6,21 +6,19 @@
         .module('RoyalPalaceHotel')
         .controller('managerController', Controller);
 
-    Controller.$inject = ['$scope', 'ManagerService', '$window', '$state', '$filter'];
+    Controller.$inject = ['$scope', 'ManagerService', '$window', '$state', '$filter', '$location'];
 
-    function Controller($scope, ManagerService, $window, $state, $filter) {
+    function Controller($scope, ManagerService, $window, $state, $filter, $location) {
         var _self = this;
 
         _self.username = "";
         _self.dataLoading = false;
         _self.currentUserPassword = "";
         _self.currentState = 'home';
-        _self.user = [];
-        _self.newUser = [];
 
         _self.encryptMd5 = encryptMd5;
 
-        var baseTestContext = 'http://localhost:8090/manager';
+        var baseTestContext = "http://" + location.host + '/manager';
         
         function init() {
 

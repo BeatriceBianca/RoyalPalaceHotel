@@ -4,9 +4,9 @@
 
     angular
         .module('RoyalPalaceHotel')
-        .factory('ReservationsService', ['$http', function($http) {
+        .factory('ReservationsService', ['$http', '$location', function($http, $location) {
 
-            var baseTestContext = 'http://localhost:8090/receptionist';
+            var baseTestContext = "http://" + location.host + '/receptionist';
 
             function searchByCnp(cnp) {
                 var URL = baseTestContext + "/findByCnp";

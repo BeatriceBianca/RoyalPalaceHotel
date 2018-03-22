@@ -4,9 +4,9 @@
 
     angular
         .module('RoyalPalaceHotel')
-        .factory('ManagerService', ['$http', function($http) {
+        .factory('ManagerService', ['$http', '$location', function($http, $location) {
 
-            var baseTestContext = 'http://localhost:8090/manager';
+            var baseTestContext = "http://" + location.host + '/manager';
 
             function getCurrentUser() {
 
