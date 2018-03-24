@@ -26,7 +26,7 @@
         _self.selectedRoom = null;
 
         var guestAlreadyExist = false;
-
+        _self.loading = false;
 
 
         function init() {
@@ -81,6 +81,7 @@
 
 
         _self.saveRequestedDate = function () {
+            _self.loading = true;
             _self.request = {
                 arrivalDate: $('#arrivalDate').val(),
                 departureDate: $('#departureDate').val()
@@ -89,7 +90,14 @@
             ReservationsService
                 .getAllReservationsBetweenDates(_self.request.arrivalDate, _self.request.departureDate)
                 .then(function (response) {
-                    console.log(response);
+                    response.data.forEach(function (request) {
+                        request.rooms.forEach(function (room) {
+                            $('.r'+room.roomNumber).addClass('occupiedRoom');
+                            $('.r'+room.roomNumber).off('click', getRoomDetails);
+                            $('.r'+room.roomNumber).css('cursor', 'context-menu');
+                        });
+                    });
+                    _self.loading = false;
                 });
         };
         
@@ -102,6 +110,8 @@
                             guestAlreadyExist = true;
 
                             _self.guest = value.data;
+                        } else {
+                            _self.guest.cnp = _self.cnp;
                         }
                     })
             }
@@ -129,7 +139,11 @@
             $('.modal-body p:nth-child(2)').append('Number of single bed: ' + _self.selectedRoom.roomType.nrSingleBed);
             $('.modal-body p:nth-child(3)').append('Number of double bed: ' + _self.selectedRoom.roomType.nrDoubleBed);
             $('.modal-body p:nth-child(4)').append('Price: ' + _self.selectedRoom.roomType.price + " &euro;");
-            $('.modal-footer .chooseButton').html("Choose");
+            if ($('.r'+_self.selectedRoom.roomNumber).hasClass('chosenRoom')) {
+                $('.modal-footer .chooseButton').html("Discard");
+            } else {
+                $('.modal-footer .chooseButton').html("Choose");
+            }
             $('#myModal').modal();
         }
 
@@ -141,7 +155,16 @@
         }
 
         function chooseRoom() {
-            _self.selectedRooms.push(_self.selectedRoom);
+            if ($('.r'+_self.selectedRoom.roomNumber).hasClass('chosenRoom')) {
+                $('.r'+_self.selectedRoom.roomNumber).addClass('type'+_self.selectedRoom.roomType.roomName.substring(0,2).toUpperCase());
+                const index = _self.selectedRooms.indexOf(_self.selectedRoom);
+                _self.selectedRooms.splice(index, 1);
+                $('.r'+_self.selectedRoom.roomNumber).removeClass('chosenRoom');
+            } else {
+                $('.r'+_self.selectedRoom.roomNumber).addClass('chosenRoom');
+                $('.r'+_self.selectedRoom.roomNumber).removeClass('type'+_self.selectedRoom.roomType.roomName.substring(0,2).toUpperCase());
+                _self.selectedRooms.push(_self.selectedRoom);
+            }
             $('.modal').modal('toggle');
         }
         
@@ -178,7 +201,7 @@
                                         ReservationsService
                                             .saveRequest(_self.request)
                                             .then(function (value) {
-                                                console.log(value);
+                                                $state.go('home');
                                             })
                                     });
                             });
@@ -210,7 +233,7 @@
                                 ReservationsService
                                     .saveRequest(_self.request)
                                     .then(function (value) {
-                                        console.log(value);
+                                        $state.go('home');
                                     })
                             });
                     });

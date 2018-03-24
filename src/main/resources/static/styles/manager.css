@@ -228,26 +228,35 @@ div.tab .active {
 
 .typeSI {
     background-color: rgb(113, 101, 178);
+    opacity: 0.6;
 }
 
 .typeTR {
     background-color: rgb(190, 164, 210);
+    opacity: 0.6;
 }
 
 .typeAP {
     background-color: rgb(240, 226, 248);
+    opacity: 0.6;
 }
 
 .typeTW {
     background-color: rgb(189, 204, 255);
+    opacity: 0.6;
 }
 
 .typeDO {
     background-color: rgb(140, 157, 226);
+    opacity: 0.6;
 }
 
 .Hall {
-    background-color: lightgrey;
+    background-color: rgb(220,220,220);
+}
+
+.occupiedRoom {
+    background-color: rgb(128,128,128);
 }
 
 .b-left {
@@ -408,7 +417,7 @@ html {
 .searchByCnp {
     width: 50%;
     text-align: center;
-    margin: 2em auto;
+    margin: 1em auto;
 }
 
 #requestForm {
@@ -431,8 +440,17 @@ html {
     left: 53%;
     position: fixed;
     top: 40%;
+    z-index:1;
 }
 
 .loadingScreen {
     opacity: 0.5;
+}
+
+.chosenRoom {
+    background-color: #996083;
+}
+
+.tableForm {
+    max-width: 700px;
 }
