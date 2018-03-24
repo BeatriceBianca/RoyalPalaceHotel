@@ -1,7 +1,10 @@
 package com.hotel.royalpalace.service.impl;
 
+import com.hotel.royalpalace.model.ChosenRooms;
 import com.hotel.royalpalace.model.Guest;
 import com.hotel.royalpalace.model.Request;
+import com.hotel.royalpalace.model.Room;
+import com.hotel.royalpalace.repository.ChosenRoomRepository;
 import com.hotel.royalpalace.repository.GuestRepository;
 import com.hotel.royalpalace.repository.RequestRepository;
 import com.hotel.royalpalace.service.RequestService;
@@ -22,10 +25,19 @@ public class RequestServiceImpl implements RequestService {
     @Autowired
     GuestRepository guestRepository;
 
+    @Autowired
+    ChosenRoomRepository chosenRoomRepository;
+
     @Override
     @Transactional(readOnly = true)
     public List<Request> getAllReservationsBetweenDates(Date arrivalDate, Date departureDate) {
         return requestRepository.findAllByArrivalDateLessThanEqualAndDepartureDateGreaterThanEqual(departureDate, arrivalDate);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ChosenRooms> getAllRChosenRooms() {
+        return chosenRoomRepository.findAll();
     }
 
     @Override
@@ -36,5 +48,15 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public Request saveRequest(Request request) {
         return requestRepository.save(request);
+    }
+
+    @Override
+    public void saveChosenRoom(ChosenRooms room) {
+            chosenRoomRepository.save(room);
+    }
+
+    @Override
+    public void removeChosenRoom(ChosenRooms room) {
+        chosenRoomRepository.delete(chosenRoomRepository.findByRoom(room.getRoom()).get(0));
     }
 }

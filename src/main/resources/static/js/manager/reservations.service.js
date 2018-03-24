@@ -31,6 +31,16 @@
                     }});
             }
 
+            function getAllChosenRooms() {
+                var URL = baseTestContext + "/getAllChosenRooms";
+                return $http({
+                    method: 'GET',
+                    url: URL,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }});
+            }
+
             function saveGuest(guest) {
                 var URL = baseTestContext + "/saveGuest";
                 return $http({
@@ -52,16 +62,24 @@
                         'Content-Type': 'application/json'
                     }});
             }
-
-            function saveRooms(room, request) {
-                var URL = baseTestContext + "/saveRoom";
+            
+            function saveChosenRoom(room) {
+                var URL = baseTestContext + "/saveChosenRoom";
                 return $http({
                     method: 'POST',
                     url: URL,
-                    params: {
-                        room: room,
-                        currentRequest: request
-                    },
+                    data: room,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }});
+            }
+
+            function removeChosenRoom(room) {
+                var URL = baseTestContext + "/removeChosenRoom";
+                return $http({
+                    method: 'POST',
+                    url: URL,
+                    data: room,
                     headers: {
                         'Content-Type': 'application/json'
                     }});
@@ -70,9 +88,11 @@
             return {
                 searchByCnp: searchByCnp,
                 getAllReservationsBetweenDates: getAllReservationsBetweenDates,
+                getAllChosenRooms: getAllChosenRooms,
                 saveGuest: saveGuest,
                 saveRequest: saveRequest,
-                saveRooms: saveRooms
+                saveChosenRoom: saveChosenRoom,
+                removeChosenRoom: removeChosenRoom
             };
 
         }]);

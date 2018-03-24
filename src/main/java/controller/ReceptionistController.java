@@ -1,9 +1,11 @@
 package controller;
 
+import com.hotel.royalpalace.model.ChosenRooms;
 import com.hotel.royalpalace.model.Guest;
 import com.hotel.royalpalace.model.Request;
 import com.hotel.royalpalace.model.Room;
 import com.hotel.royalpalace.model.info.RequestInfo;
+import com.hotel.royalpalace.repository.ChosenRoomRepository;
 import com.hotel.royalpalace.service.GuestService;
 import com.hotel.royalpalace.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +50,13 @@ public class ReceptionistController {
     public ResponseEntity getReservationsBetweenDates(@RequestParam(value = "arrivalDate") String arrivalDate,
                                                       @RequestParam(value = "departureDate") String departureDate) throws ParseException {
 
-
         return new ResponseEntity<>(requestService.getAllReservationsBetweenDates(df.parse(arrivalDate), df.parse(departureDate)), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getAllChosenRooms", method = RequestMethod.GET)
+    public ResponseEntity getAllChosenRooms() {
+
+        return new ResponseEntity<>(requestService.getAllRChosenRooms(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/saveGuest", method = RequestMethod.POST,
@@ -70,5 +77,25 @@ public class ReceptionistController {
         Request request = new Request(requestInfo);
         requestService.saveRequest(request);
         return "redirect:/manager";
+    }
+
+    @RequestMapping(value = "/saveChosenRoom", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String saveChosenRoom(@RequestBody Room room) {
+
+        ChosenRooms chosenRooms = new ChosenRooms(room);
+        requestService.saveChosenRoom(chosenRooms);
+        return "manager";
+    }
+
+    @RequestMapping(value = "/removeChosenRoom", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String removeChosenRoom(@RequestBody Room room) {
+
+        ChosenRooms chosenRooms = new ChosenRooms(room);
+        requestService.removeChosenRoom(chosenRooms);
+        return "manager";
     }
 }

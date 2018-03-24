@@ -27,7 +27,11 @@
 
         var guestAlreadyExist = false;
         _self.loading = false;
-
+        var refreshRooms;
+        
+        _self.closeInterval = function () {
+            clearInterval(refreshRooms);
+        };
 
         function init() {
             if ($state.current.name === 'viewReservations') {
@@ -78,8 +82,6 @@
         init();
 
 
-
-
         _self.saveRequestedDate = function () {
             _self.loading = true;
             _self.request = {
@@ -97,8 +99,61 @@
                             $('.r'+room.roomNumber).css('cursor', 'context-menu');
                         });
                     });
-                    _self.loading = false;
+
+                    ReservationsService
+                        .getAllChosenRooms()
+                        .then(function (response) {
+                            response.data.forEach(function (chosenRooms) {
+
+                                if (!_self.selectedRooms.find(r => r.roomNumber === chosenRooms.room.roomNumber)) {
+                                    $('.r'+chosenRooms.room.roomNumber).addClass('occupiedRoom');
+                                    $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
+                                    $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
+                                }
+                            });
+                            _self.loading = false;
+                        });
                 });
+
+            refreshRooms = setInterval(function() {
+                ReservationsService
+                    .getAllReservationsBetweenDates(_self.request.arrivalDate, _self.request.departureDate)
+                    .then(function (response) {
+
+                        $('.occupiedRoom').on('click', getRoomDetails);
+                        $('.occupiedRoom').css('cursor', 'pointer');
+                        $('.occupiedRoom').removeClass('occupiedRoom');
+
+                        response.data.forEach(function (request) {
+                            request.rooms.forEach(function (room) {
+
+                                if(_self.selectedRoom) {
+                                    if(_self.selectedRoom.id === room.id) {
+                                        $('.modal').modal('toggle');
+                                    }
+                                }
+
+                                $('.r'+room.roomNumber).addClass('occupiedRoom');
+                                $('.r'+room.roomNumber).off('click', getRoomDetails);
+                                $('.r'+room.roomNumber).css('cursor', 'context-menu');
+                            });
+                        });
+
+                        ReservationsService
+                            .getAllChosenRooms()
+                            .then(function (response) {
+                                response.data.forEach(function (chosenRooms) {
+
+                                    if (!_self.selectedRooms.find(r => r.roomNumber === chosenRooms.room.roomNumber)) {
+                                        $('.r'+chosenRooms.room.roomNumber).addClass('occupiedRoom');
+                                        $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
+                                        $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
+                                    }
+                                });
+                                _self.loading = false;
+                            });
+                    })
+            },5000);
         };
         
         _self.searchByCnp = function () {
@@ -155,12 +210,21 @@
         }
 
         function chooseRoom() {
+
             if ($('.r'+_self.selectedRoom.roomNumber).hasClass('chosenRoom')) {
+
+                ReservationsService
+                    .removeChosenRoom(_self.selectedRoom);
+
                 $('.r'+_self.selectedRoom.roomNumber).addClass('type'+_self.selectedRoom.roomType.roomName.substring(0,2).toUpperCase());
                 const index = _self.selectedRooms.indexOf(_self.selectedRoom);
                 _self.selectedRooms.splice(index, 1);
                 $('.r'+_self.selectedRoom.roomNumber).removeClass('chosenRoom');
             } else {
+
+                ReservationsService
+                    .saveChosenRoom(_self.selectedRoom);
+
                 $('.r'+_self.selectedRoom.roomNumber).addClass('chosenRoom');
                 $('.r'+_self.selectedRoom.roomNumber).removeClass('type'+_self.selectedRoom.roomType.roomName.substring(0,2).toUpperCase());
                 _self.selectedRooms.push(_self.selectedRoom);
@@ -169,6 +233,8 @@
         }
         
         function submitRequest() {
+
+            _self.closeInterval();
 
             if (!guestAlreadyExist) {
                 ReservationsService
@@ -238,6 +304,10 @@
                             });
                     });
             }
+        }
+
+        window.onbeforeunload = function () {
+            _self.closeInterval();
         }
     }
 
