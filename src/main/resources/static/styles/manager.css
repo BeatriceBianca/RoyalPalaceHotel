@@ -259,6 +259,10 @@ div.tab .active {
     background-color: rgb(128,128,128);
 }
 
+.chosenRooms {
+    background-color: rgb(128,128,128);
+}
+
 .b-left {
     border-left: 1px solid black;
 }

@@ -106,7 +106,7 @@
                             response.data.forEach(function (chosenRooms) {
 
                                 if (!_self.selectedRooms.find(r => r.roomNumber === chosenRooms.room.roomNumber)) {
-                                    $('.r'+chosenRooms.room.roomNumber).addClass('occupiedRoom');
+                                    $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
                                     $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
                                     $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
                                 }
@@ -144,8 +144,12 @@
                             .then(function (response) {
                                 response.data.forEach(function (chosenRooms) {
 
+                                    $('.chosenRooms').on('click', getRoomDetails);
+                                    $('.chosenRooms').css('cursor', 'pointer');
+                                    $('.chosenRooms').removeClass('chosenRooms');
+
                                     if (!_self.selectedRooms.find(r => r.roomNumber === chosenRooms.room.roomNumber)) {
-                                        $('.r'+chosenRooms.room.roomNumber).addClass('occupiedRoom');
+                                        $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
                                         $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
                                         $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
                                     }
