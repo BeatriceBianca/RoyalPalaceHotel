@@ -22,6 +22,33 @@
         var allRooms = [];
         _self.selectedRoom = null;
 
+        _self.loading = true;
+
+        function init() {
+
+            RoomsService
+                .getAllRooms()
+                .then(function (response) {
+                    allRooms = response.data;
+                    response.data.forEach(function (room) {
+                        $('.r'+room.roomNumber).addClass('type'+room.roomType.roomName.substring(0,2).toUpperCase());
+                        $('.r'+room.roomNumber).on('click', getRoomDetails);
+                        $('.r'+room.roomNumber).css('cursor', 'pointer');
+                        _self.loading = false;
+                    })
+                });
+
+            $(".modal").on("hidden.bs.modal", function(){
+                $(".modal-body p").html("");
+                $(".modal-title").html("");
+                _self.selectedRoom = null;
+            });
+        }
+
+        init();
+
+
+
         function updatePrice() {
             var selectedValue = _self.roomTypes.find(function (type) {
                 if (type.id.toString() === $('.modal-body select').val()) {
@@ -112,28 +139,6 @@
             _self.isThirdFloorOpen = false;
             _self.isFourthFloorOpen = false;
         }
-
-        function init() {
-
-            RoomsService
-                .getAllRooms()
-                .then(function (response) {
-                    allRooms = response.data;
-                    response.data.forEach(function (room) {
-                        $('.r'+room.roomNumber).addClass('type'+room.roomType.roomName.substring(0,2).toUpperCase());
-                        $('.r'+room.roomNumber).on('click', getRoomDetails);
-                        $('.r'+room.roomNumber).css('cursor', 'pointer');
-                    })
-                });
-
-            $(".modal").on("hidden.bs.modal", function(){
-                $(".modal-body p").html("");
-                $(".modal-title").html("");
-                _self.selectedRoom = null;
-            });
-        }
-        
-        init();
     }
 
 })();

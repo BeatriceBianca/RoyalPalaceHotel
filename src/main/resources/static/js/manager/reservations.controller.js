@@ -27,6 +27,59 @@
 
         var guestAlreadyExist = false;
 
+
+
+        function init() {
+            if ($state.current.name === 'viewReservations') {
+                _self.currentState = 'newReservation';
+            } else {
+                _self.currentState = $state.current.name;
+            }
+
+            $('.menu-div a button').removeClass('active');
+            $('#'+_self.currentState).addClass('active');
+
+            _self.viewGuest = true;
+            _self.viewRequest = false;
+            _self.viewRoom = false;
+
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY/MM/DD'
+            });
+
+            $('#datetimepicker2').datetimepicker({
+                format: 'YYYY/MM/DD'
+            });
+
+            RoomsService
+                .getAllRoomTypes()
+                .then(function (value) {
+                    _self.roomTypes = value.data;
+                });
+
+            RoomsService
+                .getAllRooms()
+                .then(function (response) {
+                    allRooms = response.data;
+                    response.data.forEach(function (room) {
+                        $('.r'+room.roomNumber).addClass('type'+room.roomType.roomName.substring(0,2).toUpperCase());
+                        $('.r'+room.roomNumber).on('click', getRoomDetails);
+                        $('.r'+room.roomNumber).css('cursor', 'pointer');
+                    })
+                });
+
+            $(".modal").on("hidden.bs.modal", function(){
+                $(".modal-body p").html("");
+                $(".modal-title").html("");
+                _self.selectedRoom = null;
+            });
+        }
+
+        init();
+
+
+
+
         _self.saveRequestedDate = function () {
             _self.request = {
                 arrivalDate: $('#arrivalDate').val(),
@@ -163,54 +216,6 @@
                     });
             }
         }
-        
-        function init() {
-            if ($state.current.name === 'viewReservations') {
-                _self.currentState = 'newReservation';
-            } else {
-                _self.currentState = $state.current.name;
-            }
-
-            $('.menu-div a button').removeClass('active');
-            $('#'+_self.currentState).addClass('active');
-
-            _self.viewGuest = true;
-            _self.viewRequest = false;
-            _self.viewRoom = false;
-
-            $('#datetimepicker1').datetimepicker({
-                format: 'YYYY/MM/DD'
-            });
-
-            $('#datetimepicker2').datetimepicker({
-                format: 'YYYY/MM/DD'
-            });
-
-            RoomsService
-                .getAllRoomTypes()
-                .then(function (value) {
-                    _self.roomTypes = value.data;
-                });
-
-            RoomsService
-                .getAllRooms()
-                .then(function (response) {
-                    allRooms = response.data;
-                    response.data.forEach(function (room) {
-                        $('.r'+room.roomNumber).addClass('type'+room.roomType.roomName.substring(0,2).toUpperCase());
-                        $('.r'+room.roomNumber).on('click', getRoomDetails);
-                        $('.r'+room.roomNumber).css('cursor', 'pointer');
-                    })
-                });
-
-            $(".modal").on("hidden.bs.modal", function(){
-                $(".modal-body p").html("");
-                $(".modal-title").html("");
-                _self.selectedRoom = null;
-            });
-        }
-
-        init();
     }
 
 })();

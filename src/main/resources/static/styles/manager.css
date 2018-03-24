@@ -92,6 +92,8 @@ div.tab .active {
     height: 10%;
     width: 100%;
     text-align: right;
+    padding-top: 2%;
+    padding-right: 1%;
 }
 
 .welcome span {
@@ -423,4 +425,14 @@ html {
 
 .reservations .elevator {
     margin-bottom: 15%;
+}
+
+.loading-spinner {
+    left: 53%;
+    position: fixed;
+    top: 40%;
+}
+
+.loadingScreen {
+    opacity: 0.5;
 }

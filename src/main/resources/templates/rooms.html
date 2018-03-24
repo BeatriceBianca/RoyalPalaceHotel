@@ -1,5 +1,7 @@
-<div ng-controller="roomsController as roomsCtrl">
+<div ng-controller="roomsController as roomsCtrl" ng-class="{'loadingScreen': roomsCtrl.loading}">
 
+    <i class="fa fa-spinner fa-spin loading-spinner" style="font-size:30px"
+       ng-show="roomsCtrl.loading"></i>
     <div id="rooms-page">
         <h2 id="title">Hotel rooms</h2>
 
