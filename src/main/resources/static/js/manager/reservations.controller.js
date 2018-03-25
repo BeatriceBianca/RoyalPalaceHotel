@@ -270,7 +270,11 @@
                                         _self.request.rooms = _self.selectedRooms;
                                         ReservationsService
                                             .saveRequest(_self.request)
-                                            .then(function (value) {
+                                            .then(function () {
+                                                _self.selectedRooms.forEach(function (value2) {
+                                                    ReservationsService
+                                                        .removeChosenRoom(value2);
+                                                });
                                                 $state.go('home');
                                             })
                                     });
@@ -302,7 +306,11 @@
                                 _self.request.rooms = _self.selectedRooms;
                                 ReservationsService
                                     .saveRequest(_self.request)
-                                    .then(function (value) {
+                                    .then(function () {
+                                        _self.selectedRooms.forEach(function (value2) {
+                                            ReservationsService
+                                                .removeChosenRoom(value2);
+                                        });
                                         $state.go('home');
                                     })
                             });
