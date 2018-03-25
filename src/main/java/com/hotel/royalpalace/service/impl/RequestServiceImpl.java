@@ -59,4 +59,9 @@ public class RequestServiceImpl implements RequestService {
     public void removeChosenRoom(ChosenRooms room) {
         chosenRoomRepository.delete(chosenRoomRepository.findByRoom(room.getRoom()).get(0));
     }
+
+    @Override
+    public List<Request> getAll() {
+        return (List<Request>) requestRepository.findAll();
+    }
 }

@@ -34,7 +34,7 @@ public class ReceptionistController {
     @Autowired
     RequestService requestService;
 
-    DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
+    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
     @RequestMapping(value = "")
     public String getReceptionistPage() { return "receptionist"; }
@@ -75,6 +75,9 @@ public class ReceptionistController {
 
         Set<Room> requestedRooms = requestInfo.getRooms();
         Request request = new Request(requestInfo);
+        request.setArrivalDate(df.parse(requestInfo.getArrivalDate()));
+        request.setDepartureDate(df.parse(requestInfo.getDepartureDate()));
+        request.setRequestDate(df.parse(requestInfo.getRequestDate()));
         requestService.saveRequest(request);
         return "redirect:/manager";
     }
@@ -97,5 +100,11 @@ public class ReceptionistController {
         ChosenRooms chosenRooms = new ChosenRooms(room);
         requestService.removeChosenRoom(chosenRooms);
         return "manager";
+    }
+
+    @RequestMapping(value = "/getAllReservations", method = RequestMethod.GET)
+    public ResponseEntity getAllReservations() {
+
+        return new ResponseEntity<>(requestService.getAll(), HttpStatus.OK);
     }
 }

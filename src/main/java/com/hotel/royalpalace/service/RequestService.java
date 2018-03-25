@@ -22,4 +22,6 @@ public interface RequestService {
     void saveChosenRoom(ChosenRooms room);
 
     void removeChosenRoom(ChosenRooms room);
+
+    List<Request> getAll();
 }

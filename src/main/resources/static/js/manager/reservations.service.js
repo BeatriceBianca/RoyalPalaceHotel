@@ -85,6 +85,16 @@
                     }});
             }
 
+            function getAllReservations() {
+                var URL = baseTestContext + "/getAllReservations";
+                return $http({
+                    method: 'GET',
+                    url: URL,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }});
+            }
+
             return {
                 searchByCnp: searchByCnp,
                 getAllReservationsBetweenDates: getAllReservationsBetweenDates,
@@ -92,7 +102,8 @@
                 saveGuest: saveGuest,
                 saveRequest: saveRequest,
                 saveChosenRoom: saveChosenRoom,
-                removeChosenRoom: removeChosenRoom
+                removeChosenRoom: removeChosenRoom,
+                getAllReservations: getAllReservations
             };
 
         }]);

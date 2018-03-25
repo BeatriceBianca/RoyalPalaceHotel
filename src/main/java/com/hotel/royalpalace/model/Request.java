@@ -77,7 +77,7 @@ public class Request {
 
     public Request(RequestInfo request) throws ParseException {
 
-        DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
         this.id = request.getId();
         this.user = request.getUser();

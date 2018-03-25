@@ -33,6 +33,8 @@
             clearInterval(refreshRooms);
         };
 
+        _self.allReservations = [];
+
         function init() {
             if ($state.current.name === 'viewReservations') {
                 _self.currentState = 'newReservation';
@@ -77,6 +79,7 @@
                 $(".modal-title").html("");
                 _self.selectedRoom = null;
             });
+
         }
 
         init();
