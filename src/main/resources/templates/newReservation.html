@@ -5,15 +5,15 @@
     <div class="col-md-6 col-md-offset-3 reservations">
 
         <div class="reservations-menu">
-            <a ui-sref="newReservation"><button id="newReservation" class="reservations-menu-activ">New Reservation</button></a>
             <a ui-sref="viewReservations"><button id="viewReservations">View Reservations</button></a>
+            <a ui-sref="newReservation"><button id="newReservation" class="reservations-menu-activ">New Reservation</button></a>
         </div>
 
         <!--GUEST-->
 
-        <div class="searchByCnp" ng-show="res.viewGuest">
+        <div class="searchByIdNumber" ng-show="res.viewGuest">
             <span> Search guest by CNP </span><br/>
-            <input type="text" class="form-control" ng-change="res.searchByCnp()" ng-model="res.cnp"/><br/>
+            <input type="text" class="form-control" ng-change="res.searchByIdNumber()" ng-model="res.idNumber"/><br/>
             <span> or add new guest </span>
         </div>
 
@@ -45,10 +45,10 @@
                 </div>
 
                 <div class="right-content">
-                    <div class="form-group" ng-class="{ 'has-error': guestForm.cnp.$dirty &amp;&amp; guestForm.cnp.$error.required }">
-                        <label for="cnp">CNP</label>
-                        <input type="text" name="cnp" id="cnp" class="form-control" ng-change="res.validateCnp()" ng-model="res.guest.cnp" required="required" />
-                        <span ng-show="guestForm.cnp.$dirty &amp;&amp; guestForm.cnp.$error.required" class="help-block">CNP is required</span>
+                    <div class="form-group" ng-class="{ 'has-error': guestForm.idNumber.$dirty &amp;&amp; guestForm.idNumber.$error.required }">
+                        <label for="idNumber">CNP</label>
+                        <input type="text" name="idNumber" id="idNumber" class="form-control" ng-change="res.validateIdNumber()" ng-model="res.guest.idNumber" required="required" />
+                        <span ng-show="guestForm.idNumber.$dirty &amp;&amp; guestForm.idNumber.$error.required" class="help-block">CNP is required</span>
                     </div>
 
                     <div class="form-group" ng-class="{ 'has-error': guestForm.address.$dirty &amp;&amp; guestForm.address.$error.required }">

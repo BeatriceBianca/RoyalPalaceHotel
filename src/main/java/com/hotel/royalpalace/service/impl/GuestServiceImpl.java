@@ -13,7 +13,7 @@ public class GuestServiceImpl implements GuestService{
     GuestRepository guestRepository;
 
     @Override
-    public Guest getByCnp(String cnp) {
-        return guestRepository.getByCnp(cnp);
+    public Guest getByIdNumber(String idNumber) {
+        return guestRepository.getByIdNumber(idNumber);
     }
 }

@@ -8,12 +8,12 @@
 
             var baseTestContext = "http://" + location.host + '/receptionist';
 
-            function searchByCnp(cnp) {
-                var URL = baseTestContext + "/findByCnp";
+            function searchByIdNumber(idNumber) {
+                var URL = baseTestContext + "/findByIdNumber";
                 return $http({
                     method: 'GET',
                     url: URL,
-                    params: {cnp: cnp},
+                    params: {idNumber: idNumber},
                     headers: {
                         'Content-Type': 'application/json'
                     }});
@@ -96,7 +96,7 @@
             }
 
             return {
-                searchByCnp: searchByCnp,
+                searchByIdNumber: searchByIdNumber,
                 getAllReservationsBetweenDates: getAllReservationsBetweenDates,
                 getAllChosenRooms: getAllChosenRooms,
                 saveGuest: saveGuest,

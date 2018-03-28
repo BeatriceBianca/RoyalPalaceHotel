@@ -163,26 +163,26 @@
             },5000);
         };
         
-        _self.searchByCnp = function () {
-            if (_self.cnp.length === 13) {
+        _self.searchByIdNumber = function () {
+            if (_self.idNumber.length === 13) {
                 ReservationsService
-                    .searchByCnp(_self.cnp)
+                    .searchByIdNumber(_self.idNumber)
                     .then(function (value) {
                         if (value.data !== "") {
                             guestAlreadyExist = true;
 
                             _self.guest = value.data;
                         } else {
-                            _self.guest.cnp = _self.cnp;
+                            _self.guest.idNumber = _self.idNumber;
                         }
                     })
             }
         };
         
-        _self.validateCnp = function () {
-            if (_self.guest.cnp.length === 13) {
+        _self.validateIdNumber = function () {
+            if (_self.guest.idNumber.length === 13) {
                 ReservationsService
-                    .searchByCnp(_self.guest.cnp)
+                    .searchByIdNumber(_self.guest.idNumber)
                     .then(function (value) {
                         if (value.data !== "") {
                             guestAlreadyExist = true;
@@ -249,7 +249,7 @@
                     .then(function () {
 
                         ReservationsService
-                            .searchByCnp(_self.guest.cnp)
+                            .searchByIdNumber(_self.guest.idNumber)
                             .then(function (response) {
 
                                 _self.request.customer = response.data;
@@ -285,7 +285,7 @@
                     });
             } else {
                 ReservationsService
-                    .searchByCnp(_self.guest.cnp)
+                    .searchByIdNumber(_self.guest.idNumber)
                     .then(function (response) {
 
                         _self.request.customer = response.data;

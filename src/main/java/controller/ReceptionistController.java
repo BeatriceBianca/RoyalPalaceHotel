@@ -39,11 +39,11 @@ public class ReceptionistController {
     @RequestMapping(value = "")
     public String getReceptionistPage() { return "receptionist"; }
 
-    @RequestMapping(value = "/findByCnp", method = RequestMethod.GET)
-    public ResponseEntity findByCnp(@RequestParam(value = "cnp") String cnp,
+    @RequestMapping(value = "/findByIdNumber", method = RequestMethod.GET)
+    public ResponseEntity findByIdNumber(@RequestParam(value = "idNumber") String idNumber,
                                     HttpServletRequest request) {
 
-        return new ResponseEntity<>(guestService.getByCnp(cnp), HttpStatus.OK);
+        return new ResponseEntity<>(guestService.getByIdNumber(idNumber), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getReservationsBetweenDates", method = RequestMethod.GET)

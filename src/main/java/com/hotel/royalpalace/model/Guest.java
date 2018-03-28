@@ -24,8 +24,8 @@ public class Guest {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "cnp")
-    private String cnp;
+    @Column(name = "idNumber")
+    private String idNumber;
 
     @Column(name = "gender")
     private String gender;
@@ -49,9 +49,9 @@ public class Guest {
 
     public void setAddress(String address) { this.address = address; }
 
-    public String getCnp() { return cnp; }
+    public String getIdNumber() { return idNumber; }
 
-    public void setCnp(String cnp) { this.cnp = cnp; }
+    public void setIdNumber(String idNumber) { this.idNumber = idNumber; }
 
     public String getGender() { return gender; }
 
