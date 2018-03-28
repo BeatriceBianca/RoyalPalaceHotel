@@ -65,12 +65,29 @@ body {
     cursor: pointer;
 }
 
-.forgot-password {
+.login-footer {
     margin-top: 3%;
     height: 5%;
+    width: 100%;
+    display: flex;
+}
+
+.forgot-password {
+    width: 50%;
+    text-align: left;
+}
+
+.new-guest-account {
+    width: 50%;
+    text-align: right;
 }
 
 .forgot-password span {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.new-guest-account span {
     font-weight: bold;
     cursor: pointer;
 }

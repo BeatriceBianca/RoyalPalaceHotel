@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" ng-app="RoyalPalaceHotel">
+<html lang="en" ng-app="RoyalPalaceHotel">
 <head>
     <meta charset="UTF-8" />
     <title>Royal Palace Hotel</title>
@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
 
 </head>
-<body ng-controller="loginController as login">
+<body ng-controller="loginController as lg">
 
 <div class="login-container">
     <div class="login-top">
@@ -24,8 +24,13 @@
             <button class="button" type="submit">Sign in</button>
         </form>
     </div>
-    <div class="forgot-password">
-        Forgot <span ng-click="login.forgotPass">Password</span>?
+    <div class="login-footer">
+        <div class="forgot-password">
+            Forgot <span ng-click="lg.forgotPass()">Password</span>?
+        </div>
+        <div class="new-guest-account">
+            Create new <span ng-click="lg.newGuest()">{{lg.guestAccount}}</span>
+        </div>
     </div>
 </div>
 

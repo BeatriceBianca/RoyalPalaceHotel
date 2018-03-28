@@ -6,15 +6,21 @@
         .module('RoyalPalaceHotel')
         .controller('loginController', Controller);
 
-    Controller.$inject = ['$scope', 'LoginService', '$location'];
+    Controller.$inject = ['$scope', 'LoginService'];
 
-    function Controller($scope, LoginService, $location) {
+    function Controller($scope, LoginService) {
         var _self = this;
 
-        $scope.forgotPass = forgotPass;
+        _self.forgotPass = forgotPass;
+        _self.newGuest = newGuest;
+        _self.guestAccount = 'guest account';
 
         function forgotPass() {
+            console.log("Forgot password");
+        }
 
+         function newGuest() {
+            console.log("New Account");
         }
     }
 
