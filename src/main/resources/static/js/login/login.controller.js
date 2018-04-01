@@ -15,6 +15,9 @@
         _self.newGuest = newGuest;
         _self.guestAccount = 'guest account';
 
+        _self.login = true;
+        _self.newAccount = false;
+
         function forgotPass() {
             console.log("Forgot password");
         }

@@ -77,17 +77,27 @@ body {
     text-align: left;
 }
 
-.new-guest-account {
-    width: 50%;
-    text-align: right;
-}
-
 .forgot-password span {
     font-weight: bold;
     cursor: pointer;
 }
 
+.new-guest-account {
+    width: 50%;
+    text-align: right;
+}
+
 .new-guest-account span {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-account {
+    width: 50%;
+    text-align: right;
+}
+
+.login-account span {
     font-weight: bold;
     cursor: pointer;
 }
@@ -102,4 +112,16 @@ body {
     .login-container {
         width: 70%;
     }
+}
+
+.newAccountForm {
+    display: flex;
+}
+
+.newAccountForm div {
+    width: 50%;
+}
+
+.login-container .login-bottom .newAccountForm input:first-child {
+    margin-top: 20%;
 }
