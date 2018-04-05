@@ -1,18 +1,19 @@
 package controller;
 
 import com.hotel.royalpalace.auxiliary.Encryption;
+import com.hotel.royalpalace.model.Room;
+import com.hotel.royalpalace.model.RoomType;
 import com.hotel.royalpalace.model.User;
 import com.hotel.royalpalace.model.info.UserInfo;
+import com.hotel.royalpalace.service.RoomsService;
 import com.hotel.royalpalace.service.UserService;
+import com.hotel.royalpalace.service.impl.RoomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
@@ -25,42 +26,20 @@ public class ManagerController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    RoomsService roomsService;
+
     @RequestMapping(value = "")
-    public String getManagerPage() { return "manager"; }
+    public String manager() { return "manager/manager"; }
 
     @RequestMapping(value = "/home")
-    public String getHomeContent() { return "home"; }
+    public String home() { return "manager/home"; }
 
     @RequestMapping(value = "/newAccount")
-    public String getNewAccountContent() { return "newAccount"; }
-
-    @RequestMapping(value = "/rooms")
-    public String getRoomsContent() { return "rooms"; }
+    public String newAccount() { return "manager/newAccount"; }
 
     @RequestMapping(value = "/reports")
-    public String getReportsContent() { return "reports"; }
-
-    @RequestMapping(value = "/guests")
-    public String getGuestsContent() { return "guests"; }
-
-    @RequestMapping(value = "/newReservation")
-    public String getNewReservationContent() { return "newReservation"; }
-
-    @RequestMapping(value = "/viewReservations")
-    public String getViewReservationsContent() { return "viewReservations"; }
-
-    @RequestMapping(value = "/myProfile")
-    public String getMyProfileContent() { return "myProfile"; }
-
-    @RequestMapping(value = "/changePassword")
-    public String getChangePasswordContent() { return "changePassword"; }
-
-    @RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getCurrentUser(HttpServletRequest request) {
-        String currentUser = request.getUserPrincipal().getName();
-        User user = userService.getByUserEmail(currentUser);
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
+    public String reports() { return "manager/reports"; }
 
     @RequestMapping(value = "/computePassword?password={password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity computePassword(@PathVariable("password") String password,
@@ -99,16 +78,23 @@ public class ManagerController {
         return "redirect:/manager";
     }
 
-    @RequestMapping(value = "/changePassword", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public String changePassword(@RequestParam(value = "newPassword") String newPassword,
-                           HttpServletRequest request) throws NoSuchAlgorithmException {
+    @RequestMapping(value = "/manager/editRoomType", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String editRoomType(@RequestBody Room room,
+                               HttpServletRequest request) {
 
-        User currentUser = userService.getByUserEmail(request.getUserPrincipal().getName());
-        userService.changePassword(currentUser, newPassword);
-
+        roomsService.editRoomType(room);
         return "redirect:/manager";
     }
 
+    @RequestMapping(value = "/manager/editPrice", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String editPrice(@RequestBody RoomType roomType,
+                            HttpServletRequest request) {
+
+        roomsService.editPrice(roomType);
+        return "redirect:/manager";
+    }
 }

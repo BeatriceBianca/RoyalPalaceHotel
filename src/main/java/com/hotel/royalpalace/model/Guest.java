@@ -1,6 +1,7 @@
 package com.hotel.royalpalace.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Beatrice Bianca on 04-Mar-17.
@@ -24,14 +25,17 @@ public class Guest {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "idNumber")
-    private String idNumber;
+    @Column(name = "guest_phone")
+    private String guestPhone;
 
-    @Column(name = "gender")
-    private String gender;
+    @Column(name = "guest_email")
+    private String guestEmail;
 
-    @Column(name = "customer_phone")
-    private String customerPhone;
+    @Column(name = "guest_password")
+    private String guestPassword;
+
+    @Column(name = "register_date")
+    private Date registerDate;
 
     public Long getId() { return id; }
 
@@ -49,18 +53,31 @@ public class Guest {
 
     public void setAddress(String address) { this.address = address; }
 
-    public String getIdNumber() { return idNumber; }
+    public String getGuestPhone() { return guestPhone; }
 
-    public void setIdNumber(String idNumber) { this.idNumber = idNumber; }
+    public void setGuestPhone(String guestPhone) { this.guestPhone = guestPhone; }
 
-    public String getGender() { return gender; }
+    public String getGuestEmail() { return guestEmail; }
 
-    public void setGender(String gender) { this.gender = gender; }
+    public void setGuestEmail(String guestEmail) { this.guestEmail = guestEmail; }
 
-    public String getCustomerPhone() { return customerPhone; }
+    public String getGuestPassword() { return guestPassword; }
 
-    public void setCustomerPhone(String customerPhone) { this.customerPhone = customerPhone; }
+    public void setGuestPassword(String guestPassword) { this.guestPassword = guestPassword; }
+
+    public Date getRegisterDate() { return registerDate; }
+
+    public void setRegisterDate(Date registerDate) { this.registerDate = registerDate; }
 
     public Guest() {}
 
+    public Guest(String lastName, String firstName, String address, String guestPhone, String guestEmail, String guestPassword) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.address = address;
+        this.guestPhone = guestPhone;
+        this.guestEmail = guestEmail;
+        this.guestPassword = guestPassword;
+        this.registerDate = new Date();
+    }
 }

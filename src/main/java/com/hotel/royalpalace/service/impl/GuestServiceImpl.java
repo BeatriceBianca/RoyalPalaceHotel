@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GuestServiceImpl implements GuestService{
+public class GuestServiceImpl implements GuestService {
 
     @Autowired
     GuestRepository guestRepository;
 
+//    @Override
+//    public Guest getByIdNumber(String idNumber) {
+//        return guestRepository.getByIdNumber(idNumber);
+//    }
+
     @Override
-    public Guest getByIdNumber(String idNumber) {
-        return guestRepository.getByIdNumber(idNumber);
+    public void newGuest(Guest guest) {
+        guestRepository.save(guest);
     }
 }

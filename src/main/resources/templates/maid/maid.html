@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" ng-app="RoyalPalaceHotel">
 <head>
+    <base href="/" />
     <meta charset="UTF-8" />
     <title>Royal Palace Hotel</title>
 
@@ -15,27 +16,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/common.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/manager.css"/>
 </head>
-<body ng-controller="managerController as manager">
+<body ng-controller="maidController as maid">
 
-<div class="manager">
+<div class="main-container">
+
     <div class="welcome">
-        <span> Welcome, {{manager.username}}! </span>
+        <span> Welcome, {{maid.username}}! </span>
         <a ui-sref="myProfile"><button> My profile </button></a>
-        <a href="/logout"><button> Sign Out </button></a>
+        <button ng-click="maid.logout()"> Sign Out </button>
     </div>
 
-    <div class="manager-container">
-        <div class="manager-content">
+    <div class="menu-container">
+        <div class="menu-content">
 
             <div class="tab menu-div">
-                <a ui-sref="home"><button id="home">Home</button></a>
-                <a ui-sref="newAccount"><button id="newAccount">New Account</button></a>
+                <a ui-sref="homeMaid"><button id="homeMaid">Home</button></a>
                 <a ui-sref="rooms"><button id="rooms">Hotel Rooms</button></a>
-                <a ui-sref="viewReservations"><button id="viewReservations">Reservations</button></a>
-                <a ui-sref="reports"><button id="reports">Reports</button></a>
-                <a ui-sref="guests"><button id="guests">Guests</button></a>
+                <a ui-sref="contact"><button id="contact">Contact</button></a>
             </div>
 
             <div class="tabcontent">
@@ -59,12 +59,9 @@
 
 <script src="/js/jquery.md5.js"></script>
 <script src="/js/app.js"></script>
-<script src="/js/manager/manager.controller.js"></script>
-<script src="/js/manager/manager.service.js"></script>
-<script src="/js/manager/rooms.controller.js"></script>
-<script src="/js/manager/rooms.service.js"></script>
-<script src="/js/manager/reservations.controller.js"></script>
-<script src="/js/manager/reservations.service.js"></script>
-<script src="/js/manager/viewReservations.controller.js"></script>
+<script src="/js/maid/maid.controller.js"></script>
+<script src="/js/maid/maid.service.js"></script>
+<script src="/js/common/common.controller.js"></script>
+<script src="/js/common/common.service.js"></script>
 </body>
 </html>

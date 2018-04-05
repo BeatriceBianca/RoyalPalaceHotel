@@ -4,24 +4,22 @@
 
     angular
         .module('RoyalPalaceHotel')
-        .controller('managerController', Controller);
+        .controller('receptionistController', Controller);
 
-    Controller.$inject = ['$scope', '$window', '$state', '$filter', 'ManagerService', 'MaidService'];
+    Controller.$inject = ['$scope', '$state', '$window', '$filter', 'MaidService'];
 
-    function Controller($scope, $window, $state, $filter, ManagerService, MaidService) {
+    function Controller($scope, $state, $window, $filter, MaidService) {
         var _self = this;
 
         _self.username = "";
         _self.dataLoading = false;
         _self.currentUserPassword = "";
-        _self.currentState = 'homeManager';
-
-        // _self.encryptMd5 = encryptMd5;
+        _self.currentState = 'homeReceptionist';
 
         _self.logout = function () {
             $window.location.href = "/logout";
         };
-        
+
         function init() {
 
             MaidService
@@ -34,13 +32,6 @@
                     _self.currentUserPassword = response.data.userPassword;
                 });
 
-            // $('#datetimepicker1').datetimepicker({
-            //     format: 'YYYY/MM/DD'
-            // });
-            // $('#datetimepicker2').datetimepicker({
-            //     format: 'YYYY/MM/DD'
-            // });
-
             if ($state.current.name !== 'default' && $state.current.name !== '') {
                 _self.currentState = $state.current.name;
             } else {
@@ -51,11 +42,7 @@
             $('#'+_self.currentState).addClass('active');
         }
 
-        // function encryptMd5(pass) {
-        //     return $.md5(pass);
-        // }
-
         init();
-    }
 
+    }
 })();

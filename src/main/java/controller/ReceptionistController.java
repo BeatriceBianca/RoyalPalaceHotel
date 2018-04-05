@@ -5,7 +5,6 @@ import com.hotel.royalpalace.model.Guest;
 import com.hotel.royalpalace.model.Request;
 import com.hotel.royalpalace.model.Room;
 import com.hotel.royalpalace.model.info.RequestInfo;
-import com.hotel.royalpalace.repository.ChosenRoomRepository;
 import com.hotel.royalpalace.service.GuestService;
 import com.hotel.royalpalace.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,17 +33,30 @@ public class ReceptionistController {
     @Autowired
     RequestService requestService;
 
-    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+//    Pages Mapping
 
     @RequestMapping(value = "")
-    public String getReceptionistPage() { return "receptionist"; }
+    public String receptionist() { return "receptionist/receptionist"; }
 
-    @RequestMapping(value = "/findByIdNumber", method = RequestMethod.GET)
-    public ResponseEntity findByIdNumber(@RequestParam(value = "idNumber") String idNumber,
-                                    HttpServletRequest request) {
+    @RequestMapping(value = "/homeReceptionist")
+    public String home() { return "receptionist/home"; }
 
-        return new ResponseEntity<>(guestService.getByIdNumber(idNumber), HttpStatus.OK);
-    }
+    @RequestMapping(value = "/guests")
+    public String guests() { return "receptionist/guests"; }
+
+    @RequestMapping(value = "/viewReservations")
+    public String viewReservations() { return "receptionist/viewReservations"; }
+
+//    ------------------------------------------------------------------------------
+
+    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+
+//    @RequestMapping(value = "/findByIdNumber", method = RequestMethod.GET)
+//    public ResponseEntity findByIdNumber(@RequestParam(value = "idNumber") String idNumber,
+//                                    HttpServletRequest request) {
+//
+//        return new ResponseEntity<>(null, HttpStatus.OK);
+//    }
 
     @RequestMapping(value = "/getReservationsBetweenDates", method = RequestMethod.GET)
     public ResponseEntity getReservationsBetweenDates(@RequestParam(value = "arrivalDate") String arrivalDate,

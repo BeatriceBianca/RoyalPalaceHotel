@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" ng-app="RoyalPalaceHotel">
+<head>
+    <base href="/" />
+    <meta charset="UTF-8" />
+    <title>Royal Palace Hotel</title>
+
+    <link rel="icon"
+          type="image/x-icon"
+          href="/img/hotel-ico.ico" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/manager.css"/>
+</head>
+<body ng-controller="commonController as commonCtrl">
+
+<div class="main-container">
+
+    <div class="login-menu">
+        <button id="signIn" ng-click="commonCtrl.login()">Sign In</button>
+        <button id="signUp">Sign Up</button>
+    </div>
+
+    <div class="menu-container">
+        <div class="menu-content">
+
+            <div class="tab menu-div">
+                <a ui-sref="homeCommon"><button id="homeCommon">Home</button></a>
+                <a ui-sref="rooms"><button id="rooms">Hotel Rooms</button></a>
+                <a ui-sref="offers"><button id="offers">Offers and Promotions</button></a>
+                <a ui-sref="contact"><button id="contact">Contact</button></a>
+            </div>
+
+            <div class="tabcontent">
+                <div ui-view=""></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p> &copy; 2018 - Royal Palace Hotel </p>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular-ui-router/1.0.0-rc.1/angular-ui-router.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+<script src="/js/jquery.md5.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/common/common.controller.js"></script>
+<script src="/js/common/common.service.js"></script>
+</body>
+</html>

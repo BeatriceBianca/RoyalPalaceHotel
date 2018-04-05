@@ -4,5 +4,7 @@ import com.hotel.royalpalace.model.Guest;
 
 public interface GuestService {
 
-    Guest getByIdNumber(String idNumber);
+//    Guest getByIdNumber(String idNumber);
+
+    void newGuest(Guest guest);
 }
