@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
 @Controller
@@ -91,6 +92,7 @@ public class CommonController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String saveGuest(@RequestBody Guest guest) {
 
+        guest.setRegisterDate(new Date());
         requestService.saveGuest(guest);
         return redirectToPage();
     }

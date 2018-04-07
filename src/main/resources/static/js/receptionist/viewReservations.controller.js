@@ -53,6 +53,7 @@
                     } );
                     _self.loading = false;
                 });
+
             if ($state.current.name !== 'viewReservations') {
                 _self.currentState = $state.current.name;
             }

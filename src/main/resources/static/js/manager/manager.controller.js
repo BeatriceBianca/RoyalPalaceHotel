@@ -26,15 +26,15 @@
             MaidService
                 .getCurrentUser()
                 .then(function (response) {
-                    if (response.data) {
-                        _self.username = response.data.firstName;
+                    _self.username = response.data.firstName;
+                    if (response.data !== "") {
                         _self.user = response.data;
                         _self.user.birthDate = $filter('date')(response.data.birthDate, "yyyy/MM/dd");
                         _self.user.hireDate = $filter('date')(response.data.hireDate, "yyyy/MM/dd");
                         _self.currentUserPassword = response.data.userPassword;
-
-                        $rootScope.user = _self.user;
                     }
+
+                    $rootScope.user = _self.user;
                 });
 
             if ($state.current.name !== 'default' && $state.current.name !== '') {

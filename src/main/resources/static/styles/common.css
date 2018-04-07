@@ -466,3 +466,11 @@ div.tab .active {
 .reservations form {
     height: 70%;
 }
+
+#datetimepicker1, #datetimepicker2 {
+    width: 100%;
+}
+
+#datetimepicker1 input, #datetimepicker2 input {
+    width: 100%;
+}

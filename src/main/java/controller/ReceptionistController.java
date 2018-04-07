@@ -58,4 +58,10 @@ public class ReceptionistController {
 //        return new ResponseEntity<>(null, HttpStatus.OK);
 //    }
 
+    @RequestMapping(value = "/getAllGuests", method = RequestMethod.GET)
+    public ResponseEntity getAllReservations() {
+
+        return new ResponseEntity<>(guestService.getAll(), HttpStatus.OK);
+    }
+
 }

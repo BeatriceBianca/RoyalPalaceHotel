@@ -1,3 +1,12 @@
-<div ng-controller="receptionistController as receptionistCtrl">
-    guests
+<div>
+    <div class="col-md-6 col-md-offset-3 reservations"
+         ng-controller="receptionistController as view"
+         ng-class="{'loadingScreen': view.loading}">
+
+        <i class="fa fa-spinner fa-spin loading-spinner" style="font-size:30px"
+           ng-show="view.loading"></i>
+
+        <table id="allReservationsTable" class="display table table-striped table-bordered">
+        </table>
+    </div>
 </div>

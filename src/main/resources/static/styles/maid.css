@@ -76,11 +76,3 @@
     width: 50%;
     height: 15%;
 }
-
-#datetimepicker1, #datetimepicker2 {
-    width: 80%;
-}
-
-#datetimepicker1 input, #datetimepicker2 input {
-    width: 100%;
-}

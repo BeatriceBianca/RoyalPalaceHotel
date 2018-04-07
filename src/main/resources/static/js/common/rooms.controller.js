@@ -11,8 +11,6 @@
     function Controller($rootScope, $scope, $state, $http, $location, $window, CommonService, ManagerService) {
         var _self = this;
 
-        _self.currentState = 'homeCommon';
-
         var allRooms = [];
 
         _self.isFirstFloorOpen = true;
@@ -33,7 +31,7 @@
         function init() {
 
             $('.menu-div a button').removeClass('active');
-            $('#'+$state.current).addClass('active');
+            $('#'+$state.current.name).addClass('active');
 
             CommonService
                 .getAllRooms()

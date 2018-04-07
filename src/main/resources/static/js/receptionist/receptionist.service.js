@@ -8,8 +8,18 @@
 
             var baseTestContext = "http://" + location.host + '/receptionist';
 
-            return {
+            function getAllGuests() {
+                var URL = baseTestContext + "/getAllGuests";
+                return $http({
+                    method: 'GET',
+                    url: URL,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }});
+            }
 
+            return {
+                getAllGuests: getAllGuests
             }
 
         }]);
