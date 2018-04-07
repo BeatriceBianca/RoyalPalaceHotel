@@ -6,27 +6,36 @@
         .module('RoyalPalaceHotel')
         .controller('roomsController', Controller);
 
-    Controller.$inject = ['$scope', '$state', 'RoomsService'];
+    Controller.$inject = ['$rootScope', '$scope', '$state', '$http', '$location', '$window', 'CommonService', 'ManagerService'];
 
-    function Controller($scope, $state, RoomsService) {
+    function Controller($rootScope, $scope, $state, $http, $location, $window, CommonService, ManagerService) {
         var _self = this;
+
+        _self.currentState = 'homeCommon';
+
+        var allRooms = [];
 
         _self.isFirstFloorOpen = true;
         _self.isSecondFloorOpen = false;
         _self.isThirdFloorOpen = false;
         _self.isFourthFloorOpen = false;
 
-        _self.closeTables = closeTables;
         _self.editRoom = editRoom;
-        
-        var allRooms = [];
+
+        _self.closeTables = closeTables;
+
         _self.selectedRoom = null;
 
         _self.loading = true;
+        
+        _self.user = $rootScope.user;
 
         function init() {
 
-            RoomsService
+            $('.menu-div a button').removeClass('active');
+            $('#'+$state.current).addClass('active');
+
+            CommonService
                 .getAllRooms()
                 .then(function (response) {
                     allRooms = response.data;
@@ -34,8 +43,8 @@
                         $('.r'+room.roomNumber).addClass('type'+room.roomType.roomName.substring(0,2).toUpperCase());
                         $('.r'+room.roomNumber).on('click', getRoomDetails);
                         $('.r'+room.roomNumber).css('cursor', 'pointer');
-                        _self.loading = false;
-                    })
+                    });
+                    _self.loading = false;
                 });
 
             $(".modal").on("hidden.bs.modal", function(){
@@ -47,19 +56,43 @@
 
         init();
 
-
-
-        function updatePrice() {
-            var selectedValue = _self.roomTypes.find(function (type) {
-                if (type.id.toString() === $('.modal-body select').val()) {
-                    return type;
-                }
+        function getRoomDetails(event) {
+            _self.selectedRoom = allRooms.find(function (room) {
+                if (room.roomNumber.toString() === event.target.className.substring(1,3))
+                    return room;
             });
-            $('.modal-body p:last-child input').val(selectedValue.price);
+            $('.modal-title').html("");
+            $('.modal-title').append('Room number ' + _self.selectedRoom.roomNumber);
+
+            $('.modal-body p:first-child').html("");
+            $('.modal-body p:first-child').append('Room Type: ' + _self.selectedRoom.roomType.roomName);
+
+            if (_self.selectedRoom.roomType.nrSingleBed !== 0) {
+                $('.modal-body p:nth-child(2)').html("");
+                $('.modal-body p:nth-child(2)').append('Number of single bed: ' + _self.selectedRoom.roomType.nrSingleBed);
+            }
+
+            if (_self.selectedRoom.roomType.nrDoubleBed !== 0) {
+                $('.modal-body p:nth-child(3)').html("");
+                $('.modal-body p:nth-child(3)').append('Number of double bed: ' + _self.selectedRoom.roomType.nrDoubleBed);
+            }
+
+            $('.modal-body p:nth-child(4)').html("");
+            $('.modal-body p:nth-child(4)').append('Price: ' + _self.selectedRoom.roomType.price + " &euro;");
+
+            $('.modal-footer .editButton').html("Edit");
+            $('#myModal').modal();
+        }
+
+        function closeTables() {
+            _self.isFirstFloorOpen = false;
+            _self.isSecondFloorOpen = false;
+            _self.isThirdFloorOpen = false;
+            _self.isFourthFloorOpen = false;
         }
 
         function editRoom() {
-            RoomsService
+            CommonService
                 .getAllRoomTypes()
                 .then(function (roomTypes) {
 
@@ -96,11 +129,11 @@
 
                             _self.selectedRoom.roomType.price = $('.modal-body p:last-child input').val();
 
-                            RoomsService
+                            ManagerService
                                 .editPrice(_self.selectedRoom.roomType)
                                 .then(function () {
 
-                                    RoomsService
+                                    ManagerService
                                         .editRoomType(_self.selectedRoom)
                                         .then(function () {
                                             $('.modal').modal('toggle');
@@ -108,7 +141,7 @@
                                         });
                                 });
                         } else {
-                            RoomsService
+                            ManagerService
                                 .editRoomType(_self.selectedRoom)
                                 .then(function () {
                                     $('.modal').modal('toggle');
@@ -119,26 +152,13 @@
                 });
         }
 
-        function getRoomDetails(event) {
-            _self.selectedRoom = allRooms.find(function (room) {
-                if (room.roomNumber.toString() === event.target.className.substring(1,3))
-                    return room;
+        function updatePrice() {
+            var selectedValue = _self.roomTypes.find(function (type) {
+                if (type.id.toString() === $('.modal-body select').val()) {
+                    return type;
+                }
             });
-            $('.modal-title').append('Room number ' + _self.selectedRoom.roomNumber);
-            $('.modal-body p:first-child').append('Room Type: ' + _self.selectedRoom.roomType.roomName);
-            $('.modal-body p:nth-child(2)').append('Number of single bed: ' + _self.selectedRoom.roomType.nrSingleBed);
-            $('.modal-body p:nth-child(3)').append('Number of double bed: ' + _self.selectedRoom.roomType.nrDoubleBed);
-            $('.modal-body p:nth-child(4)').append('Price: ' + _self.selectedRoom.roomType.price + " &euro;");
-            $('.modal-footer .editButton').html("Edit");
-            $('#myModal').modal();
-        }
-
-        function closeTables() {
-            _self.isFirstFloorOpen = false;
-            _self.isSecondFloorOpen = false;
-            _self.isThirdFloorOpen = false;
-            _self.isFourthFloorOpen = false;
+            $('.modal-body p:last-child input').val(selectedValue.price);
         }
     }
-
 })();

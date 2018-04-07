@@ -10,7 +10,7 @@
 
             function getCurrentUser() {
 
-                var URL = baseTestContext + "/getCurrentUser";
+                var URL = "http://" + location.host + "/getCurrentUser";
                 return $http.get(URL, null);
             }
 

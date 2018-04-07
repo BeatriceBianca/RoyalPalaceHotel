@@ -1,404 +1,403 @@
-<!--<div ng-controller="commonController as roomsCtrl" ng-class="{'loadingScreen': roomsCtrl.loading}">-->
-<div ng-controller="commonController as commonCtrl">
-rooms
-    <!--<i class="fa fa-spinner fa-spin loading-spinner" style="font-size:30px"-->
-       <!--ng-show="roomsCtrl.loading"></i>-->
-    <!--<div id="rooms-page">-->
-        <!--<h2 id="title">Hotel rooms</h2>-->
+<div ng-controller="roomsController as commonCtrl" ng-class="{'loadingScreen': commonCtrl.loading}">
 
-        <!--<table class="rooms-table first-floor" ng-show="roomsCtrl.isFirstFloorOpen">-->
-            <!--<caption style="font-size: 18px; text-align: center;">First Floor</caption>-->
-            <!--<tr>-->
-                <!--<td class="r13"></td><td class="r13"></td><td class="r13"></td>-->
-                <!--<td class="r14 b-left"></td><td class="r14"></td>-->
-                <!--<td class="r15 b-left"></td><td class="r15"></td>-->
-                <!--<td class="r16 b-left"></td><td class="r16"></td><td class="r16"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r13"></td><td class="r13"></td><td class="r13"></td>-->
-                <!--<td class="r14 b-left"></td><td class="r14"></td>-->
-                <!--<td class="r15 b-left"></td><td class="r15"></td>-->
-                <!--<td class="r16 b-left"></td><td class="r16"></td><td class="r16"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r13 b-bottom"></td><td class="r13 b-bottom"></td><td class="r13 b-bottom"></td>-->
-                <!--<td class="r14 b-left"></td><td class="r14"></td>-->
-                <!--<td class="r15 b-left"></td><td class="r15"></td>-->
-                <!--<td class="r16 b-left b-bottom"></td><td class="r16 b-bottom"></td><td class="r16 b-bottom"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r12"></td><td class="r12"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r14 b-left"></td><td class="r14"></td>-->
-                <!--<td class="r15 b-left"></td><td class="r15"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r17 b-left"></td><td class="r17"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r12"></td><td class="r12"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r14 b-left b-bottom"></td><td class="r14 b-bottom"></td>-->
-                <!--<td class="r15 b-left b-bottom"></td><td class="r15 b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r17 b-left"></td><td class="r17"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r12 b-bottom"></td><td class="r12 b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td><td class="Hall"></td><td class="Hall"></td>-->
-                <!--<td class="Hall"></td><td class="Hall"></td><td class="Hall"></td>-->
-                <!--<td class="r17 b-left b-bottom"></td><td class="r17 b-bottom"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r11"></td><td class="r11"></td>-->
-                <!--<td class="Hall b-left"></td><td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td>-->
-                <!--<td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td><td class="Hall"></td>-->
-                <!--<td class="r18 b-left"></td><td class="r18"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r11 b-bottom"></td><td class="r11"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r18 b-left"></td><td class="r18 b-bottom"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r10"></td>-->
-                <!--<td class="r11 b-left b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r18 b-left b-bottom"></td>-->
-                <!--<td class="r19 b-left"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r10"></td><td class="r10"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r19 b-left"></td><td class="r19"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r10 b-bottom-big"></td><td class="r10 b-bottom-big"></td>-->
-                <!--<td class="Hall b-left b-bottom-big"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big b-bottom-big"></td>-->
-                <!--<td class="r19 b-left b-bottom-big"></td><td class="r19 b-bottom-big"></td>-->
-            <!--</tr>-->
-        <!--</table>-->
+    <i class="fa fa-spinner fa-spin loading-spinner" style="font-size:30px"
+       ng-show="commonCtrl.loading"></i>
+    <div id="rooms-page">
+        <h2 id="title">Hotel rooms</h2>
 
-
-        <!--<table class="rooms-table second-floor" ng-show="roomsCtrl.isSecondFloorOpen">-->
-            <!--<caption style="font-size: 18px; text-align: center;">Second Floor</caption>-->
-            <!--<tr>-->
-                <!--<td class="r22"></td><td class="r22"></td>-->
-                <!--<td class="r23 b-left"></td><td class="r23"></td>-->
-                <!--<td class="r24 b-left"></td>-->
-                <!--<td class="r25 b-left"></td>-->
-                <!--<td class="r26 b-left"></td><td class="r26"></td>-->
-                <!--<td class="r27 b-left"></td><td class="r27"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r22"></td><td class="r22"></td>-->
-                <!--<td class="r23 b-left"></td><td class="r23"></td>-->
-                <!--<td class="r24 b-left"></td>-->
-                <!--<td class="r25 b-left"></td>-->
-                <!--<td class="r26 b-left"></td><td class="r26"></td>-->
-                <!--<td class="r27 b-left"></td><td class="r27"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r22"></td><td class="r22"></td>-->
-                <!--<td class="r23 b-left b-bottom"></td><td class="r23 b-bottom"></td>-->
-                <!--<td class="r24 b-left"></td>-->
-                <!--<td class="r25 b-left"></td>-->
-                <!--<td class="r26 b-left b-bottom"></td><td class="r26 b-bottom"></td>-->
-                <!--<td class="r27 b-left"></td><td class="r27"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r22 b-bottom"></td><td class="r22 b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r24 b-left"></td><td class="r24"></td>-->
-                <!--<td class="r25 b-left"></td><td class="r25"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r27 b-left b-bottom"></td><td class="r27 b-bottom"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r21"></td><td class="r21"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r24 b-left b-bottom"></td><td class="r24 b-bottom"></td>-->
-                <!--<td class="r25 b-left b-bottom"></td><td class="r25 b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r28 b-left"></td><td class="r28"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r21"></td><td class="r21"></td>-->
-                <!--<td class="Hall b-left"></td><td class="Hall"></td><td class="Hall"></td>-->
-                <!--<td class="Hall"></td><td class="Hall"></td><td class="Hall"></td>-->
-                <!--<td class="r28 b-left"></td><td class="r28"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r21"></td><td class="r21 b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td><td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td>-->
-                <!--<td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td><td class="Hall"></td>-->
-                <!--<td class="r28 b-left b-bottom"></td><td class="r28"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r21 b-bottom"></td>-->
-                <!--<td class="r20 b-left"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r29 b-left"></td><td class="r28 b-left b-bottom"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r20"></td><td class="r20"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r29 b-left"></td><td class="r29"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r20"></td><td class="r20"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r29 b-left"></td><td class="r29"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r20 b-bottom-big"></td><td class="r20 b-bottom-big"></td>-->
-                <!--<td class="Hall b-left b-bottom-big"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big b-bottom-big"></td>-->
-                <!--<td class="r29 b-left b-bottom-big"></td><td class="r29 b-bottom-big"></td>-->
-            <!--</tr>-->
-        <!--</table>-->
+        <table class="rooms-table first-floor" ng-show="commonCtrl.isFirstFloorOpen">
+            <caption style="font-size: 18px; text-align: center;">First Floor</caption>
+            <tr>
+                <td class="r13"></td><td class="r13"></td><td class="r13"></td>
+                <td class="r14 b-left"></td><td class="r14"></td>
+                <td class="r15 b-left"></td><td class="r15"></td>
+                <td class="r16 b-left"></td><td class="r16"></td><td class="r16"></td>
+            </tr>
+            <tr>
+                <td class="r13"></td><td class="r13"></td><td class="r13"></td>
+                <td class="r14 b-left"></td><td class="r14"></td>
+                <td class="r15 b-left"></td><td class="r15"></td>
+                <td class="r16 b-left"></td><td class="r16"></td><td class="r16"></td>
+            </tr>
+            <tr>
+                <td class="r13 b-bottom"></td><td class="r13 b-bottom"></td><td class="r13 b-bottom"></td>
+                <td class="r14 b-left"></td><td class="r14"></td>
+                <td class="r15 b-left"></td><td class="r15"></td>
+                <td class="r16 b-left b-bottom"></td><td class="r16 b-bottom"></td><td class="r16 b-bottom"></td>
+            </tr>
+            <tr>
+                <td class="r12"></td><td class="r12"></td>
+                <td class="Hall b-left"></td>
+                <td class="r14 b-left"></td><td class="r14"></td>
+                <td class="r15 b-left"></td><td class="r15"></td>
+                <td class="Hall b-left"></td>
+                <td class="r17 b-left"></td><td class="r17"></td>
+            </tr>
+            <tr>
+                <td class="r12"></td><td class="r12"></td>
+                <td class="Hall b-left"></td>
+                <td class="r14 b-left b-bottom"></td><td class="r14 b-bottom"></td>
+                <td class="r15 b-left b-bottom"></td><td class="r15 b-bottom"></td>
+                <td class="Hall b-left"></td>
+                <td class="r17 b-left"></td><td class="r17"></td>
+            </tr>
+            <tr>
+                <td class="r12 b-bottom"></td><td class="r12 b-bottom"></td>
+                <td class="Hall b-left"></td><td class="Hall"></td><td class="Hall"></td>
+                <td class="Hall"></td><td class="Hall"></td><td class="Hall"></td>
+                <td class="r17 b-left b-bottom"></td><td class="r17 b-bottom"></td>
+            </tr>
+            <tr>
+                <td class="r11"></td><td class="r11"></td>
+                <td class="Hall b-left"></td><td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td>
+                <td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td><td class="Hall"></td>
+                <td class="r18 b-left"></td><td class="r18"></td>
+            </tr>
+            <tr>
+                <td class="r11 b-bottom"></td><td class="r11"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r18 b-left"></td><td class="r18 b-bottom"></td>
+            </tr>
+            <tr>
+                <td class="r10"></td>
+                <td class="r11 b-left b-bottom"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r18 b-left b-bottom"></td>
+                <td class="r19 b-left"></td>
+            </tr>
+            <tr>
+                <td class="r10"></td><td class="r10"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r19 b-left"></td><td class="r19"></td>
+            </tr>
+            <tr>
+                <td class="r10 b-bottom-big"></td><td class="r10 b-bottom-big"></td>
+                <td class="Hall b-left b-bottom-big"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big b-bottom-big"></td>
+                <td class="r19 b-left b-bottom-big"></td><td class="r19 b-bottom-big"></td>
+            </tr>
+        </table>
 
 
-        <!--<table class="rooms-table third-floor" ng-show="roomsCtrl.isThirdFloorOpen">-->
-            <!--<caption style="font-size: 18px; text-align: center;">Third Floor</caption>-->
-            <!--<tr>-->
-                <!--<td class="r32"></td><td class="r32"></td>-->
-                <!--<td class="r33 b-left"></td><td class="r33"></td>-->
-                <!--<td class="r34 b-left"></td>-->
-                <!--<td class="r35 b-left"></td>-->
-                <!--<td class="r36 b-left"></td><td class="r36"></td>-->
-                <!--<td class="r37 b-left"></td><td class="r37"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r32"></td><td class="r32"></td>-->
-                <!--<td class="r33 b-left"></td><td class="r33"></td>-->
-                <!--<td class="r34 b-left"></td>-->
-                <!--<td class="r35 b-left"></td>-->
-                <!--<td class="r36 b-left"></td><td class="r36"></td>-->
-                <!--<td class="r37 b-left"></td><td class="r37"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r32"></td><td class="r32"></td>-->
-                <!--<td class="r33 b-left b-bottom"></td><td class="r33 b-bottom"></td>-->
-                <!--<td class="r34 b-left"></td>-->
-                <!--<td class="r35 b-left"></td>-->
-                <!--<td class="r36 b-left b-bottom"></td><td class="r36 b-bottom"></td>-->
-                <!--<td class="r37 b-left"></td><td class="r37"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r32"></td><td class="r32"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r34 b-left"></td><td class="r34"></td>-->
-                <!--<td class="r35 b-left"></td><td class="r35"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r37 b-left b-bottom"></td><td class="r37 b-bottom"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r32"></td><td class="r32"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r34 b-left b-bottom"></td><td class="r34 b-bottom"></td>-->
-                <!--<td class="r35 b-left b-bottom"></td><td class="r35 b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r38 b-left"></td><td class="r38"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r32 b-bottom"></td><td class="r32 b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td><td class="Hall"></td><td class="Hall"></td>-->
-                <!--<td class="Hall"></td><td class="Hall"></td><td class="Hall"></td>-->
-                <!--<td class="r38 b-left"></td><td class="r38"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r31"></td><td class="r31"></td>-->
-                <!--<td class="Hall b-left"></td><td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td>-->
-                <!--<td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td><td class="Hall"></td>-->
-                <!--<td class="r38 b-left b-bottom"></td><td class="r38"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r31 b-bottom"></td><td class="r31"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r39 b-left"></td>-->
-                <!--<td class="r38 b-left b-bottom"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r30"></td>-->
-                <!--<td class="r31 b-left b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r39 b-left"></td><td class="r39"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r30"></td><td class="r30"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r39 b-left"></td><td class="r39"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r30 b-bottom-big"></td><td class="r30 b-bottom-big"></td>-->
-                <!--<td class="Hall b-left b-bottom-big"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big b-bottom-big"></td>-->
-                <!--<td class="r39 b-left b-bottom-big"></td><td class="r39 b-bottom-big"></td>-->
-            <!--</tr>-->
-        <!--</table>-->
+        <table class="rooms-table second-floor" ng-show="commonCtrl.isSecondFloorOpen">
+            <caption style="font-size: 18px; text-align: center;">Second Floor</caption>
+            <tr>
+                <td class="r22"></td><td class="r22"></td>
+                <td class="r23 b-left"></td><td class="r23"></td>
+                <td class="r24 b-left"></td>
+                <td class="r25 b-left"></td>
+                <td class="r26 b-left"></td><td class="r26"></td>
+                <td class="r27 b-left"></td><td class="r27"></td>
+            </tr>
+            <tr>
+                <td class="r22"></td><td class="r22"></td>
+                <td class="r23 b-left"></td><td class="r23"></td>
+                <td class="r24 b-left"></td>
+                <td class="r25 b-left"></td>
+                <td class="r26 b-left"></td><td class="r26"></td>
+                <td class="r27 b-left"></td><td class="r27"></td>
+            </tr>
+            <tr>
+                <td class="r22"></td><td class="r22"></td>
+                <td class="r23 b-left b-bottom"></td><td class="r23 b-bottom"></td>
+                <td class="r24 b-left"></td>
+                <td class="r25 b-left"></td>
+                <td class="r26 b-left b-bottom"></td><td class="r26 b-bottom"></td>
+                <td class="r27 b-left"></td><td class="r27"></td>
+            </tr>
+            <tr>
+                <td class="r22 b-bottom"></td><td class="r22 b-bottom"></td>
+                <td class="Hall b-left"></td>
+                <td class="r24 b-left"></td><td class="r24"></td>
+                <td class="r25 b-left"></td><td class="r25"></td>
+                <td class="Hall b-left"></td>
+                <td class="r27 b-left b-bottom"></td><td class="r27 b-bottom"></td>
+            </tr>
+            <tr>
+                <td class="r21"></td><td class="r21"></td>
+                <td class="Hall b-left"></td>
+                <td class="r24 b-left b-bottom"></td><td class="r24 b-bottom"></td>
+                <td class="r25 b-left b-bottom"></td><td class="r25 b-bottom"></td>
+                <td class="Hall b-left"></td>
+                <td class="r28 b-left"></td><td class="r28"></td>
+            </tr>
+            <tr>
+                <td class="r21"></td><td class="r21"></td>
+                <td class="Hall b-left"></td><td class="Hall"></td><td class="Hall"></td>
+                <td class="Hall"></td><td class="Hall"></td><td class="Hall"></td>
+                <td class="r28 b-left"></td><td class="r28"></td>
+            </tr>
+            <tr>
+                <td class="r21"></td><td class="r21 b-bottom"></td>
+                <td class="Hall b-left"></td><td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td>
+                <td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td><td class="Hall"></td>
+                <td class="r28 b-left b-bottom"></td><td class="r28"></td>
+            </tr>
+            <tr>
+                <td class="r21 b-bottom"></td>
+                <td class="r20 b-left"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r29 b-left"></td><td class="r28 b-left b-bottom"></td>
+            </tr>
+            <tr>
+                <td class="r20"></td><td class="r20"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r29 b-left"></td><td class="r29"></td>
+            </tr>
+            <tr>
+                <td class="r20"></td><td class="r20"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r29 b-left"></td><td class="r29"></td>
+            </tr>
+            <tr>
+                <td class="r20 b-bottom-big"></td><td class="r20 b-bottom-big"></td>
+                <td class="Hall b-left b-bottom-big"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big b-bottom-big"></td>
+                <td class="r29 b-left b-bottom-big"></td><td class="r29 b-bottom-big"></td>
+            </tr>
+        </table>
 
 
-        <!--<table class="rooms-table fourth-floor" ng-show="roomsCtrl.isFourthFloorOpen">-->
-            <!--<caption style="font-size: 18px; text-align: center;">Fourth Floor</caption>-->
-            <!--<tr>-->
-                <!--<td class="r41"></td><td class="r41"></td>-->
-                <!--<td class="r42 b-left"></td><td class="r42"></td><td class="r42"></td>-->
-                <!--<td class="r43 b-left"></td><td class="r43"></td><td class="r43"></td>-->
-                <!--<td class="r44 b-left"></td><td class="r44"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r41"></td><td class="r41"></td>-->
-                <!--<td class="r42 b-left"></td><td class="r42"></td><td class="r42"></td>-->
-                <!--<td class="r43 b-left"></td><td class="r43"></td><td class="r43"></td>-->
-                <!--<td class="r44 b-left"></td><td class="r44"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r41"></td><td class="r41"></td>-->
-                <!--<td class="r42 b-left b-bottom"></td><td class="r42"></td><td class="r42"></td>-->
-                <!--<td class="r43 b-left"></td><td class="r43"></td><td class="r43 b-bottom"></td>-->
-                <!--<td class="r44 b-left"></td><td class="r44"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r41"></td><td class="r41"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r42 b-left"></td><td class="r42"></td>-->
-                <!--<td class="r43 b-left"></td><td class="r43"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r44 b-left"></td><td class="r44"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r41"></td><td class="r41 b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r42 b-left b-bottom"></td><td class="r42 b-bottom"></td>-->
-                <!--<td class="r43 b-left b-bottom"></td><td class="r43 b-bottom"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="r44 b-left b-bottom"></td><td class="r44"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r41 b-bottom"></td>-->
-                <!--<td class="r40 b-left"></td>-->
-                <!--<td class="Hall b-left"></td><td class="Hall"></td><td class="Hall"></td>-->
-                <!--<td class="Hall"></td><td class="Hall"></td><td class="Hall"></td>-->
-                <!--<td class="r45 b-left"></td><td class="r44 b-left b-bottom"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r40"></td><td class="r40"></td>-->
-                <!--<td class="Hall b-left"></td><td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td>-->
-                <!--<td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td><td class="Hall"></td>-->
-                <!--<td class="r45 b-left"></td><td class="r45"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r40"></td><td class="r40"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r45 b-left"></td><td class="r45"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r40"></td><td class="r40"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r45 b-left"></td><td class="r45"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r40"></td><td class="r40"></td>-->
-                <!--<td class="Hall b-left"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big"></td>-->
-                <!--<td class="r45 b-left"></td><td class="r45"></td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td class="r40 b-bottom-big"></td><td class="r40 b-bottom-big"></td>-->
-                <!--<td class="Hall b-left b-bottom-big"></td>-->
-                <!--<td class="b-left-big"></td><td></td><td></td><td></td>-->
-                <!--<td class="Hall b-left-big b-bottom-big"></td>-->
-                <!--<td class="r45 b-left b-bottom-big"></td><td class="r45 b-bottom-big"></td>-->
-            <!--</tr>-->
-        <!--</table>-->
+        <table class="rooms-table third-floor" ng-show="commonCtrl.isThirdFloorOpen">
+            <caption style="font-size: 18px; text-align: center;">Third Floor</caption>
+            <tr>
+                <td class="r32"></td><td class="r32"></td>
+                <td class="r33 b-left"></td><td class="r33"></td>
+                <td class="r34 b-left"></td>
+                <td class="r35 b-left"></td>
+                <td class="r36 b-left"></td><td class="r36"></td>
+                <td class="r37 b-left"></td><td class="r37"></td>
+            </tr>
+            <tr>
+                <td class="r32"></td><td class="r32"></td>
+                <td class="r33 b-left"></td><td class="r33"></td>
+                <td class="r34 b-left"></td>
+                <td class="r35 b-left"></td>
+                <td class="r36 b-left"></td><td class="r36"></td>
+                <td class="r37 b-left"></td><td class="r37"></td>
+            </tr>
+            <tr>
+                <td class="r32"></td><td class="r32"></td>
+                <td class="r33 b-left b-bottom"></td><td class="r33 b-bottom"></td>
+                <td class="r34 b-left"></td>
+                <td class="r35 b-left"></td>
+                <td class="r36 b-left b-bottom"></td><td class="r36 b-bottom"></td>
+                <td class="r37 b-left"></td><td class="r37"></td>
+            </tr>
+            <tr>
+                <td class="r32"></td><td class="r32"></td>
+                <td class="Hall b-left"></td>
+                <td class="r34 b-left"></td><td class="r34"></td>
+                <td class="r35 b-left"></td><td class="r35"></td>
+                <td class="Hall b-left"></td>
+                <td class="r37 b-left b-bottom"></td><td class="r37 b-bottom"></td>
+            </tr>
+            <tr>
+                <td class="r32"></td><td class="r32"></td>
+                <td class="Hall b-left"></td>
+                <td class="r34 b-left b-bottom"></td><td class="r34 b-bottom"></td>
+                <td class="r35 b-left b-bottom"></td><td class="r35 b-bottom"></td>
+                <td class="Hall b-left"></td>
+                <td class="r38 b-left"></td><td class="r38"></td>
+            </tr>
+            <tr>
+                <td class="r32 b-bottom"></td><td class="r32 b-bottom"></td>
+                <td class="Hall b-left"></td><td class="Hall"></td><td class="Hall"></td>
+                <td class="Hall"></td><td class="Hall"></td><td class="Hall"></td>
+                <td class="r38 b-left"></td><td class="r38"></td>
+            </tr>
+            <tr>
+                <td class="r31"></td><td class="r31"></td>
+                <td class="Hall b-left"></td><td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td>
+                <td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td><td class="Hall"></td>
+                <td class="r38 b-left b-bottom"></td><td class="r38"></td>
+            </tr>
+            <tr>
+                <td class="r31 b-bottom"></td><td class="r31"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r39 b-left"></td>
+                <td class="r38 b-left b-bottom"></td>
+            </tr>
+            <tr>
+                <td class="r30"></td>
+                <td class="r31 b-left b-bottom"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r39 b-left"></td><td class="r39"></td>
+            </tr>
+            <tr>
+                <td class="r30"></td><td class="r30"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r39 b-left"></td><td class="r39"></td>
+            </tr>
+            <tr>
+                <td class="r30 b-bottom-big"></td><td class="r30 b-bottom-big"></td>
+                <td class="Hall b-left b-bottom-big"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big b-bottom-big"></td>
+                <td class="r39 b-left b-bottom-big"></td><td class="r39 b-bottom-big"></td>
+            </tr>
+        </table>
 
-        <!--<table class="elevator">-->
-            <!--<tr>-->
-                <!--<td>-->
-                    <!--<span ng-class="{activeFloor: roomsCtrl.isFirstFloorOpen}"-->
-                    <!--ng-click="roomsCtrl.closeTables(); roomsCtrl.isFirstFloorOpen = true">1</span>-->
-                <!--</td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td>-->
-                    <!--<span ng-class="{activeFloor: roomsCtrl.isSecondFloorOpen}"-->
-                    <!--ng-click="roomsCtrl.closeTables(); roomsCtrl.isSecondFloorOpen = true">2</span>-->
-                <!--</td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td>-->
-                    <!--<span ng-class="{activeFloor: roomsCtrl.isThirdFloorOpen}"-->
-                    <!--ng-click="roomsCtrl.closeTables(); roomsCtrl.isThirdFloorOpen = true">3</span>-->
-                <!--</td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--<td>-->
-                    <!--<span ng-class="{activeFloor: roomsCtrl.isFourthFloorOpen}"-->
-                    <!--ng-click="roomsCtrl.closeTables(); roomsCtrl.isFourthFloorOpen = true">4</span>-->
-                <!--</td>-->
-            <!--</tr>-->
-        <!--</table>-->
 
-        <!--<table class="color-legend">-->
-            <!--<tr>-->
-                <!--<td class="typeSI"></td><td>Single</td>-->
-                <!--<td class="typeDO"></td><td>Double</td>-->
-                <!--<td class="typeTW"></td><td>Twin</td>-->
-                <!--<td class="typeTR"></td><td>Triple</td>-->
-                <!--<td class="typeAP"></td><td>Apartment</td>-->
-            <!--</tr>-->
-        <!--</table>-->
+        <table class="rooms-table fourth-floor" ng-show="commonCtrl.isFourthFloorOpen">
+            <caption style="font-size: 18px; text-align: center;">Fourth Floor</caption>
+            <tr>
+                <td class="r41"></td><td class="r41"></td>
+                <td class="r42 b-left"></td><td class="r42"></td><td class="r42"></td>
+                <td class="r43 b-left"></td><td class="r43"></td><td class="r43"></td>
+                <td class="r44 b-left"></td><td class="r44"></td>
+            </tr>
+            <tr>
+                <td class="r41"></td><td class="r41"></td>
+                <td class="r42 b-left"></td><td class="r42"></td><td class="r42"></td>
+                <td class="r43 b-left"></td><td class="r43"></td><td class="r43"></td>
+                <td class="r44 b-left"></td><td class="r44"></td>
+            </tr>
+            <tr>
+                <td class="r41"></td><td class="r41"></td>
+                <td class="r42 b-left b-bottom"></td><td class="r42"></td><td class="r42"></td>
+                <td class="r43 b-left"></td><td class="r43"></td><td class="r43 b-bottom"></td>
+                <td class="r44 b-left"></td><td class="r44"></td>
+            </tr>
+            <tr>
+                <td class="r41"></td><td class="r41"></td>
+                <td class="Hall b-left"></td>
+                <td class="r42 b-left"></td><td class="r42"></td>
+                <td class="r43 b-left"></td><td class="r43"></td>
+                <td class="Hall b-left"></td>
+                <td class="r44 b-left"></td><td class="r44"></td>
+            </tr>
+            <tr>
+                <td class="r41"></td><td class="r41 b-bottom"></td>
+                <td class="Hall b-left"></td>
+                <td class="r42 b-left b-bottom"></td><td class="r42 b-bottom"></td>
+                <td class="r43 b-left b-bottom"></td><td class="r43 b-bottom"></td>
+                <td class="Hall b-left"></td>
+                <td class="r44 b-left b-bottom"></td><td class="r44"></td>
+            </tr>
+            <tr>
+                <td class="r41 b-bottom"></td>
+                <td class="r40 b-left"></td>
+                <td class="Hall b-left"></td><td class="Hall"></td><td class="Hall"></td>
+                <td class="Hall"></td><td class="Hall"></td><td class="Hall"></td>
+                <td class="r45 b-left"></td><td class="r44 b-left b-bottom"></td>
+            </tr>
+            <tr>
+                <td class="r40"></td><td class="r40"></td>
+                <td class="Hall b-left"></td><td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td>
+                <td class="Hall b-bottom-big"></td><td class="Hall b-bottom-big"></td><td class="Hall"></td>
+                <td class="r45 b-left"></td><td class="r45"></td>
+            </tr>
+            <tr>
+                <td class="r40"></td><td class="r40"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r45 b-left"></td><td class="r45"></td>
+            </tr>
+            <tr>
+                <td class="r40"></td><td class="r40"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r45 b-left"></td><td class="r45"></td>
+            </tr>
+            <tr>
+                <td class="r40"></td><td class="r40"></td>
+                <td class="Hall b-left"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big"></td>
+                <td class="r45 b-left"></td><td class="r45"></td>
+            </tr>
+            <tr>
+                <td class="r40 b-bottom-big"></td><td class="r40 b-bottom-big"></td>
+                <td class="Hall b-left b-bottom-big"></td>
+                <td class="b-left-big"></td><td></td><td></td><td></td>
+                <td class="Hall b-left-big b-bottom-big"></td>
+                <td class="r45 b-left b-bottom-big"></td><td class="r45 b-bottom-big"></td>
+            </tr>
+        </table>
 
-        <!--&lt;!&ndash; Modal &ndash;&gt;-->
-        <!--<div class="modal" id="myModal" role="dialog">-->
-            <!--<div class="modal-dialog">-->
+        <table class="elevator">
+            <tr>
+                <td>
+                    <span ng-class="{activeFloor: commonCtrl.isFirstFloorOpen}"
+                    ng-click="commonCtrl.closeTables(); commonCtrl.isFirstFloorOpen = true">1</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span ng-class="{activeFloor: commonCtrl.isSecondFloorOpen}"
+                    ng-click="commonCtrl.closeTables(); commonCtrl.isSecondFloorOpen = true">2</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span ng-class="{activeFloor: commonCtrl.isThirdFloorOpen}"
+                    ng-click="commonCtrl.closeTables(); commonCtrl.isThirdFloorOpen = true">3</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span ng-class="{activeFloor: commonCtrl.isFourthFloorOpen}"
+                    ng-click="commonCtrl.closeTables(); commonCtrl.isFourthFloorOpen = true">4</span>
+                </td>
+            </tr>
+        </table>
 
-                <!--&lt;!&ndash; Modal content&ndash;&gt;-->
-                <!--<div class="modal-content">-->
-                    <!--<div class="modal-header">-->
-                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                        <!--<h4 class="modal-title"> </h4>-->
-                    <!--</div>-->
-                    <!--<div class="modal-body">-->
-                        <!--<p></p>-->
-                        <!--<p></p>-->
-                        <!--<p></p>-->
-                        <!--<p></p>-->
-                    <!--</div>-->
-                    <!--<div class="modal-footer">-->
-                        <!--<button type="button" class="btn btn-default editButton" ng-click="roomsCtrl.editRoom()"></button>-->
-                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                    <!--</div>-->
-                <!--</div>-->
+        <table class="color-legend">
+            <tr>
+                <td class="typeSI"></td><td>Single</td>
+                <td class="typeDO"></td><td>Double</td>
+                <td class="typeTW"></td><td>Twin</td>
+                <td class="typeTR"></td><td>Triple</td>
+                <td class="typeAP"></td><td>Apartment</td>
+            </tr>
+        </table>
 
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+        <!-- Modal -->
+        <div class="modal" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"> </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default editButton" ng-click="commonCtrl.editRoom()" ng-if="commonCtrl.user &amp;&amp; commonCtrl.user.userRole == 'MANAGER'"></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>

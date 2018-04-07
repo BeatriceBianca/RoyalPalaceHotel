@@ -6,19 +6,18 @@
         .module('RoyalPalaceHotel')
         .controller('receptionistController', Controller);
 
-    Controller.$inject = ['$scope', '$state', '$window', '$filter', 'MaidService'];
+    Controller.$inject = ['$rootScope', '$scope', '$state', '$window', '$filter', 'MaidService'];
 
-    function Controller($scope, $state, $window, $filter, MaidService) {
+    function Controller($rootScope, $scope, $state, $window, $filter, MaidService) {
         var _self = this;
 
         _self.username = "";
-        _self.dataLoading = false;
         _self.currentUserPassword = "";
         _self.currentState = 'homeReceptionist';
 
-        _self.logout = function () {
-            $window.location.href = "/logout";
-        };
+
+
+        $rootScope.user = null;
 
         function init() {
 
@@ -30,6 +29,8 @@
                     _self.user.birthDate = $filter('date')(response.data.birthDate, "yyyy/MM/dd");
                     _self.user.hireDate = $filter('date')(response.data.hireDate, "yyyy/MM/dd");
                     _self.currentUserPassword = response.data.userPassword;
+
+                    $rootScope.user = _self.user;
                 });
 
             if ($state.current.name !== 'default' && $state.current.name !== '') {

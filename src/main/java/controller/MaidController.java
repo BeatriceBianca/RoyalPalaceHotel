@@ -1,11 +1,14 @@
 package controller;
 
 import com.hotel.royalpalace.model.User;
+import com.hotel.royalpalace.model.info.UserInfo;
 import com.hotel.royalpalace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/maid")
@@ -41,13 +45,6 @@ public class MaidController {
 
 //    -----------------------------------------------------------
 
-    @RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getCurrentUser(HttpServletRequest request) {
-        String currentUser = request.getUserPrincipal().getName();
-        User user = userService.getByUserEmail(currentUser);
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -57,6 +54,45 @@ public class MaidController {
         User currentUser = userService.getByUserEmail(request.getUserPrincipal().getName());
         userService.changePassword(currentUser, newPassword);
 
-        return "redirect:/manager";
+        return redirectToPage();
+    }
+
+    @RequestMapping(value = "/editUser", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public String editUser(@RequestParam(value = "lastName") String lastName,
+                           @RequestParam(value = "firstName") String firstName,
+                           @RequestParam(value = "birthDate") Date birthDate,
+                           @RequestParam(value = "phone") String phone,
+                           HttpServletRequest request) throws NoSuchAlgorithmException {
+        User currentUser = userService.getByUserEmail(request.getUserPrincipal().getName());
+        UserInfo userInfo = new UserInfo(lastName, firstName, currentUser.getUserRole(), birthDate, currentUser.getHireDate(), phone, currentUser.getUserEmail(), currentUser.getUserPassword());
+        userService.editUser(userInfo);
+
+        return redirectToPage();
+    }
+
+    private String redirectToPage() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        authentication.getAuthorities();
+        String email;
+        if (authentication.getPrincipal() instanceof User) {
+            email = ((User) authentication.getPrincipal()).getUserEmail();
+        } else {
+            email = authentication.getName();
+        }
+        if (!email.equals("anonymousUser")) {
+            User user = userService.getByUserEmail(email);
+
+            if (user.getUserRole().equals("MANAGER")) {
+                return "redirect:/manager";
+            } else if (user.getUserRole().equals("RECEPTIONIST")) {
+                return "redirect:/receptionist";
+            } else if (user.getUserRole().equals("MAID")) {
+                return "redirect:/maid";
+            }
+        }
+
+        return "index";
     }
 }

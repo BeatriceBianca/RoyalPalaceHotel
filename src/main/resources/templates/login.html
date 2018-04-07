@@ -17,36 +17,17 @@
         <img src="/img/hotel-logo.png"/>
     </div>
     <div class="login-bottom">
-        <form name="login" action="login" method="POST" ng-if="lg.login" class="loginForm">
+        <form name="login" action="login" method="POST" class="loginForm">
             <input name="username" type="text" placeholder="Email" /><br/><br/>
             <input name="password" type="password" placeholder="Password" /><br/>
 
             <button class="button" type="submit">Sign in</button>
         </form>
 
-        <form name="signUp" action="signUp" method="POST" ng-if="lg.newAccount" class="newAccountForm">
-            <div>
-                <input name="lastName" type="text" placeholder="Last Name" /><br/><br/>
-                <input name="firstName" type="text" placeholder="First Name" /><br/><br/>
-                <input name="address" type="text" placeholder="Address" /><br/>
-            </div>
-            <div>
-                <input name="guestPhone" type="text" placeholder="Phone" /><br/><br/>
-                <input name="guestEmail" type="text" placeholder="Email" /><br/><br/>
-                <input name="password" type="password" placeholder="Password" /><br/><br />
-                <button class="button" type="submit">Sign up</button>
-            </div>
-        </form>
     </div>
     <div class="login-footer">
         <div class="forgot-password">
             <span ng-click="lg.forgotPass()">Forgot Password</span>?
-        </div>
-        <div class="new-guest-account" ng-if="lg.login">
-            <span ng-click="lg.newAccount=true;lg.login=false;">Create new guest account</span>
-        </div>
-        <div class="login-account" ng-if="lg.newAccount">
-            <span ng-click="lg.newAccount=false;lg.login=true;">Sign in as guest</span>
         </div>
     </div>
 </div>

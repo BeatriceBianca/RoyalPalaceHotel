@@ -1,8 +1,15 @@
+html {
+    overflow-y: hidden;
+}
 
 body {
     background-color: #2e0f2b;
     background-size: cover;
     height: 100%;
+}
+
+#title {
+    text-align: center;
 }
 
 .main-container {
@@ -16,6 +23,7 @@ body {
     width: 100%;
     top: 10%;
     left: 0;
+    float: left
 }
 
 .menu-content {
@@ -73,7 +81,7 @@ div.tab .active {
 
 .tabcontent>div {
     margin-top: 3%;
-    height: 100%;
+    height: 96%;
 }
 
 .tabcontent>div>div {
@@ -82,23 +90,379 @@ div.tab .active {
 
 .footer {
     width: 100%;
-    height: auto;
+    height: 5%;
     color: white;
     text-align: center;
+    float:left;
+    display: table;
+}
+
+.footer p {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .welcome {
     height: 10%;
-    width: 100%;
+    width: 30%;
     text-align: right;
-    padding-top: 2%;
-    padding-right: 1%;
+    display: table;
+    float:right;
+    margin-right: 2%;
+}
+
+.welcome button {
+    outline: none;
 }
 
 .welcome span {
     color: white;
+    display: table-cell;
+    vertical-align: middle;
+    width: 28%;
 }
 
 .welcome a {
     text-decoration: none;
+    color: black;
+    display: table-cell;
+    vertical-align: middle;
+    width: 1%;
+}
+
+#signIn {
+    outline: none;
+}
+
+.right-content {
+    width: 50%;
+    margin-left: 5%;
+}
+
+.left-content {
+    width: 50%;
+    margin-right: 5%;
+}
+
+
+
+#rooms-page {
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+    /*padding-right: 10%;*/
+}
+
+.rooms-table {
+    width: 90%;
+    height: 27vw;
+    margin: 0 auto;
+    border: 2px solid black;
+    border-bottom: none;
+    float: left;
+}
+
+.rooms-table tr {
+    width: 100%;
+    height: 9%;
+}
+
+.rooms-table td {
+    width: 10%;
+    text-align: center;
+    font-size: 0.7em;
+}
+
+.typeSI {
+    background-color: rgb(113, 101, 178);
+    opacity: 0.6;
+}
+
+.typeTR {
+    background-color: rgb(190, 164, 210);
+    opacity: 0.6;
+}
+
+.typeAP {
+    background-color: rgb(240, 226, 248);
+    opacity: 0.6;
+}
+
+.typeTW {
+    background-color: rgb(189, 204, 255);
+    opacity: 0.6;
+}
+
+.typeDO {
+    background-color: rgb(140, 157, 226);
+    opacity: 0.6;
+}
+
+.Hall {
+    background-color: rgb(220,220,220);
+}
+
+.occupiedRoom {
+    background: repeating-linear-gradient(
+            180deg,
+            rgb(137,111,128),
+            rgb(137,111,128) 10px,
+            white 60px,
+            white 20px
+    )
+}
+
+.chosenRooms {
+    background-color: rgb(128,128,128);
+}
+
+.b-left {
+    border-left: 1px solid black;
+}
+
+.b-bottom {
+    border-bottom: 1px solid black;
+}
+
+.b-left-big {
+    border-left: 2px solid black;
+}
+
+.b-bottom-big {
+    border-bottom: 2px solid black;
+}
+
+.elevator {
+    width: 8%;
+    height: 12vw;
+    margin: 17% auto 13% auto;
+    border: 1px solid black;
+}
+
+.elevator td {
+    text-align: center;
+    margin: 50%;
+    height: 25%;
+    width: 100%;
+}
+
+.elevator td span {
+    padding: 8%;
+    border: 1px solid #996083;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.activeFloor {
+    background-color: #996083;
+    border: 1px solid black;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    color: white;
+}
+
+#myModal {
+    margin: 10% auto;
+    text-align: center;
+}
+
+#rooms-page #title {
+    padding-right: 10%;
+}
+
+.color-legend {
+    width: 70%;
+    height: 10px;
+    margin-left: auto;
+    margin-right: 18%;
+}
+
+.color-legend tr {
+    width: 100%;
+}
+
+.color-legend tr td {
+    width: 10%;
+    text-align: center;
+    padding-left: 2px;
+}
+
+.modal-content {
+    font-size: 16px;
+}
+
+.loadingScreen {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    left: 53%;
+    position: fixed;
+    top: 40%;
+    z-index:1;
+}
+
+.reservations {
+    width: 80% !important;
+    margin-left: 10%!important;
+    height: 100%;
+}
+
+.reservations form {
+    margin-top: 5%;
+}
+
+*[role="form"] {
+    width: 80%;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 0.3em;
+    height: 70%;
+    font-size: 1.25em;
+}
+
+*[role="form"] h2 {
+    margin-left: 5em;
+    margin-bottom: 1em;
+}
+
+.reservations .form-control {
+    width: 80%;
+}
+
+.reservations .reservations-menu {
+    text-align: center;
+}
+
+.reservations-menu button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+    margin-bottom: 3%;
+    color: #2e0f2b;
+}
+
+.reservations-menu #viewRes {
+    border-left: 1px solid #2e0f2b;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-bottom: 1px solid #2e0f2b;
+    opacity: 0.5;
+}
+
+.reservations-menu #newReservation {
+    border-right: 1px solid #2e0f2b;
+    padding-right: 3%;
+    padding-left: 3%;
+    border-bottom: 1px solid #2e0f2b;
+    opacity: 0.5;
+}
+
+.reservations-menu .reservations-menu-activ {
+    color: #2e0f2b;
+    background-color: #996083;
+    opacity: 1!important;
+}
+
+.reservations-menu .form-group {
+    width: 50%;
+    height: 15%;
+}
+
+#price {
+    width: 10%;
+}
+
+
+/*Save Reservation page*/
+
+.saveGuest-button, .saveRequest-button, .saveReservation-button,
+.editGuest-button, .editRequest-button{
+    text-align: right;
+    margin-top: 5%;
+}
+
+.saveGuest-button button, .saveRequest-button button, .saveReservation-button button,
+.editGuest-button button, .editRequest-button button {
+    min-width: 15%;
+    height: 3em;
+    margin-right: 10%;
+    background-color: #996083;
+    font-size: 0.8em;
+    color: white;
+}
+
+/*.editGuest-button button, .saveRequest-button button {*/
+    /*width: 50%;*/
+/*}*/
+
+.editRequest-button button, .saveReservation-button button {
+    width: 30%;
+}
+
+.saveGuest-button button:hover, .saveRequest-button button:hover, .saveReservation-button button:hover,
+.editGuest-button button:hover, .editRequest-button button:hover {
+    color: white;
+}
+
+.editGuest-button, .editRequest-button {
+    text-align: left;
+}
+
+.saveGuest, .saveRequest-buttons, .saveRoom-buttons {
+    display: flex;
+}
+
+.editGuest-button, .saveRequest-button, .editRequest-button, .saveReservation-button {
+    width: 50%!important;
+}
+
+.searchByIdNumber {
+    width: 50%;
+    text-align: center;
+    margin: 1em auto;
+}
+
+#requestForm {
+    width: 40%;
+}
+
+.reservations .rooms-table {
+    height: 20vw;
+    margin-top: -5%;
+}
+
+.saveRoom-buttons {
+    margin-top: -2%;
+}
+
+.reservations .elevator {
+    margin: 10% auto 10% auto;
+}
+
+.chosenRoom {
+
+}
+
+.saveRequest .form-control {
+    width: 100%;
+}
+
+.menu-div a button:disabled:hover {
+    background-color: transparent;
+}
+
+#discardReservation {
+    float: right;
+}
+
+.reservations form {
+    height: 70%;
 }

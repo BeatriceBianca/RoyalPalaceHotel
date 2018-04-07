@@ -1,0 +1,86 @@
+.editAccount {
+    display: flex;
+}
+
+.editAccount .form-control, .changePassword .form-control, .newAccountPage .form-control {
+    width: 80%;
+}
+
+.editAccount-button, .changePassword-button, .newAccount-button {
+    text-align: right;
+}
+
+.changePassword-button {
+    margin-right: 15%;
+    margin-top: 10%;
+}
+
+.editAccount-button button, .changePassword-button button, .newAccount-button button {
+    min-width: 15%;
+    height: 3em;
+    margin-right: 10%;
+    background-color: #996083;
+    font-size: 0.8em;
+    color: white;
+}
+
+.editAccount-button button:hover, .changePassword-button button:hover, .newAccount-button button:hover {
+    color: white;
+}
+
+.editPage, .newAccountPage {
+    width: 80% !important;
+    margin-left: 10%!important;
+    height: 100%;
+}
+
+.editPage .account-menu, .newAccountPage h2 {
+    text-align: center;
+    height: 15%;
+    width:100%;
+}
+
+.account-menu button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+    margin-bottom: 3%;
+    color: #2e0f2b;
+}
+
+.account-menu #changePassword {
+    border-left: 1px solid #2e0f2b;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-bottom: 1px solid #2e0f2b;
+    opacity: 0.5;
+    height: 50%;
+}
+
+.account-menu #myProfile {
+    border-right: 1px solid #2e0f2b;
+    padding-right: 5%;
+    padding-left: 5%;
+    border-bottom: 1px solid #2e0f2b;
+    opacity: 0.5;
+    height: 50%;
+}
+
+.account-menu .account-menu-activ {
+    color: #2e0f2b;
+    background-color: #996083;
+    opacity: 1!important;
+}
+
+.changePassword .form-group {
+    width: 50%;
+    height: 15%;
+}
+
+#datetimepicker1, #datetimepicker2 {
+    width: 80%;
+}
+
+#datetimepicker1 input, #datetimepicker2 input {
+    width: 100%;
+}

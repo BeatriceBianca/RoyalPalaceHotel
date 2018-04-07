@@ -21,12 +21,12 @@
             .state('rooms', {
                 // url: '/rooms',
                 templateUrl: 'common/rooms.html'
-                // controller: 'managerController'
+                // controller: 'managerController as managerCtrl'
             })
             .state('newReservation', {
                 // url: '/guest/newReservation',
                 templateUrl: 'common/newReservation.html'
-                // controller: 'managerController'
+                // controller: 'managerController as managerCtrl'
             })
 
 

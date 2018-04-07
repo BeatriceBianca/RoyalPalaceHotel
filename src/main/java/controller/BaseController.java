@@ -5,7 +5,9 @@ import com.hotel.royalpalace.model.User;
 import com.hotel.royalpalace.service.GuestService;
 import com.hotel.royalpalace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -103,9 +105,15 @@ public class BaseController {
         return "redirect:/error";
     }
 
-//    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-//    public String logout() {
-//
-//    }
+    @RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getCurrentUser(HttpServletRequest request) {
+        if (request.getUserPrincipal() != null) {
+            String currentUser = request.getUserPrincipal().getName();
+            User user = userService.getByUserEmail(currentUser);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
 
 }

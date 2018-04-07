@@ -13,7 +13,14 @@
 
         _self.loading = true;
 
+        _self.currentState = 'viewReservations';
+
         function init() {
+
+            $('.menu-div a button').prop('disabled', false);
+            $('.menu-div a button').css('cursor', 'pointer');
+            $('.menu-div a button').css('opacity', '1');
+
             ReservationsService
                 .getAllReservations()
                 .then(function (response) {
@@ -46,6 +53,12 @@
                     } );
                     _self.loading = false;
                 });
+            if ($state.current.name !== 'viewReservations') {
+                _self.currentState = $state.current.name;
+            }
+
+            $('.menu-div a button').removeClass('active');
+            $('#'+_self.currentState).addClass('active');
         }
         init();
     }

@@ -4,18 +4,25 @@
 
     angular
         .module('RoyalPalaceHotel')
-        .factory('CommonService', ['$http', '$location', function($http, $location) {
+        .factory('CommonService', ['$http', function($http) {
 
             var baseTestContext = "http://" + location.host + '/common';
 
-            // function getCurrentUser() {
-            //
-            //     var URL = baseTestContext + "/getCurrentUser";
-            //     return $http.get(URL, null);
-            // }
-            //
+            function getAllRooms() {
+
+                var URL = baseTestContext + "/getAllRooms";
+                return $http.get(URL, null);
+            }
+
+            function getAllRoomTypes() {
+
+                var URL = baseTestContext + "/getAllRoomTypes";
+                return $http.get(URL, null);
+            }
+
             return {
-                // getCurrentUser: getCurrentUser
+                getAllRooms: getAllRooms,
+                getAllRoomTypes: getAllRoomTypes
             };
 
         }]);

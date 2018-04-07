@@ -6,14 +6,14 @@
         .module('RoyalPalaceHotel')
         .factory('ReservationsService', ['$http', '$location', function($http, $location) {
 
-            var baseTestContext = "http://" + location.host + '/receptionist';
+            var baseTestContext = "http://" + location.host + '/common';
 
-            function searchByIdNumber(idNumber) {
-                var URL = baseTestContext + "/findByIdNumber";
+            function searchByEmail(email) {
+                var URL = baseTestContext + "/findByEmail";
                 return $http({
                     method: 'GET',
                     url: URL,
-                    params: {idNumber: idNumber},
+                    params: {email: email},
                     headers: {
                         'Content-Type': 'application/json'
                     }});
@@ -96,7 +96,7 @@
             }
 
             return {
-                searchByIdNumber: searchByIdNumber,
+                searchByEmail: searchByEmail,
                 getAllReservationsBetweenDates: getAllReservationsBetweenDates,
                 getAllChosenRooms: getAllChosenRooms,
                 saveGuest: saveGuest,

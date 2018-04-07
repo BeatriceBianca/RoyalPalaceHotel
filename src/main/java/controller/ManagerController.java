@@ -63,22 +63,7 @@ public class ManagerController {
         return "redirect:/manager";
     }
 
-    @RequestMapping(value = "/editUser", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public String editUser(@RequestParam(value = "lastName") String lastName,
-                          @RequestParam(value = "firstName") String firstName,
-                          @RequestParam(value = "birthDate") Date birthDate,
-                          @RequestParam(value = "phone") String phone,
-                          HttpServletRequest request) throws NoSuchAlgorithmException {
-        User currentUser = userService.getByUserEmail(request.getUserPrincipal().getName());
-        UserInfo userInfo = new UserInfo(lastName, firstName, currentUser.getUserRole(), birthDate, currentUser.getHireDate(), phone, currentUser.getUserEmail(), currentUser.getUserPassword());
-        userService.editUser(userInfo);
-
-        return "redirect:/manager";
-    }
-
-    @RequestMapping(value = "/manager/editRoomType", method = RequestMethod.POST,
+    @RequestMapping(value = "/editRoomType", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String editRoomType(@RequestBody Room room,
@@ -88,7 +73,7 @@ public class ManagerController {
         return "redirect:/manager";
     }
 
-    @RequestMapping(value = "/manager/editPrice", method = RequestMethod.POST,
+    @RequestMapping(value = "/editPrice", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String editPrice(@RequestBody RoomType roomType,

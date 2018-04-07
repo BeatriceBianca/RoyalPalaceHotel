@@ -12,10 +12,10 @@ public class GuestServiceImpl implements GuestService {
     @Autowired
     GuestRepository guestRepository;
 
-//    @Override
-//    public Guest getByIdNumber(String idNumber) {
-//        return guestRepository.getByIdNumber(idNumber);
-//    }
+    @Override
+    public Guest getByGuestEmail(String email) {
+        return guestRepository.getByGuestEmail(email);
+    }
 
     @Override
     public void newGuest(Guest guest) {

@@ -17,15 +17,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/maid.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/receptionist.css"/>
 </head>
-<body ng-controller="receptionistController as receptionist">
+<body ng-controller="commonController as receptionist">
 
 <div class="main-container">
 
     <div class="welcome">
         <span> Welcome, {{receptionist.username}}! </span>
-        <a ui-sref="myProfile"><button> My profile </button></a>
-        <button ng-click="receptionist.logout()"> Sign Out </button>
+        <a ui-sref="myProfile"><button class="btn"> My profile </button></a>
+        <a href="javascript:void(0)"> <button ng-click="receptionist.logout()" class="btn"> Sign Out </button> </a>
     </div>
 
     <div class="menu-container">
@@ -67,5 +69,11 @@
 <script src="/js/maid/maid.service.js"></script>
 <script src="/js/common/common.controller.js"></script>
 <script src="/js/common/common.service.js"></script>
+<script src="/js/manager/manager.controller.js"></script>
+<script src="/js/manager/manager.service.js"></script>
+<script src="/js/common/reservations.controller.js"></script>
+<script src="/js/common/reservations.service.js"></script>
+<script src="/js/receptionist/viewReservations.controller.js"></script>
+<script src="/js/common/rooms.controller.js"></script>
 </body>
 </html>

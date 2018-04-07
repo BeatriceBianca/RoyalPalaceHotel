@@ -6,9 +6,9 @@
         .module('RoyalPalaceHotel')
         .controller('reservationsController', Controller);
 
-    Controller.$inject = ['$scope', '$state', 'ReservationsService', 'RoomsService', 'ManagerService'];
+    Controller.$inject = ['$rootScope', '$scope', '$state', 'ReservationsService', 'CommonService', 'MaidService'];
 
-    function Controller($scope, $state, ReservationsService, RoomsService, ManagerService) {
+    function Controller($rootScope, $scope, $state, ReservationsService, CommonService, MaidService) {
         var _self = this;
 
         _self.isFirstFloorOpen = true;
@@ -27,17 +27,38 @@
 
         var guestAlreadyExist = false;
         _self.loading = false;
-        var refreshRooms;
+
+        // var refreshRooms;
         
-        _self.closeInterval = function () {
-            clearInterval(refreshRooms);
-        };
+        // _self.closeInterval = function () {
+        //     clearInterval(refreshRooms);
+        // };
 
         _self.allReservations = [];
+        _self.hasRole = false;
 
         function init() {
-            if ($state.current.name === 'viewReservations') {
-                _self.currentState = 'newReservation';
+
+            _self.hasRole = ($rootScope.user && ($rootScope.user.userRole == 'MANAGER' || $rootScope.user.userRole == 'RECEPTIONIST'));
+
+            $('.menu-div a button').prop('disabled', true);
+            $('.menu-div a button').css('cursor', 'context-menu');
+            $('.menu-div a button').css('opacity', '0.5');
+
+            $('#viewRes').prop('disabled', true);
+            $('#viewRes').css('cursor', 'context-menu');
+            $('#viewRes').css('opacity', '0.5');
+
+            $('.menu-div a button#newReservation').prop('disabled', false);
+            $('.menu-div a button#newReservation').css('cursor', 'pointer');
+            $('.menu-div a button#newReservation').css('opacity', '1');
+
+            $('.menu-div a button#viewReservations').prop('disabled', false);
+            $('.menu-div a button#viewReservations').css('cursor', 'pointer');
+            $('.menu-div a button#viewReservations').css('opacity', '1');
+
+            if ($state.current.name === 'newReservation' && $rootScope.user && ($rootScope.user.userRole === 'MANAGER' || $rootScope.user.userRole === 'RECEPTIONIST')) {
+                _self.currentState = 'viewReservations';
             } else {
                 _self.currentState = $state.current.name;
             }
@@ -50,20 +71,37 @@
             _self.viewRoom = false;
 
             $('#datetimepicker1').datetimepicker({
-                format: 'YYYY/MM/DD'
+                format: 'YYYY/MM/DD',
+                minDate: moment()
             });
 
             $('#datetimepicker2').datetimepicker({
-                format: 'YYYY/MM/DD'
+                format: 'YYYY/MM/DD',
+                minDate: moment()
             });
 
-            RoomsService
+            $('#datetimepicker1').datetimepicker().on('dp.change', function (e) {
+                var incrementDay = moment(new Date(e.date));
+                incrementDay.add(1, 'days');
+                $('#datetimepicker2').data('DateTimePicker').minDate(incrementDay);
+                $(this).data("DateTimePicker").hide();
+
+            });
+
+            $('#datetimepicker2').datetimepicker().on('dp.change', function (e) {
+                var decrementDay = moment(new Date(e.date));
+                decrementDay.subtract(1, 'days');
+                $('#datetimepicker1').data('DateTimePicker').maxDate(decrementDay);
+                $(this).data("DateTimePicker").hide();
+            });
+
+            CommonService
                 .getAllRoomTypes()
                 .then(function (value) {
                     _self.roomTypes = value.data;
                 });
 
-            RoomsService
+            CommonService
                 .getAllRooms()
                 .then(function (response) {
                     allRooms = response.data;
@@ -78,6 +116,11 @@
                 $(".modal-body p").html("");
                 $(".modal-title").html("");
                 _self.selectedRoom = null;
+            });
+
+            _self.selectedRooms.forEach(function (value2) {
+                ReservationsService
+                    .removeChosenRoom(value2);
             });
 
         }
@@ -118,88 +161,98 @@
                         });
                 });
 
-            refreshRooms = setInterval(function() {
-                ReservationsService
-                    .getAllReservationsBetweenDates(_self.request.arrivalDate, _self.request.departureDate)
-                    .then(function (response) {
-
-                        $('.occupiedRoom').on('click', getRoomDetails);
-                        $('.occupiedRoom').css('cursor', 'pointer');
-                        $('.occupiedRoom').removeClass('occupiedRoom');
-
-                        response.data.forEach(function (request) {
-                            request.rooms.forEach(function (room) {
-
-                                if(_self.selectedRoom) {
-                                    if(_self.selectedRoom.id === room.id) {
-                                        $('.modal').modal('toggle');
-                                    }
-                                }
-
-                                $('.r'+room.roomNumber).addClass('occupiedRoom');
-                                $('.r'+room.roomNumber).off('click', getRoomDetails);
-                                $('.r'+room.roomNumber).css('cursor', 'context-menu');
-                            });
-                        });
-
-                        ReservationsService
-                            .getAllChosenRooms()
-                            .then(function (response) {
-                                response.data.forEach(function (chosenRooms) {
-
-                                    $('.chosenRooms').on('click', getRoomDetails);
-                                    $('.chosenRooms').css('cursor', 'pointer');
-                                    $('.chosenRooms').removeClass('chosenRooms');
-
-                                    if (!_self.selectedRooms.find(r => r.roomNumber === chosenRooms.room.roomNumber)) {
-                                        $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
-                                        $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
-                                        $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
-                                    }
-                                });
-                                _self.loading = false;
-                            });
-                    })
-            },5000);
+            // refreshRooms = setInterval(function() {
+            //     ReservationsService
+            //         .getAllReservationsBetweenDates(_self.request.arrivalDate, _self.request.departureDate)
+            //         .then(function (response) {
+            //
+            //             $('.occupiedRoom').on('click', getRoomDetails);
+            //             $('.occupiedRoom').css('cursor', 'pointer');
+            //             $('.occupiedRoom').removeClass('occupiedRoom');
+            //
+            //             response.data.forEach(function (request) {
+            //                 request.rooms.forEach(function (room) {
+            //
+            //                     if(_self.selectedRoom) {
+            //                         if(_self.selectedRoom.id === room.id) {
+            //                             $('.modal').modal('toggle');
+            //                         }
+            //                     }
+            //
+            //                     $('.r'+room.roomNumber).addClass('occupiedRoom');
+            //                     $('.r'+room.roomNumber).off('click', getRoomDetails);
+            //                     $('.r'+room.roomNumber).css('cursor', 'context-menu');
+            //                 });
+            //             });
+            //
+            //             ReservationsService
+            //                 .getAllChosenRooms()
+            //                 .then(function (response) {
+            //                     response.data.forEach(function (chosenRooms) {
+            //
+            //                         $('.chosenRooms').on('click', getRoomDetails);
+            //                         $('.chosenRooms').css('cursor', 'pointer');
+            //                         $('.chosenRooms').removeClass('chosenRooms');
+            //
+            //                         if (!_self.selectedRooms.find(r => r.roomNumber === chosenRooms.room.roomNumber)) {
+            //                             $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
+            //                             $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
+            //                             $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
+            //                         }
+            //                     });
+            //                     _self.loading = false;
+            //                 });
+            //         })
+            // },5000);
         };
         
-        _self.searchByIdNumber = function () {
-            if (_self.idNumber.length === 13) {
+        _self.searchByEmail = function (email) {
+
+            if (email) {
                 ReservationsService
-                    .searchByIdNumber(_self.idNumber)
+                    .searchByEmail(email)
                     .then(function (value) {
                         if (value.data !== "") {
                             guestAlreadyExist = true;
 
                             _self.guest = value.data;
-                        } else {
-                            _self.guest.idNumber = _self.idNumber;
                         }
                     })
             }
         };
         
-        _self.validateIdNumber = function () {
-            if (_self.guest.idNumber.length === 13) {
-                ReservationsService
-                    .searchByIdNumber(_self.guest.idNumber)
-                    .then(function (value) {
-                        if (value.data !== "") {
-                            guestAlreadyExist = true;
-                        }
-                    })
-            }
-        };
+        // _self.validateIdNumber = function () {
+        //     if (_self.guest.idNumber.length === 13) {
+        //         ReservationsService
+        //             .searchByIdNumber(_self.guest.idNumber)
+        //             .then(function (value) {
+        //                 if (value.data !== "") {
+        //                     guestAlreadyExist = true;
+        //                 }
+        //             })
+        //     }
+        // };
 
         function getRoomDetails(event) {
             _self.selectedRoom = allRooms.find(function (room) {
                 if (room.roomNumber.toString() === event.target.className.substring(1,3))
                     return room;
             });
+            $('.modal-title').html("");
             $('.modal-title').append('Room number ' + _self.selectedRoom.roomNumber);
+
+            $('.modal-body p:first-child').html("");
             $('.modal-body p:first-child').append('Room Type: ' + _self.selectedRoom.roomType.roomName);
-            $('.modal-body p:nth-child(2)').append('Number of single bed: ' + _self.selectedRoom.roomType.nrSingleBed);
-            $('.modal-body p:nth-child(3)').append('Number of double bed: ' + _self.selectedRoom.roomType.nrDoubleBed);
+
+            if (_self.selectedRoom.roomType.nrSingleBed !== 0) {
+                $('.modal-body p:nth-child(2)').html("");
+                $('.modal-body p:nth-child(2)').append('Number of single bed: ' + _self.selectedRoom.roomType.nrSingleBed);
+            }
+
+            if (_self.selectedRoom.roomType.nrDoubleBed !== 0) {
+                $('.modal-body p:nth-child(3)').html("");
+                $('.modal-body p:nth-child(3)').append('Number of double bed: ' + _self.selectedRoom.roomType.nrDoubleBed);
+            }
             $('.modal-body p:nth-child(4)').append('Price: ' + _self.selectedRoom.roomType.price + " &euro;");
             if ($('.r'+_self.selectedRoom.roomNumber).hasClass('chosenRoom')) {
                 $('.modal-footer .chooseButton').html("Discard");
@@ -227,13 +280,15 @@
                 const index = _self.selectedRooms.indexOf(_self.selectedRoom);
                 _self.selectedRooms.splice(index, 1);
                 $('.r'+_self.selectedRoom.roomNumber).removeClass('chosenRoom');
+                $('.r'+_self.selectedRoom.roomNumber).html("");
             } else {
 
                 ReservationsService
                     .saveChosenRoom(_self.selectedRoom);
 
                 $('.r'+_self.selectedRoom.roomNumber).addClass('chosenRoom');
-                $('.r'+_self.selectedRoom.roomNumber).removeClass('type'+_self.selectedRoom.roomType.roomName.substring(0,2).toUpperCase());
+                $('.r'+_self.selectedRoom.roomNumber).html("X");
+                // $('.r'+_self.selectedRoom.roomNumber).removeClass('type'+_self.selectedRoom.roomType.roomName.substring(0,2).toUpperCase());
                 _self.selectedRooms.push(_self.selectedRoom);
             }
             $('.modal').modal('toggle');
@@ -241,7 +296,7 @@
         
         function submitRequest() {
 
-            _self.closeInterval();
+            // _self.closeInterval();
 
             if (!guestAlreadyExist) {
                 ReservationsService
@@ -249,7 +304,7 @@
                     .then(function () {
 
                         ReservationsService
-                            .searchByIdNumber(_self.guest.idNumber)
+                            .searchByEmail(_self.guest.guestEmail)
                             .then(function (response) {
 
                                 _self.request.customer = response.data;
@@ -265,27 +320,19 @@
 
                                 _self.request.requestDate = yyyy + "/" + mm + "/" + dd;
 
-                                ManagerService
-                                    .getCurrentUser()
-                                    .then(function (currentUser) {
-                                        _self.request.user = currentUser.data;
+                                _self.request.user = $rootScope.user;
 
-                                        _self.request.rooms = _self.selectedRooms;
-                                        ReservationsService
-                                            .saveRequest(_self.request)
-                                            .then(function () {
-                                                _self.selectedRooms.forEach(function (value2) {
-                                                    ReservationsService
-                                                        .removeChosenRoom(value2);
-                                                });
-                                                $state.go('home');
-                                            })
-                                    });
+                                _self.request.rooms = _self.selectedRooms;
+                                ReservationsService
+                                    .saveRequest(_self.request)
+                                    .then(function () {
+                                        _self.discardRes();
+                                    })
                             });
                     });
             } else {
                 ReservationsService
-                    .searchByIdNumber(_self.guest.idNumber)
+                    .searchByEmail(_self.guest.guestEmail)
                     .then(function (response) {
 
                         _self.request.customer = response.data;
@@ -301,29 +348,48 @@
 
                         _self.request.requestDate = yyyy + "/" + mm + "/" + dd;
 
-                        ManagerService
+                        MaidService
                             .getCurrentUser()
                             .then(function (currentUser) {
-                                _self.request.user = currentUser.data;
+                                if(currentUser.data) {
+                                    _self.request.user = currentUser.data;
+                                } else {
+                                    _self.request.user = null;
+                                }
 
                                 _self.request.rooms = _self.selectedRooms;
                                 ReservationsService
                                     .saveRequest(_self.request)
                                     .then(function () {
-                                        _self.selectedRooms.forEach(function (value2) {
-                                            ReservationsService
-                                                .removeChosenRoom(value2);
-                                        });
-                                        $state.go('home');
+                                        _self.discardRes();
                                     })
                             });
                     });
             }
         }
 
-        window.onbeforeunload = function () {
-            _self.closeInterval();
-        }
+        _self.discardRes = function () {
+            _self.selectedRooms.forEach(function (value2) {
+                ReservationsService
+                    .removeChosenRoom(value2);
+            });
+
+            $('.menu-div a button').prop('disabled', false);
+            $('.menu-div a button').css('cursor', 'pointer');
+            $('.menu-div a button').css('opacity', '1');
+
+            if ($rootScope.user) {
+                if($rootScope.user.userRole === 'MANAGER')
+                    $state.go('homeManager');
+                else if ($rootScope.user.userRole === 'RECEPTIONIST')
+                    $state.go('homeReceptionist');
+                else if ($rootScope.user.userRole === 'MAID')
+                    $state.go('homeMaid');
+            } else
+                $state.go('homeCommon');
+
+        };
+
     }
 
 })();

@@ -6,17 +6,16 @@
         .module('RoyalPalaceHotel')
         .controller('managerController', Controller);
 
-    Controller.$inject = ['$scope', '$window', '$state', '$filter', 'ManagerService', 'MaidService'];
+    Controller.$inject = ['$rootScope', '$scope', '$window', '$state', '$filter', 'ManagerService', 'MaidService'];
 
-    function Controller($scope, $window, $state, $filter, ManagerService, MaidService) {
+    function Controller($rootScope, $scope, $window, $state, $filter, ManagerService, MaidService) {
         var _self = this;
 
         _self.username = "";
-        _self.dataLoading = false;
         _self.currentUserPassword = "";
         _self.currentState = 'homeManager';
 
-        // _self.encryptMd5 = encryptMd5;
+        $rootScope.user = null;
 
         _self.logout = function () {
             $window.location.href = "/logout";
@@ -27,19 +26,16 @@
             MaidService
                 .getCurrentUser()
                 .then(function (response) {
-                    _self.username = response.data.firstName;
-                    _self.user = response.data;
-                    _self.user.birthDate = $filter('date')(response.data.birthDate, "yyyy/MM/dd");
-                    _self.user.hireDate = $filter('date')(response.data.hireDate, "yyyy/MM/dd");
-                    _self.currentUserPassword = response.data.userPassword;
-                });
+                    if (response.data) {
+                        _self.username = response.data.firstName;
+                        _self.user = response.data;
+                        _self.user.birthDate = $filter('date')(response.data.birthDate, "yyyy/MM/dd");
+                        _self.user.hireDate = $filter('date')(response.data.hireDate, "yyyy/MM/dd");
+                        _self.currentUserPassword = response.data.userPassword;
 
-            // $('#datetimepicker1').datetimepicker({
-            //     format: 'YYYY/MM/DD'
-            // });
-            // $('#datetimepicker2').datetimepicker({
-            //     format: 'YYYY/MM/DD'
-            // });
+                        $rootScope.user = _self.user;
+                    }
+                });
 
             if ($state.current.name !== 'default' && $state.current.name !== '') {
                 _self.currentState = $state.current.name;
@@ -51,11 +47,8 @@
             $('#'+_self.currentState).addClass('active');
         }
 
-        // function encryptMd5(pass) {
-        //     return $.md5(pass);
-        // }
-
         init();
+
     }
 
 })();

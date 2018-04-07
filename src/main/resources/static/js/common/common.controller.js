@@ -6,32 +6,73 @@
         .module('RoyalPalaceHotel')
         .controller('commonController', Controller);
 
-    Controller.$inject = ['$scope', '$state', '$http', '$location', '$window', 'CommonService'];
+    Controller.$inject = ['$rootScope', '$scope', '$state', '$filter', '$window', 'MaidService'];
 
-    function Controller($scope, $state, $http, $location, $window, CommonService) {
+    function Controller($rootScope, $scope, $state, $filter, $window, MaidService) {
         var _self = this;
 
+        $rootScope.user = null;
+
         _self.username = "";
-        _self.dataLoading = false;
         _self.currentUserPassword = "";
-        _self.currentState = 'homeCommon';
+
 
         function init() {
 
-            if ($state.current.name !== 'default' && $state.current.name !== '') {
-                _self.currentState = $state.current.name;
-            } else {
-                $state.go(_self.currentState);
-            }
+            MaidService
+                .getCurrentUser()
+                .then(function (response) {
+                    _self.username = response.data.firstName;
+                    if (response.data !== "") {
+                        _self.user = response.data;
+                        _self.user.birthDate = $filter('date')(response.data.birthDate, "yyyy/MM/dd");
+                        _self.user.hireDate = $filter('date')(response.data.hireDate, "yyyy/MM/dd");
+                        _self.currentUserPassword = response.data.userPassword;
+                    }
 
-            $('.menu-div a button').removeClass('active');
-            $('#'+_self.currentState).addClass('active');
+                    $rootScope.user = _self.user;
+
+                    if ($rootScope.user) {
+                        switch ($rootScope.user.userRole) {
+                            case 'MANAGER': {_self.currentState = 'homeManager';break;}
+                            case 'RECEPTIONIST': {_self.currentState = 'homeReceptionist';break;}
+                            case 'MAID': {_self.currentState = 'homeMaid';break;}
+                        }
+                    } else {
+                        _self.currentState = 'homeCommon';
+                    }
+
+                    if ($state.current.name !== 'default' && $state.current.name !== '') {
+                        _self.currentState = $state.current.name;
+                    } else {
+                        $state.go(_self.currentState);
+                    }
+
+                    $('.menu-div a button').removeClass('active');
+                    $('#'+_self.currentState).addClass('active');
+
+                    $('#datetimepicker1').datetimepicker({
+                        format: 'YYYY/MM/DD'
+                    });
+
+                    $('#datetimepicker2').datetimepicker({
+                        format: 'YYYY/MM/DD'
+                    });
+                });
         }
 
         init();
 
         _self.login = function () {
             $window.location.href = '/login';
+        };
+
+        _self.logout = function () {
+            $window.location.href = "/logout";
+        };
+
+        _self.encryptMd5 = function (pass) {
+            return $.md5(pass);
         }
     }
 })();

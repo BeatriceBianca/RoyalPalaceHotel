@@ -8,7 +8,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "CUSTOMER")
+@Table(name = "GUEST")
 public class Guest {
 
     @Id
@@ -30,9 +30,6 @@ public class Guest {
 
     @Column(name = "guest_email")
     private String guestEmail;
-
-    @Column(name = "guest_password")
-    private String guestPassword;
 
     @Column(name = "register_date")
     private Date registerDate;
@@ -61,10 +58,6 @@ public class Guest {
 
     public void setGuestEmail(String guestEmail) { this.guestEmail = guestEmail; }
 
-    public String getGuestPassword() { return guestPassword; }
-
-    public void setGuestPassword(String guestPassword) { this.guestPassword = guestPassword; }
-
     public Date getRegisterDate() { return registerDate; }
 
     public void setRegisterDate(Date registerDate) { this.registerDate = registerDate; }
@@ -77,7 +70,6 @@ public class Guest {
         this.address = address;
         this.guestPhone = guestPhone;
         this.guestEmail = guestEmail;
-        this.guestPassword = guestPassword;
         this.registerDate = new Date();
     }
 }
