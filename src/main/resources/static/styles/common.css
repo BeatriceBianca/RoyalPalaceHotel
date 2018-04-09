@@ -46,13 +46,13 @@ div.tab button {
     background-color: inherit;
     color: black;
     width: 100%;
-    height: 10%;
+    height: 12%;
     border: none;
     outline: none;
     text-align: left;
     cursor: pointer;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 1em;
     border-bottom: 1px solid #2e0f2b;
 }
 
@@ -100,6 +100,7 @@ div.tab .active {
 .footer p {
     display: table-cell;
     vertical-align: middle;
+    font-size: 0.8em;
 }
 
 .welcome {
@@ -113,6 +114,7 @@ div.tab .active {
 
 .welcome button {
     outline: none;
+    font-size: 0.7em;
 }
 
 .welcome span {
@@ -130,8 +132,9 @@ div.tab .active {
     width: 1%;
 }
 
-#signIn {
+#signIn, #discardReservation {
     outline: none;
+    font-size: 0.7em;
 }
 
 .right-content {
@@ -206,9 +209,9 @@ div.tab .active {
     background: repeating-linear-gradient(
             180deg,
             rgb(137,111,128),
-            rgb(137,111,128) 10px,
-            white 60px,
-            white 20px
+            rgb(137,111,128) 40%,
+            white 150%,
+            white 10%
     )
 }
 
@@ -255,6 +258,7 @@ div.tab .active {
     width: 100%;
     height: 100%;
     cursor: pointer;
+    font-size: 0.9em;
 }
 
 .activeFloor {
@@ -269,6 +273,14 @@ div.tab .active {
 #myModal {
     margin: 10% auto;
     text-align: center;
+}
+
+.modal-body p {
+    font-size: 0.8em;
+}
+
+.modal-footer button {
+    font-size: 0.7em;
 }
 
 #rooms-page #title {
@@ -290,6 +302,7 @@ div.tab .active {
     width: 10%;
     text-align: center;
     padding-left: 2px;
+    font-size: 0.6em;
 }
 
 .modal-content {
@@ -308,13 +321,13 @@ div.tab .active {
     z-index:1;
 }
 
-.reservations {
+.reservations, .guests {
     width: 80% !important;
     margin-left: 10%!important;
     height: 100%;
 }
 
-.reservations form {
+.reservations form, .guests form {
     margin-top: 5%;
 }
 
@@ -326,6 +339,11 @@ div.tab .active {
     border-radius: 0.3em;
     height: 70%;
     font-size: 1.25em;
+}
+
+*[role="form"] label {
+    font-size: 0.8em;
+    font-weight: 600;
 }
 
 *[role="form"] h2 {
@@ -344,7 +362,7 @@ div.tab .active {
 .reservations-menu button {
     background-color: transparent;
     border: none;
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-bottom: 3%;
     color: #2e0f2b;
 }
@@ -395,7 +413,7 @@ div.tab .active {
     height: 3em;
     margin-right: 10%;
     background-color: #996083;
-    font-size: 0.8em;
+    font-size: 0.6em;
     color: white;
 }
 
@@ -468,7 +486,7 @@ div.tab .active {
 }
 
 #datetimepicker1, #datetimepicker2 {
-    width: 100%;
+    width: 80%;
 }
 
 #datetimepicker1 input, #datetimepicker2 input {

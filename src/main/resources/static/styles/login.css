@@ -61,7 +61,7 @@ body {
     color: white;
     outline: none;
     border: none;
-    font-size: 1.1em;
+    font-size: 1em;
     cursor: pointer;
 }
 
@@ -80,6 +80,7 @@ body {
 .forgot-password span {
     font-weight: bold;
     cursor: pointer;
+    font-size: 0.9em;
 }
 
 .new-guest-account {

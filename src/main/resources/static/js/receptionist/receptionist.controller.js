@@ -54,7 +54,7 @@
 
                         datasets.push(arr);
                     });
-                    $('#allReservationsTable').DataTable( {
+                    $('#allGuestsTable').DataTable( {
                         pageLength: 5,
                         bLengthChange: false,
                         data: datasets,
