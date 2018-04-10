@@ -275,6 +275,10 @@ div.tab .active {
     text-align: center;
 }
 
+#successModal .modal-dialog {
+    margin-top: 15%;
+}
+
 .modal-body p {
     font-size: 0.8em;
 }
@@ -487,6 +491,10 @@ div.tab .active {
 
 #datetimepicker1, #datetimepicker2 {
     width: 80%;
+}
+
+#requestForm #datetimepicker1, #requestForm #datetimepicker2 {
+    width: 100%;
 }
 
 #datetimepicker1 input, #datetimepicker2 input {

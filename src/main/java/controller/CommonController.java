@@ -1,11 +1,10 @@
 package controller;
 
+import com.hotel.royalpalace.auxiliary.PDF;
+import com.hotel.royalpalace.auxiliary.SmtpMailSender;
 import com.hotel.royalpalace.model.*;
 import com.hotel.royalpalace.model.info.RequestInfo;
-import com.hotel.royalpalace.service.GuestService;
-import com.hotel.royalpalace.service.RequestService;
-import com.hotel.royalpalace.service.RoomsService;
-import com.hotel.royalpalace.service.UserService;
+import com.hotel.royalpalace.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +45,12 @@ public class CommonController {
     @Autowired
     GuestService guestService;
 
+    @Autowired
+    SmtpMailSender smtpMailSender;
+
+    @Autowired
+    PDF pdf;
+
 //    Pages Mapping
 
     @RequestMapping(value = "/home")
@@ -57,6 +67,12 @@ public class CommonController {
 
     @RequestMapping(value = "/newReservation")
     public String getNewReservationContent() {
+//        try {
+//            smtpMailSender.sendToSingle("bianca.luca96@gmail.com", "Reservation request",
+//                    "Thank you for your request");
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
         return "common/newReservation";
     }
 
@@ -108,6 +124,12 @@ public class CommonController {
         request.setDepartureDate(df.parse(requestInfo.getDepartureDate()));
         request.setRequestDate(df.parse(requestInfo.getRequestDate()));
         requestService.saveRequest(request);
+//        try {
+//            smtpMailSender.sendToSingle(request.getCustomer().getGuestEmail(), "Reservation request",
+//                    "Thank you for your request");
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
         return redirectToPage();
     }
 
@@ -131,9 +153,16 @@ public class CommonController {
         return redirectToPage();
     }
 
-    @RequestMapping(value = "/getAllReservations", method = RequestMethod.GET)
-    public ResponseEntity getAllReservations() {
+    @RequestMapping(value = "/getPDF", method = RequestMethod.GET)
+    public void getPDF (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        pdf.service(request, response);
+    }
+
+    @RequestMapping(value = "/getAllReservations", method = RequestMethod.GET)
+    public ResponseEntity getAllReservations(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        pdf.service(request, response);
         return new ResponseEntity<>(requestService.getAll(), HttpStatus.OK);
     }
 

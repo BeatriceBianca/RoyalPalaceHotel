@@ -112,10 +112,14 @@
                     })
                 });
 
-            $(".modal").on("hidden.bs.modal", function(){
-                $(".modal-body p").html("");
-                $(".modal-title").html("");
+            $("#myModal").on("hidden.bs.modal", function(){
+                $("#myModal .modal-body p").html("");
+                $("#myModal .modal-title").html("");
                 _self.selectedRoom = null;
+            });
+
+            $("#successModal").on("hidden.bs.modal", function(){
+                _self.discardRes();
             });
 
             _self.selectedRooms.forEach(function (value2) {
@@ -175,7 +179,7 @@
             //
             //                     if(_self.selectedRoom) {
             //                         if(_self.selectedRoom.id === room.id) {
-            //                             $('.modal').modal('toggle');
+            //                             $('#myModal .modal').modal('toggle');
             //                         }
             //                     }
             //
@@ -238,27 +242,31 @@
                 if (room.roomNumber.toString() === event.target.className.substring(1,3))
                     return room;
             });
-            $('.modal-title').html("");
-            $('.modal-title').append('Room number ' + _self.selectedRoom.roomNumber);
+            $('#myModal .modal-title').html("");
+            $('#myModal .modal-title').append('Room number ' + _self.selectedRoom.roomNumber);
 
-            $('.modal-body p:first-child').html("");
-            $('.modal-body p:first-child').append('Room Type: ' + _self.selectedRoom.roomType.roomName);
+            $('#myModal .modal-body p:first-child').html("");
+            $('#myModal .modal-body p:first-child').append('Room Type: ' + _self.selectedRoom.roomType.roomName);
 
+            $('#myModal .modal-body p:nth-child(2)').html("");
             if (_self.selectedRoom.roomType.nrSingleBed !== 0) {
-                $('.modal-body p:nth-child(2)').html("");
-                $('.modal-body p:nth-child(2)').append('Number of single bed: ' + _self.selectedRoom.roomType.nrSingleBed);
+                $('#myModal .modal-body p:nth-child(2)').append('Number of single bed: ' + _self.selectedRoom.roomType.nrSingleBed);
             }
 
+            $('#myModal .modal-body p:nth-child(3)').html("");
             if (_self.selectedRoom.roomType.nrDoubleBed !== 0) {
-                $('.modal-body p:nth-child(3)').html("");
-                $('.modal-body p:nth-child(3)').append('Number of double bed: ' + _self.selectedRoom.roomType.nrDoubleBed);
+                $('#myModal .modal-body p:nth-child(3)').append('Number of double bed: ' + _self.selectedRoom.roomType.nrDoubleBed);
             }
-            $('.modal-body p:nth-child(4)').append('Price: ' + _self.selectedRoom.roomType.price + " &euro;");
+
+            $('#myModal .modal-body p:nth-child(4)').html("");
+            $('#myModal .modal-body p:nth-child(4)').append('Price: ' + _self.selectedRoom.roomType.price + " &euro;");
+
             if ($('.r'+_self.selectedRoom.roomNumber).hasClass('chosenRoom')) {
-                $('.modal-footer .chooseButton').html("Discard");
+                $('#myModal .modal-footer .chooseButton').html("Discard");
             } else {
-                $('.modal-footer .chooseButton').html("Choose");
+                $('#myModal .modal-footer .chooseButton').html("Choose");
             }
+
             $('#myModal').modal();
         }
 
@@ -291,12 +299,13 @@
                 // $('.r'+_self.selectedRoom.roomNumber).removeClass('type'+_self.selectedRoom.roomType.roomName.substring(0,2).toUpperCase());
                 _self.selectedRooms.push(_self.selectedRoom);
             }
-            $('.modal').modal('toggle');
+            $('#myModal').modal('toggle');
         }
         
         function submitRequest() {
 
             // _self.closeInterval();
+            _self.loading = true;
 
             if (!guestAlreadyExist) {
                 ReservationsService
@@ -326,7 +335,8 @@
                                 ReservationsService
                                     .saveRequest(_self.request)
                                     .then(function () {
-                                        _self.discardRes();
+                                        _self.loading = false;
+                                        $('#successModal').modal();
                                     })
                             });
                     });
@@ -361,7 +371,8 @@
                                 ReservationsService
                                     .saveRequest(_self.request)
                                     .then(function () {
-                                        _self.discardRes();
+                                        _self.loading = false;
+                                        $('#successModal').modal();
                                     })
                             });
                     });
@@ -380,11 +391,9 @@
 
             if ($rootScope.user) {
                 if($rootScope.user.userRole === 'MANAGER')
-                    $state.go('homeManager');
+                    $state.go('viewReservations');
                 else if ($rootScope.user.userRole === 'RECEPTIONIST')
-                    $state.go('homeReceptionist');
-                else if ($rootScope.user.userRole === 'MAID')
-                    $state.go('homeMaid');
+                    $state.go('viewReservations');
             } else
                 $state.go('homeCommon');
 

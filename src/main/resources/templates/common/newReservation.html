@@ -9,7 +9,6 @@
             <a ui-sref="newReservation"><button id="newReservation" class="reservations-menu-activ">New Reservation</button></a>
         </div>
 
-        <!--<h2 id="title" ng-show="!managerCtrl.user"> New Reservations</h2>-->
         <button id="discardReservation" class="btn" ng-click="res.discardRes()"> Discard </button>
 
         <!--GUEST-->
@@ -510,6 +509,27 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn chooseButton" ng-click="res.chooseRoom()"></button>
+                            <button type="button" class="btn" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal" id="successModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"> </h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Thank you for your request!
+                                A mail with all the information below was sent to {{res.guest.guestEmail}}.</p>
+                        </div>
+                        <div class="modal-footer">
                             <button type="button" class="btn" data-dismiss="modal">Close</button>
                         </div>
                     </div>

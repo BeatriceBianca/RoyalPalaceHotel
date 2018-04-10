@@ -86,7 +86,8 @@
             }
 
             function getAllReservations() {
-                var URL = baseTestContext + "/getAllReservations";
+                var URL = baseTestContext + "/getPDF";
+                // var URL = baseTestContext + "/getAllReservations";
                 return $http({
                     method: 'GET',
                     url: URL,
