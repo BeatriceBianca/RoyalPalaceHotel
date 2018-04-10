@@ -27,7 +27,7 @@
 
                     var blob = new Blob([response.data], { type: "application/pdf"});
                     //change download.pdf to the name of whatever you want your file to be
-                    FileSaver.saveAs(blob, "download.pdf");
+                    saveAs(blob, "download.pdf");
 
                     // var datasets = [];
                     // response.data.forEach(function (r) {
