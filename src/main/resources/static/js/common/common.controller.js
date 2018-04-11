@@ -16,6 +16,8 @@
         _self.username = "";
         _self.currentUserPassword = "";
 
+        _self.newUser = null;
+
         _self.loading = false;
         function init() {
 
@@ -73,6 +75,13 @@
 
         _self.encryptMd5 = function (pass) {
             return $.md5(pass);
+        }
+
+        _self.disableNewAccount = function() {
+            if ($('#birthDate').val() && $('#hireDate').val() &&
+                _self.newUser.lastName && _self.newUser.firstName && _self.newUser.userEmail && _self.newUser.phone)
+                return false;
+            return true;
         }
     }
 })();

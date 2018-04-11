@@ -20,13 +20,11 @@
                     <div class="form-group" ng-class="{ 'has-error': guestForm.lastName.$dirty &amp;&amp; guestForm.lastName.$error.required }">
                         <label for="lastName">Last name</label>
                         <input type="text" name="lastName" id="lastName" class="form-control" ng-model="res.guest.lastName" required="required" />
-                        <span ng-show="guestForm.lastName.$dirty &amp;&amp; guestForm.lastName.$error.required" class="help-block">Last name is required</span>
                     </div>
 
                     <div class="form-group" ng-class="{ 'has-error': guestForm.firstName.$dirty &amp;&amp; guestForm.firstName.$error.required }">
                         <label for="firstName">First name</label>
                         <input type="text" name="firstName" id="firstName" class="form-control" ng-model="res.guest.firstName" required="required" />
-                        <span ng-show="guestForm.firstName.$dirty &amp;&amp; guestForm.firstName.$error.required" class="help-block">First name is required</span>
                     </div>
 
                     <div class="form-group" ng-class="{ 'has-error': guestForm.guestEmail.$dirty &amp;&amp; guestForm.guestEmail.$error.required }">
@@ -38,8 +36,7 @@
                         <input type="text" name="guestEmail" id="guestEmail2" class="form-control"
                                ng-model="res.guest.guestEmail" required="required"
                                ng-if="!res.user"/>
-                        <span ng-show="guestForm.guestEmail.$dirty &amp;&amp; guestForm.guestEmail.$error.required" class="help-block">Email is required</span>
-                    </div>
+                        </div>
 
                 </div>
 
@@ -48,13 +45,11 @@
                     <div class="form-group" ng-class="{ 'has-error': guestForm.address.$dirty &amp;&amp; guestForm.address.$error.required }">
                         <label for="address">Address</label>
                         <input type="text" name="address" id="address" class="form-control" ng-model="res.guest.address" required="required" />
-                        <span ng-show="guestForm.address.$dirty &amp;&amp; guestForm.address.$error.required" class="help-block">Address is required</span>
                     </div>
 
                     <div class="form-group" ng-class="{ 'has-error': guestForm.guestPhone.$dirty &amp;&amp; guestForm.guestPhone.$error.required }">
                         <label for="guestPhone">Phone</label>
                         <input type="text" name="guestPhone" id="guestPhone" class="form-control" ng-model="res.guest.guestPhone" required="required"/>
-                        <span ng-show="guestForm.guestPhone.$dirty &amp;&amp; guestForm.guestPhone.$error.required" class="help-block">Phone is required</span>
                     </div>
 
                 </div>
@@ -100,7 +95,6 @@
                 <div class="form-group" ng-class="{ 'has-error': requestForm.nrOfPerson.$dirty &amp;&amp; requestForm.nrOfPerson.$error.required }">
                     <label for="nrOfPerson">Number of person</label>
                     <input type="text" name="nrOfPerson" id="nrOfPerson" class="form-control" ng-model="res.nrOfPerson" required="required"/>
-                    <span ng-show="requestForm.nrOfPerson.$dirty &amp;&amp; requestForm.nrOfPerson.$error.required" class="help-block">Number of person is required</span>
                 </div>
 
             </div>

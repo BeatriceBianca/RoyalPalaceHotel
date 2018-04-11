@@ -54,16 +54,16 @@
                         </div>
                         </div>
 
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': form.phone.$dirty &amp;&amp; form.phone.$error.required }">
                         <label for="phone">Phone</label>
-                        <input type="text" name="phone" id="phone" class="form-control" ng-model="manager.newUser.phone" />
+                        <input type="text" name="phone" id="phone" class="form-control" ng-model="manager.newUser.phone" required="required"/>
                     </div>
 
                 </div>
             </div>
 
             <div class="form-actions newAccount-button">
-                <button type="submit"  class="btn" ng-disabled="false"
+                <button type="submit"  class="btn" ng-disabled="manager.disableNewAccount()"
                         ng-click="manager.loading = true">
                     Register</button>
             </div>
