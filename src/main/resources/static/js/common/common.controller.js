@@ -16,7 +16,7 @@
         _self.username = "";
         _self.currentUserPassword = "";
 
-
+        _self.loading = false;
         function init() {
 
             MaidService

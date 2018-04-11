@@ -1,4 +1,7 @@
-<div ng-controller="commonController as manager">
+<div ng-controller="commonController as manager" ng-class="{'loadingScreen': manager.loading}">
+
+    <i class="fa fa-spinner fa-spin loading-spinner" style="font-size:30px"
+       ng-show="manager.loading"></i>
     <div class="col-md-6 col-md-offset-3 newAccountPage">
         <h2 id="title">Create new account</h2>
         <form name="form" action="manager/addUser" method="post" role="form" >
@@ -60,7 +63,8 @@
             </div>
 
             <div class="form-actions newAccount-button">
-                <button type="submit"  class="btn" ng-disabled="false">
+                <button type="submit"  class="btn" ng-disabled="false"
+                        ng-click="manager.loading = true">
                     Register</button>
             </div>
 
