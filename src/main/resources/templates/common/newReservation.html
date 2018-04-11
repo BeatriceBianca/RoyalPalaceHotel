@@ -44,11 +44,6 @@
                 </div>
 
                 <div class="right-content">
-                    <!--<div class="form-group" ng-class="{ 'has-error': guestForm.idNumber.$dirty &amp;&amp; guestForm.idNumber.$error.required }">-->
-                        <!--<label for="idNumber">CNP</label>-->
-                        <!--<input type="text" name="idNumber" id="idNumber" class="form-control" ng-change="res.validateIdNumber()" ng-model="res.guest.idNumber" required="required" />-->
-                        <!--<span ng-show="guestForm.idNumber.$dirty &amp;&amp; guestForm.idNumber.$error.required" class="help-block">CNP is required</span>-->
-                    <!--</div>-->
 
                     <div class="form-group" ng-class="{ 'has-error': guestForm.address.$dirty &amp;&amp; guestForm.address.$error.required }">
                         <label for="address">Address</label>
@@ -56,17 +51,18 @@
                         <span ng-show="guestForm.address.$dirty &amp;&amp; guestForm.address.$error.required" class="help-block">Address is required</span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': guestForm.guestPhone.$dirty &amp;&amp; guestForm.guestPhone.$error.required }">
                         <label for="guestPhone">Phone</label>
-                        <input type="text" name="guestPhone" id="guestPhone" class="form-control" ng-model="res.guest.guestPhone" />
+                        <input type="text" name="guestPhone" id="guestPhone" class="form-control" ng-model="res.guest.guestPhone" required="required"/>
+                        <span ng-show="guestForm.guestPhone.$dirty &amp;&amp; guestForm.guestPhone.$error.required" class="help-block">Phone is required</span>
                     </div>
 
                 </div>
             </div>
 
             <div class="form-actions saveGuest-button" ng-show="res.viewGuest">
-                <button type="submit" class="btn" ng-click="res.viewGuest=false;res.viewRequest=true">
-                        <!--ng-disabled="guestForm.$invalid" -->
+                <button type="submit" class="btn" ng-click="res.viewGuest=false;res.viewRequest=true"
+                        ng-disabled="guestForm.$invalid">
                     Next </button>
             </div>
 
@@ -79,29 +75,32 @@
 
             <div class="saveRequest">
 
-                <div class="form-group" ng-class="{ 'has-error': requestForm.arrivalDate.$dirty &amp;&amp; requestForm.arrivalDate.$error.required }">
+                <div class="form-group">
                     <label for="arrivalDate">Arrival date</label>
                     <div class='input-group date' id='datetimepicker1'>
-                        <input type="text" name="arrivalDate" id="arrivalDate" class="form-control" ng-model="res.request.arrivalDate" required="required" />
+                        <input type="text" name="arrivalDate" id="arrivalDate" class="form-control"
+                               ng-model="res.request.arrivalDate"/>
                         <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                    </div>
-                </div>
-
-                <div class="form-group" ng-class="{ 'has-error': requestForm.departureDate.$dirty &amp;&amp; requestForm.departureDate.$error.required }">
-                    <label for="departureDate">Departure date</label>
-                    <div class='input-group date' id='datetimepicker2'>
-                        <input type="text" name="departureDate" id="departureDate" class="form-control" ng-model="res.request.departureDate" required="required"/>
-                        <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                     </div>
                 </div>
 
                 <div class="form-group">
+                    <label for="departureDate">Departure date</label>
+                    <div class='input-group date' id='datetimepicker2'>
+                        <input type="text" name="departureDate" id="departureDate" class="form-control"
+                               ng-model="res.request.departureDate"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    </div>
+
+                <div class="form-group" ng-class="{ 'has-error': requestForm.nrOfPerson.$dirty &amp;&amp; requestForm.nrOfPerson.$error.required }">
                     <label for="nrOfPerson">Number of person</label>
-                    <input type="text" name="nrOfPerson" id="nrOfPerson" class="form-control" ng-model="res.nrOfPerson" />
+                    <input type="text" name="nrOfPerson" id="nrOfPerson" class="form-control" ng-model="res.nrOfPerson" required="required"/>
+                    <span ng-show="requestForm.nrOfPerson.$dirty &amp;&amp; requestForm.nrOfPerson.$error.required" class="help-block">Number of person is required</span>
                 </div>
 
             </div>
@@ -113,7 +112,9 @@
                 </div>
 
                 <div class="form-actions saveRequest-button" ng-show="res.viewRequest">
-                    <button type="submit" class="btn" ng-click="res.viewRequest=false;res.viewRoom=true;res.saveRequestedDate()">
+                    <button type="submit" class="btn"
+                            ng-click="res.viewRequest=false;res.viewRoom=true;res.saveRequestedDate()"
+                            ng-disabled="res.isRequestedSet()">
                         Next </button>
                 </div>
             </div>
@@ -549,7 +550,8 @@
                 </div>
 
                 <div class="form-actions saveReservation-button">
-                    <button type="button" class="btn" ng-click="res.submitRequest()">
+                    <button type="button" class="btn" ng-click="res.submitRequest()"
+                            ng-disabled="res.selectedRooms.length == 0">
                         Submit </button>
                 </div>
             </div>

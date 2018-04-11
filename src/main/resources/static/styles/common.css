@@ -415,7 +415,7 @@ div.tab .active {
 .saveGuest-button, .saveRequest-button, .saveReservation-button,
 .editGuest-button, .editRequest-button{
     text-align: right;
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
 .saveGuest-button button, .saveRequest-button button, .saveReservation-button button,
@@ -511,4 +511,8 @@ div.tab .active {
 .downloadInvoice {
     display: block;
     margin: auto;
+}
+
+.help-block {
+    font-size: 0.7em;
 }

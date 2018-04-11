@@ -30,6 +30,12 @@
         var guestAlreadyExist = false;
         _self.loading = false;
 
+        _self.isRequestedSet = function() {
+            if ($('#arrivalDate').val() &&  $('#departureDate').val() && _self.nrOfPerson)
+                return false;
+            return true;
+        };
+
         // var refreshRooms;
         
         // _self.closeInterval = function () {
@@ -347,7 +353,7 @@
                                     .then(function () {
                                         _self.loading = false;
 
-                                        _self.discardRes();
+                                        _self.removeChosenRooms();
                                         $('#successModal').modal();
                                     })
                             });
@@ -385,7 +391,7 @@
                                     .then(function () {
                                         _self.loading = false;
 
-                                        _self.discardRes();
+                                        _self.removeChosenRooms();
                                         $('#successModal').modal();
                                     })
                             });
@@ -410,6 +416,17 @@
         };
 
         _self.discardRes = function () {
+            _self.removeChosenRooms();
+            if ($rootScope.user) {
+                if($rootScope.user.userRole === 'MANAGER')
+                    $state.go('viewReservations');
+                else if ($rootScope.user.userRole === 'RECEPTIONIST')
+                    $state.go('viewReservations');
+            } else
+                $state.go('homeCommon');
+        };
+
+        _self.removeChosenRooms = function () {
             _self.selectedRooms.forEach(function (value2) {
                 ReservationsService
                     .removeChosenRoom(value2);
@@ -418,8 +435,7 @@
             $('.menu-div a button').prop('disabled', false);
             $('.menu-div a button').css('cursor', 'pointer');
             $('.menu-div a button').css('opacity', '1');
-
-        };
+        }
 
     }
 
