@@ -27,13 +27,15 @@
                         <input type="text" name="firstName" id="firstName" class="form-control" ng-model="res.guest.firstName" required="required" />
                     </div>
 
-                    <div class="form-group" ng-class="{ 'has-error': guestForm.guestEmail.$dirty &amp;&amp; guestForm.guestEmail.$error.required }">
+                    <div class="form-group" ng-class="{ 'has-error': (guestForm.guestEmail.$dirty &amp;&amp; guestForm.guestEmail.$error.required) || guestForm.guestEmail.$error.email }">
                         <label for="guestEmail">Email</label>
-                        <input type="text" name="guestEmail" id="guestEmail" class="form-control"
+                        <input type="email" ng-pattern = '/[a-zA-Z1-9]+@[a-zA-Z1-9]+\.[a-zA-Z1-9]+/g'
+                               name="guestEmail" id="guestEmail" class="form-control"
                                ng-model="res.guest.guestEmail" required="required"
                                ng-change="res.searchByEmail(res.guest.guestEmail)"
                                ng-if="res.user"/>
-                        <input type="text" name="guestEmail" id="guestEmail2" class="form-control"
+                        <input type="email" ng-pattern = '/[a-zA-Z1-9]+@[a-zA-Z1-9]+\.[a-zA-Z1-9]+/g'
+                               name="guestEmail" id="guestEmail2" class="form-control"
                                ng-model="res.guest.guestEmail" required="required"
                                ng-if="!res.user"/>
                         </div>
