@@ -1,9 +1,14 @@
 package com.hotel.royalpalace.auxiliary;
 
 import com.hotel.royalpalace.model.Request;
+import com.hotel.royalpalace.model.Room;
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfImage;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.pdf.draw.VerticalPositionMark;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -11,31 +16,185 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class PDF extends HttpServlet {
 
-    public void service(HttpServletRequest request, HttpServletResponse response)
+    private static final long serialVersionUID = 6067021675155015602L;
+
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+    public void createPdf(Request requestInfo, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // Get the text that will be added to the PDF
-            String text = request.getParameter("text");
-            if (text == null || text.trim().length() == 0) {
-                text = "You didn't enter any text.";
-            }
-            // step 1
+
             Document document = new Document();
-            // step 2
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             PdfWriter.getInstance(document, baos);
-            // step 3
             document.open();
-            // step 4
-            document.add(new Paragraph(String.format(
-                    "You have submitted the following text using the %s method:",
-                    request.getMethod())));
-            document.add(new Paragraph(text));
-            // step 5
+//---------------------------------------
+
+            Paragraph p = new Paragraph();
+            Image img = Image.getInstance("./src/main/resources/static/img/hotel-logo.png");
+            img.setAlignment(Image.ALIGN_CENTER);
+            img.scaleAbsolute(200,100);
+            p.add(img);
+            document.add(p);
+
+            Font f = new Font(FontFamily.TIMES_ROMAN,15.0f,Font.BOLD,BaseColor.BLACK);
+            Chunk glue = new Chunk(new VerticalPositionMark());
+
+            Phrase phrase = new Phrase();
+            p = new Paragraph();
+            Chunk chunk1 = new Chunk("\t\t Royal Palace Hotel", f);
+            Chunk chunk2 = new Chunk(requestInfo.getCustomer().getLastName()
+                    + " " + requestInfo.getCustomer().getFirstName());
+            phrase.add(chunk1);
+            phrase.add(glue);
+            phrase.add(chunk2);
+            p.add(phrase);
+            document.add(p);
+
+
+            phrase = new Phrase();
+            p = new Paragraph();
+            chunk1 = new Chunk("Unirii Boulevard, Bucharest");
+            chunk2 = new Chunk(requestInfo.getCustomer().getAddress());
+            phrase.add(chunk1);
+            phrase.add(glue);
+            phrase.add(chunk2);
+            p.add(phrase);
+            document.add(p);
+
+
+            phrase = new Phrase();
+            p = new Paragraph();
+            chunk1 = new Chunk("royalpalace.service@gmail.com");
+            chunk2 = new Chunk(requestInfo.getCustomer().getGuestEmail());
+            phrase.add(chunk1);
+            phrase.add(glue);
+            phrase.add(chunk2);
+            p.add(phrase);
+            document.add(p);
+
+
+            phrase = new Phrase();
+            p = new Paragraph();
+            chunk1 = new Chunk("+40727849165");
+            chunk2 = new Chunk(requestInfo.getCustomer().getGuestPhone() != null ? requestInfo.getCustomer().getGuestPhone() : "");
+            phrase.add(chunk1);
+            phrase.add(glue);
+            phrase.add(chunk2);
+            p.add(phrase);
+            document.add(p);
+
+            p = new Paragraph("\n\nInvoice", f);
+            p.setAlignment(Element.ALIGN_CENTER);
+            document.add(p);
+
+            p = new Paragraph("( " + dateFormat.format(requestInfo.getArrivalDate())
+                    + " - " + dateFormat.format(requestInfo.getDepartureDate()) + " )");
+            p.setAlignment(Element.ALIGN_CENTER);
+            document.add(p);
+
+            document.add(new Paragraph("\n\n"));
+
+            Font f1 = new Font(FontFamily.TIMES_ROMAN,13.0f,Font.BOLD,BaseColor.BLACK);
+            PdfPTable table = new PdfPTable(5);
+
+            Phrase cellText = new Phrase("No.",f1);
+            PdfPCell cell = new PdfPCell(cellText);
+            cell.setMinimumHeight(40f);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+
+            cellText = new Phrase("Room Number",f1);
+            cell = new PdfPCell(cellText);
+            cell.setMinimumHeight(40f);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+
+            cellText = new Phrase("Room Type / Capacity",f1);
+            cell = new PdfPCell(cellText);
+            cell.setMinimumHeight(40f);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+
+            cellText = new Phrase("Quantity",f1);
+            cell = new PdfPCell(cellText);
+            cell.setMinimumHeight(40f);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+
+            cellText = new Phrase("Price (euro)",f1);
+            cell = new PdfPCell(cellText);
+            cell.setMinimumHeight(40f);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+
+            List<Room> rooms = new ArrayList<>();
+            rooms.addAll(requestInfo.getRooms());
+
+            float totalPrice = 0;
+            for(int aw = 0; aw < rooms.size(); aw++){
+                cellText = new Phrase("" + (aw+1));
+                cell = new PdfPCell(cellText);
+                cell.setMinimumHeight(25f);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+//              -------------------
+                cellText = new Phrase("" + rooms.get(aw).getRoomNumber());
+                cell = new PdfPCell(cellText);
+                cell.setMinimumHeight(25f);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+//              --------------------
+                int nrBeds = (rooms.get(aw).getRoomType().getNrDoubleBed() * 2 ) + rooms.get(aw).getRoomType().getNrSingleBed();
+                cellText = new Phrase(rooms.get(aw).getRoomType().getRoomName() + " / " + nrBeds);
+                cell = new PdfPCell(cellText);
+                cell.setMinimumHeight(25f);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+//              --------------------
+                long nrDays = TimeUnit.DAYS.convert(requestInfo.getDepartureDate().getTime()
+                        - requestInfo.getArrivalDate().getTime(), TimeUnit.MILLISECONDS);
+                cellText = new Phrase("" + nrDays);
+                cell = new PdfPCell(cellText);
+                cell.setMinimumHeight(25f);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+//              --------------------
+                cellText = new Phrase("" + (rooms.get(aw).getRoomType().getPrice() * nrDays));
+                totalPrice += rooms.get(aw).getRoomType().getPrice() * nrDays;
+                cell = new PdfPCell(cellText);
+                cell.setMinimumHeight(25f);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+            }
+
+            document.add(table);
+
+            document.add(new Paragraph("\n\n"));
+
+            p = new Paragraph("\t\t\t\t\t\tTotal: \t\t " + totalPrice, f1);
+            p.setAlignment(Element.ALIGN_CENTER);
+            document.add(p);
+//---------------------------------------
             document.close();
 
             // setting some response headers
@@ -58,45 +217,4 @@ public class PDF extends HttpServlet {
         }
     }
 
-    /**
-     * Serial version UID.
-     */
-    private static final long serialVersionUID = 6067021675155015602L;
-
-//    private Request request;
-//
-//    public PDF() {
-//
-//    }
-//
-//    public PDF(Request request) {
-//        this.request = request;
-//    }
-//
-//    private void createHeader() throws FileNotFoundException, DocumentException {
-//        Document document = new Document();
-//        PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf"));
-//
-//        document.open();
-//        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-//        Chunk chunk = new Chunk("Hello World", font);
-//
-//        Paragraph para = new Paragraph(chunk);
-//        para.setAlignment(Element.ALIGN_CENTER);
-//
-//        document.add(para);
-//        document.close();
-//    }
-//
-//    private void createContent() {
-//
-//    }
-//
-//    private void createFooter() {
-//
-//    }
-//
-//    public void createPDF() {
-//
-//    }
 }

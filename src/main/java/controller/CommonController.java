@@ -153,16 +153,20 @@ public class CommonController {
         return redirectToPage();
     }
 
-    @RequestMapping(value = "/getPDF", method = RequestMethod.GET)
-    public void getPDF (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @RequestMapping(value = "/getPDF", method = RequestMethod.POST, produces = "application/pdf")
+    public void getPDF (HttpServletRequest request, HttpServletResponse response, @RequestBody RequestInfo requestInfo
+    ) throws ServletException, IOException, ParseException {
 
-        pdf.service(request, response);
+        Request requestModel = new Request(requestInfo);
+        requestModel.setArrivalDate(df.parse(requestInfo.getArrivalDate()));
+        requestModel.setDepartureDate(df.parse(requestInfo.getDepartureDate()));
+        requestModel.setRequestDate(df.parse(requestInfo.getRequestDate()));
+        pdf.createPdf(requestModel, response);
     }
 
     @RequestMapping(value = "/getAllReservations", method = RequestMethod.GET)
     public ResponseEntity getAllReservations(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        pdf.service(request, response);
         return new ResponseEntity<>(requestService.getAll(), HttpStatus.OK);
     }
 

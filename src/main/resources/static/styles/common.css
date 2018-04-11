@@ -114,7 +114,7 @@ div.tab .active {
 
 .welcome button {
     outline: none;
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
 
 .welcome span {
@@ -134,7 +134,7 @@ div.tab .active {
 
 #signIn, #discardReservation {
     outline: none;
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
 
 .right-content {
@@ -216,7 +216,14 @@ div.tab .active {
 }
 
 .chosenRooms {
-    background-color: rgb(128,128,128);
+    /*background-color: rgb(128,128,128);*/
+    background: repeating-linear-gradient(
+            180deg,
+            rgb(137,111,128),
+            rgb(137,111,128) 40%,
+            white 150%,
+            white 10%
+    )
 }
 
 .b-left {
@@ -284,7 +291,7 @@ div.tab .active {
 }
 
 .modal-footer button {
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
 
 #rooms-page #title {
@@ -417,7 +424,7 @@ div.tab .active {
     height: 3em;
     margin-right: 10%;
     background-color: #996083;
-    font-size: 0.6em;
+    font-size: 0.7em;
     color: white;
 }
 
@@ -499,4 +506,9 @@ div.tab .active {
 
 #datetimepicker1 input, #datetimepicker2 input {
     width: 100%;
+}
+
+.downloadInvoice {
+    display: block;
+    margin: auto;
 }

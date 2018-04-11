@@ -20,6 +20,8 @@
         _self.chooseRoom = chooseRoom;
         _self.submitRequest = submitRequest;
 
+        _self.user = $rootScope.user;
+
         _self.selectedRooms = [];
 
         var allRooms = [];
@@ -119,7 +121,13 @@
             });
 
             $("#successModal").on("hidden.bs.modal", function(){
-                _self.discardRes();
+                if ($rootScope.user) {
+                    if($rootScope.user.userRole === 'MANAGER')
+                        $state.go('viewReservations');
+                    else if ($rootScope.user.userRole === 'RECEPTIONIST')
+                        $state.go('viewReservations');
+                } else
+                    $state.go('homeCommon');
             });
 
             _self.selectedRooms.forEach(function (value2) {
@@ -219,7 +227,9 @@
                         if (value.data !== "") {
                             guestAlreadyExist = true;
 
-                            _self.guest = value.data;
+                            if (_self.user) {
+                                _self.guest = value.data;
+                            }
                         }
                     })
             }
@@ -336,6 +346,8 @@
                                     .saveRequest(_self.request)
                                     .then(function () {
                                         _self.loading = false;
+
+                                        _self.discardRes();
                                         $('#successModal').modal();
                                     })
                             });
@@ -372,12 +384,30 @@
                                     .saveRequest(_self.request)
                                     .then(function () {
                                         _self.loading = false;
+
+                                        _self.discardRes();
                                         $('#successModal').modal();
                                     })
                             });
                     });
             }
         }
+
+        _self.downloadInvoice = function () {
+            ReservationsService
+                .getPdf(_self.request)
+                .then(function (response) {
+                    var fileName = "test.pdf";
+                    var a = document.createElement("a");
+                    document.body.appendChild(a);
+
+                    var file = new Blob([response.data], {type: 'application/pdf'});
+                    var fileURL = window.URL.createObjectURL(file);
+                    a.href = fileURL;
+                    a.download = fileName;
+                    a.click();
+                })
+        };
 
         _self.discardRes = function () {
             _self.selectedRooms.forEach(function (value2) {
@@ -388,14 +418,6 @@
             $('.menu-div a button').prop('disabled', false);
             $('.menu-div a button').css('cursor', 'pointer');
             $('.menu-div a button').css('opacity', '1');
-
-            if ($rootScope.user) {
-                if($rootScope.user.userRole === 'MANAGER')
-                    $state.go('viewReservations');
-                else if ($rootScope.user.userRole === 'RECEPTIONIST')
-                    $state.go('viewReservations');
-            } else
-                $state.go('homeCommon');
 
         };
 

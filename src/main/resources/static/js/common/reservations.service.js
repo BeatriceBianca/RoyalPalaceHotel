@@ -85,9 +85,18 @@
                     }});
             }
 
-            function getAllReservations() {
+            function getPdf(request) {
                 var URL = baseTestContext + "/getPDF";
-                // var URL = baseTestContext + "/getAllReservations";
+                return $http({
+                    method: 'POST',
+                    url: URL,
+                    data: request,
+                    responseType: 'arraybuffer'
+                });
+            }
+
+            function getAllReservations() {
+                var URL = baseTestContext + "/getAllReservations";
                 return $http({
                     method: 'GET',
                     url: URL,
@@ -104,7 +113,8 @@
                 saveRequest: saveRequest,
                 saveChosenRoom: saveChosenRoom,
                 removeChosenRoom: removeChosenRoom,
-                getAllReservations: getAllReservations
+                getAllReservations: getAllReservations,
+                getPdf: getPdf
             };
 
         }]);
