@@ -5,6 +5,7 @@ import com.hotel.royalpalace.auxiliary.SmtpMailSender;
 import com.hotel.royalpalace.model.*;
 import com.hotel.royalpalace.model.info.RequestInfo;
 import com.hotel.royalpalace.service.*;
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -116,21 +119,27 @@ public class CommonController {
     @RequestMapping(value = "/saveRequest", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String saveRequest(@RequestBody RequestInfo requestInfo) throws ParseException {
+    public void saveRequest(HttpServletResponse response,
+                              @RequestBody RequestInfo requestInfo) throws ParseException, ServletException, IOException, DocumentException {
 
         Set<Room> requestedRooms = requestInfo.getRooms();
-        Request request = new Request(requestInfo);
-        request.setArrivalDate(df.parse(requestInfo.getArrivalDate()));
-        request.setDepartureDate(df.parse(requestInfo.getDepartureDate()));
-        request.setRequestDate(df.parse(requestInfo.getRequestDate()));
-        requestService.saveRequest(request);
-//        try {
-//            smtpMailSender.sendToSingle(request.getCustomer().getGuestEmail(), "Reservation request",
-//                    "Thank you for your request");
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
-        return redirectToPage();
+        Request requestModel = new Request(requestInfo);
+        requestModel.setArrivalDate(df.parse(requestInfo.getArrivalDate()));
+        requestModel.setDepartureDate(df.parse(requestInfo.getDepartureDate()));
+        requestModel.setRequestDate(df.parse(requestInfo.getRequestDate()));
+        requestService.saveRequest(requestModel);
+
+        pdf.createPdfAndSendMail(requestModel, response);
+        File file = new File("C:\\TEMP\\invoice.pdf");
+        try {
+            smtpMailSender.sendWithAttachament(requestModel.getCustomer().getGuestEmail(), "Reservation request",
+                    "Thank you for your request", file);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        file.delete();
+
+//        return redirectToPage();
     }
 
     @RequestMapping(value = "/saveChosenRoom", method = RequestMethod.POST,
