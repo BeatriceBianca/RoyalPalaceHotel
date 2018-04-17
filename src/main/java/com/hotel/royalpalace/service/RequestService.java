@@ -3,11 +3,9 @@ package com.hotel.royalpalace.service;
 import com.hotel.royalpalace.model.ChosenRooms;
 import com.hotel.royalpalace.model.Guest;
 import com.hotel.royalpalace.model.Request;
-import com.hotel.royalpalace.model.Room;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 public interface RequestService {
 

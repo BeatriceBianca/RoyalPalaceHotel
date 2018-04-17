@@ -30,7 +30,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/common")
@@ -101,9 +103,12 @@ public class CommonController {
     }
 
     @RequestMapping(value = "/getAllChosenRooms", method = RequestMethod.GET)
-    public ResponseEntity getAllChosenRooms() {
+    public ResponseEntity getAllChosenRooms(HttpServletRequest request) {
 
-        return new ResponseEntity<>(requestService.getAllRChosenRooms(), HttpStatus.OK);
+        List<ChosenRooms> rooms = requestService.getAllRChosenRooms().stream()
+                .filter(x -> !x.getSessionId().equals(request.getCookies()[0].getValue()))
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/saveGuest", method = RequestMethod.POST,
@@ -145,10 +150,12 @@ public class CommonController {
     @RequestMapping(value = "/saveChosenRoom", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String saveChosenRoom(@RequestBody Room room) {
+    public String saveChosenRoom(@RequestBody ChosenRooms room,
+                                 HttpServletRequest request) {
 
-        ChosenRooms chosenRooms = new ChosenRooms(room);
-        requestService.saveChosenRoom(chosenRooms);
+//        ChosenRooms chosenRooms = new ChosenRooms(room);
+        room.setSessionId(request.getCookies()[0].getValue());
+        requestService.saveChosenRoom(room);
         return redirectToPage();
     }
 

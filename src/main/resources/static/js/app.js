@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('RoyalPalaceHotel', ['ui.router'])
+    angular.module('RoyalPalaceHotel')
             .config(function($stateProvider, $locationProvider) {
 
         $stateProvider
