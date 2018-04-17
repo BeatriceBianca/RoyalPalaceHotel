@@ -170,11 +170,11 @@
                         .then(function (response) {
                             response.data.forEach(function (chosenRooms) {
 
-                                if (!_self.selectedRooms.find(r => r.roomNumber === chosenRooms.room.roomNumber)) {
+                                // if (!_self.selectedRooms.find(r => r.roomNumber === chosenRooms.room.roomNumber)) {
                                     $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
                                     $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
                                     $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
-                                }
+                                // }
                             });
                             _self.loading = false;
                         });
