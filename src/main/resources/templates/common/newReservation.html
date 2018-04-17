@@ -546,7 +546,7 @@
                 </div>
 
                 <div class="form-actions saveReservation-button">
-                    <button type="button" class="btn" ng-click="res.viewCustomReq=true;res.viewRoom=false;"
+                    <button type="button" class="btn" ng-click="res.viewCustomReq=true;res.viewRoom=false;res.closeInterval()"
                             ng-disabled="res.selectedRooms.length == 0">
                         Next </button>
                 </div>
@@ -576,7 +576,7 @@
 
             <div class="saveRoom-buttons">
                 <div class="form-actions editRequest-button">
-                    <button type="button" class="btn" ng-click="res.viewCustomReq=false;res.viewRoom=true;">
+                    <button type="button" class="btn" ng-click="res.viewCustomReq=false;res.viewRoom=true;res.saveRequestedDate()">
                         Previous </button>
                 </div>
 
