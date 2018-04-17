@@ -517,28 +517,6 @@
                 </div>
             </div>
 
-            <div class="modal" id="successModal" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title"> </h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Thank you for your request!
-                                A mail with all the information below was sent to {{res.guest.guestEmail}}.</p>
-                            <button type="button" class="btn downloadInvoice" ng-click="res.downloadInvoice()">Download invoice </button>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
             <div class="saveRoom-buttons">
                 <div class="form-actions editRequest-button">
                     <button type="button" class="btn" ng-click="res.viewRoom=false;res.viewRequest=true;res.closeInterval()">
@@ -586,6 +564,28 @@
                 </div>
             </div>
 
+            <div class="modal" id="successModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"> </h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Thank you for your request!
+                                A mail with all the information below was sent to {{res.guest.guestEmail}}.</p>
+                            <button type="button" class="btn downloadInvoice" ng-click="res.downloadInvoice()">Download invoice </button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
         </form>
     </div>
 </div>
