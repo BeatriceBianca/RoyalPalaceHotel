@@ -4,8 +4,7 @@ import com.hotel.royalpalace.model.Guest;
 import com.hotel.royalpalace.model.Room;
 import com.hotel.royalpalace.model.User;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +17,9 @@ public class RequestInfo {
     private String arrivalDate;
     private String departureDate;
     private Set<Room> rooms = new HashSet<>();
+    private boolean lateCheckout;
+    private boolean lunch;
+    private boolean dinner;
 
     public Long getId() { return id; }
 
@@ -46,4 +48,16 @@ public class RequestInfo {
     public Set<Room> getRooms() { return rooms; }
 
     public void setRooms(Set<Room> rooms) { this.rooms = rooms; }
+
+    public boolean getLateCheckout() { return lateCheckout; }
+
+    public void setLateCheckout(boolean lateCheckout) { this.lateCheckout = lateCheckout; }
+
+    public boolean getLunch() { return lunch; }
+
+    public void setLunch(boolean lunch) { this.lunch = lunch; }
+
+    public boolean getDinner() { return dinner; }
+
+    public void setDinner(boolean dinner) { this.dinner = dinner; }
 }

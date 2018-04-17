@@ -428,14 +428,6 @@ div.tab .active {
     color: white;
 }
 
-/*.editGuest-button button, .saveRequest-button button {*/
-    /*width: 50%;*/
-/*}*/
-
-.editRequest-button button, .saveReservation-button button {
-    width: 30%;
-}
-
 .saveGuest-button button:hover, .saveRequest-button button:hover, .saveReservation-button button:hover,
 .editGuest-button button:hover, .editRequest-button button:hover {
     color: white;

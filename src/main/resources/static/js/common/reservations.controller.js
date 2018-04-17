@@ -77,6 +77,7 @@
             _self.viewGuest = true;
             _self.viewRequest = false;
             _self.viewRoom = false;
+            _self.viewCustomReq = false;
 
             $('#datetimepicker1').datetimepicker({
                 format: 'YYYY/MM/DD',
@@ -348,6 +349,9 @@
                                 _self.request.user = $rootScope.user;
 
                                 _self.request.rooms = _self.selectedRooms;
+                                _self.request.lateCheckout = !!_self.lateCheckout;
+                                _self.request.lunch = !!_self.lunch;
+                                _self.request.dinner = !!_self.dinner;
                                 ReservationsService
                                     .saveRequest(_self.request)
                                     .then(function () {
@@ -386,6 +390,9 @@
                                 }
 
                                 _self.request.rooms = _self.selectedRooms;
+                                _self.request.lateCheckout = !!_self.lateCheckout;
+                                _self.request.lunch = !!_self.lunch;
+                                _self.request.dinner = !!_self.dinner;
                                 ReservationsService
                                     .saveRequest(_self.request)
                                     .then(function () {

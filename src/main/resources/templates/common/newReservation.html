@@ -546,12 +546,46 @@
                 </div>
 
                 <div class="form-actions saveReservation-button">
-                    <button type="button" class="btn" ng-click="res.submitRequest()"
+                    <button type="button" class="btn" ng-click="res.viewCustomReq=true;res.viewRoom=false;"
                             ng-disabled="res.selectedRooms.length == 0">
-                        Submit </button>
+                        Next </button>
                 </div>
             </div>
         </form>
 
+
+        <!--CUSTOM REQUEST-->
+
+        <form name="customRequestForm" role="form" ng-show="res.viewCustomReq">
+
+            <div class="saveRequest">
+
+                <div class="checkbox">
+                    <label><input type="checkbox" name="lateCheckout" id="lateCheckout" ng-model="res.lateCheckout" />Late checkout</label>
+                </div>
+
+                <div class="checkbox">
+                    <label><input type="checkbox" name="lunch" id="lunch" ng-model="res.lunch"/>Lunch</label>
+                </div>
+
+                <div class="checkbox">
+                    <label><input type="checkbox" name="dinner" id="dinner" ng-model="res.dinner"/>Dinner</label>
+                </div>
+
+            </div>
+
+            <div class="saveRoom-buttons">
+                <div class="form-actions editRequest-button">
+                    <button type="button" class="btn" ng-click="res.viewCustomReq=false;res.viewRoom=true;">
+                        Previous </button>
+                </div>
+
+                <div class="form-actions saveGuest-button">
+                    <button type="submit" class="btn" ng-click="res.submitRequest()">
+                        Submit </button>
+                </div>
+            </div>
+
+        </form>
     </div>
 </div>
