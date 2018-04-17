@@ -45,6 +45,15 @@ public class Request {
     )
     private Set<Room> rooms = new HashSet<>();
 
+    @Column(name = "late_checkout")
+    private boolean lateCheckout;
+
+    @Column(name = "lunch")
+    private boolean lunch;
+
+    @Column(name = "dinner")
+    private boolean dinner;
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -73,6 +82,18 @@ public class Request {
 
     public void setRooms(Set<Room> rooms) { this.rooms = rooms; }
 
+    public boolean getLateCheckout() { return lateCheckout; }
+
+    public void setLateCheckout(boolean lateCheckout) { this.lateCheckout = lateCheckout; }
+
+    public boolean getLunch() { return lunch; }
+
+    public void setLunch(boolean lunch) { this.lunch = lunch; }
+
+    public boolean getDinner() { return dinner; }
+
+    public void setDinner(boolean dinner) { this.dinner = dinner; }
+
     public Request() {}
 
     public Request(RequestInfo request) throws ParseException {
@@ -86,5 +107,8 @@ public class Request {
         this.departureDate = df.parse(request.getDepartureDate());
         this.requestDate = df.parse(request.getRequestDate());
         this.rooms = request.getRooms();
+        this.lateCheckout = request.getLateCheckout();
+        this.lunch = request.getLunch();
+        this.dinner = request.getDinner();
     }
 }
