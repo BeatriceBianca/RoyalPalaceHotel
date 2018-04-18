@@ -1,4 +1,4 @@
-<div ng-controller="roomsController as commonCtrl" ng-class="{'loadingScreen': commonCtrl.loading}">
+<div ng-controller="roomsController as commonCtrl" ng-class="{'loadingScreen': commonCtrl.loading}" class="roomClass">
 
     <i class="fa fa-spinner fa-spin loading-spinner" style="font-size:30px"
        ng-show="commonCtrl.loading"></i>
@@ -6,7 +6,7 @@
         <h2 id="title">Hotel rooms</h2>
 
         <table class="rooms-table first-floor" ng-show="commonCtrl.isFirstFloorOpen">
-            <caption style="font-size: 18px; text-align: center;">First Floor</caption>
+            <caption style="font-size: 18px; text-align: center; color:#333">First Floor</caption>
             <tr>
                 <td class="r13"></td><td class="r13"></td><td class="r13"></td>
                 <td class="r14 b-left"></td><td class="r14"></td>
@@ -87,7 +87,7 @@
 
 
         <table class="rooms-table second-floor" ng-show="commonCtrl.isSecondFloorOpen">
-            <caption style="font-size: 18px; text-align: center;">Second Floor</caption>
+            <caption style="font-size: 18px; text-align: center; color:#333">Second Floor</caption>
             <tr>
                 <td class="r22"></td><td class="r22"></td>
                 <td class="r23 b-left"></td><td class="r23"></td>
@@ -173,7 +173,7 @@
 
 
         <table class="rooms-table third-floor" ng-show="commonCtrl.isThirdFloorOpen">
-            <caption style="font-size: 18px; text-align: center;">Third Floor</caption>
+            <caption style="font-size: 18px; text-align: center; color:#333">Third Floor</caption>
             <tr>
                 <td class="r32"></td><td class="r32"></td>
                 <td class="r33 b-left"></td><td class="r33"></td>
@@ -260,7 +260,7 @@
 
 
         <table class="rooms-table fourth-floor" ng-show="commonCtrl.isFourthFloorOpen">
-            <caption style="font-size: 18px; text-align: center;">Fourth Floor</caption>
+            <caption style="font-size: 18px; text-align: center; color:#333">Fourth Floor</caption>
             <tr>
                 <td class="r41"></td><td class="r41"></td>
                 <td class="r42 b-left"></td><td class="r42"></td><td class="r42"></td>

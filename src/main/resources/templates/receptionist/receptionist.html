@@ -19,12 +19,17 @@
     <link rel="stylesheet" type="text/css" href="/styles/common.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/maid.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/receptionist.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet' />
+    <link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' />
 </head>
 <body ng-controller="commonController as receptionist">
 
 <div class="main-container">
 
     <div class="welcome">
+        <div>
+            Royal Palace Hotel
+        </div>
         <span> Welcome, {{receptionist.username}}! </span>
         <a ui-sref="myProfile"><button class="btn"> My profile </button></a>
         <a href="javascript:void(0)"> <button ng-click="receptionist.logout()" class="btn"> Sign Out </button> </a>

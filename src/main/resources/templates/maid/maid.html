@@ -18,12 +18,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/common.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/maid.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet' />
+    <link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' />
 </head>
 <body ng-controller="commonController as maid">
 
 <div class="main-container">
 
     <div class="welcome">
+        <div>
+            Royal Palace Hotel
+        </div>
         <span> Welcome, {{maid.username}}! </span>
         <a ui-sref="myProfile"><button class="btn"> My profile </button></a>
         <a href="javascript:void(0)"> <button ng-click="maid.logout()" class="btn"> Sign Out </button> </a>

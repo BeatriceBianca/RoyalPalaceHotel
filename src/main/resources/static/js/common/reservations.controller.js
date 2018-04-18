@@ -63,11 +63,11 @@
 
             $('.menu-div a button').prop('disabled', true);
             $('.menu-div a button').css('cursor', 'context-menu');
-            $('.menu-div a button').css('opacity', '0.5');
+            $('.menu-div a button').css('opacity', '0.7');
 
             $('#viewRes').prop('disabled', true);
             $('#viewRes').css('cursor', 'context-menu');
-            $('#viewRes').css('opacity', '0.5');
+            $('#viewRes').css('opacity', '0.7');
 
             $('.menu-div a button#newReservation').prop('disabled', false);
             $('.menu-div a button#newReservation').css('cursor', 'pointer');
