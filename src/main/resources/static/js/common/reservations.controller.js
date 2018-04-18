@@ -11,6 +11,18 @@
     function Controller($rootScope, $scope, $cookies, $state, ReservationsService, CommonService, MaidService) {
         var _self = this;
 
+        var randomId = "";
+        function makeid() {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for (var i = 0; i < 10; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            randomId = text;
+        }
+        makeid();
+
         _self.isFirstFloorOpen = true;
         _self.isSecondFloorOpen = false;
         _self.isThirdFloorOpen = false;
@@ -157,7 +169,13 @@
             ReservationsService
                 .getAllReservationsBetweenDates(_self.request.arrivalDate, _self.request.departureDate)
                 .then(function (response) {
+
+                    $('.occupiedRoom').on('click', getRoomDetails);
+                    $('.occupiedRoom').css('cursor', 'pointer');
+                    $('.occupiedRoom').removeClass('occupiedRoom');
+
                     response.data.forEach(function (request) {
+
                         request.rooms.forEach(function (room) {
                             $('.r'+room.roomNumber).addClass('occupiedRoom');
                             $('.r'+room.roomNumber).off('click', getRoomDetails);
@@ -168,13 +186,18 @@
                     ReservationsService
                         .getAllChosenRooms()
                         .then(function (response) {
+
+                            $('.chosenRooms').on('click', getRoomDetails);
+                            $('.chosenRooms').css('cursor', 'pointer');
+                            $('.chosenRooms').removeClass('chosenRooms');
+
                             response.data.forEach(function (chosenRooms) {
 
-                                // if (!_self.selectedRooms.find(r => r.roomNumber === chosenRooms.room.roomNumber)) {
+                                if (chosenRooms.sessionId !== randomId) {
                                     $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
                                     $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
                                     $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
-                                // }
+                                }
                             });
                             _self.loading = false;
                         });
@@ -207,17 +230,18 @@
                         ReservationsService
                             .getAllChosenRooms()
                             .then(function (response) {
+
+                                $('.chosenRooms').on('click', getRoomDetails);
+                                $('.chosenRooms').css('cursor', 'pointer');
+                                $('.chosenRooms').removeClass('chosenRooms');
+
                                 response.data.forEach(function (chosenRooms) {
 
-                                    $('.chosenRooms').on('click', getRoomDetails);
-                                    $('.chosenRooms').css('cursor', 'pointer');
-                                    $('.chosenRooms').removeClass('chosenRooms');
-                                    //
-                                    // if (!_self.selectedRooms.find(r => r.roomNumber === chosenRooms.room.roomNumber)) {
+                                    if (chosenRooms.sessionId !== randomId) {
                                     $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
                                     $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
                                     $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
-                                    // }
+                                    }
                                 });
                                 _self.loading = false;
                             });
@@ -309,7 +333,8 @@
             } else {
 
                 var chosenRoom = {
-                    room: _self.selectedRoom
+                    room: _self.selectedRoom,
+                    sessionId: randomId
                 };
                 ReservationsService
                     .saveChosenRoom(chosenRoom);

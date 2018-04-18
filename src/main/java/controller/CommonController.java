@@ -105,10 +105,7 @@ public class CommonController {
     @RequestMapping(value = "/getAllChosenRooms", method = RequestMethod.GET)
     public ResponseEntity getAllChosenRooms(HttpServletRequest request) {
 
-        List<ChosenRooms> rooms = requestService.getAllRChosenRooms().stream()
-                .filter(x -> !x.getSessionId().equals(request.getCookies()[0].getValue()))
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(rooms, HttpStatus.OK);
+        return new ResponseEntity<>(requestService.getAllRChosenRooms(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/saveGuest", method = RequestMethod.POST,
@@ -143,18 +140,13 @@ public class CommonController {
             e.printStackTrace();
         }
         file.delete();
-
-//        return redirectToPage();
     }
 
     @RequestMapping(value = "/saveChosenRoom", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String saveChosenRoom(@RequestBody ChosenRooms room,
-                                 HttpServletRequest request) {
+    public String saveChosenRoom(@RequestBody ChosenRooms room) {
 
-//        ChosenRooms chosenRooms = new ChosenRooms(room);
-        room.setSessionId(request.getCookies()[0].getValue());
         requestService.saveChosenRoom(room);
         return redirectToPage();
     }
