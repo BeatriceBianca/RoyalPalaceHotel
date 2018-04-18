@@ -193,6 +193,12 @@
 
                             response.data.forEach(function (chosenRooms) {
 
+                                if (_self.selectedRoom) {
+                                    if (_self.selectedRoom.id === chosenRooms.room.id) {
+                                        $('.modal').modal('toggle');
+                                    }
+                                }
+
                                 if (chosenRooms.sessionId !== randomId) {
                                     $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
                                     $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
@@ -236,6 +242,12 @@
                                 $('.chosenRooms').removeClass('chosenRooms');
 
                                 response.data.forEach(function (chosenRooms) {
+
+                                    if (_self.selectedRoom) {
+                                        if (_self.selectedRoom.id === chosenRooms.room.id) {
+                                            $('.modal').modal('toggle');
+                                        }
+                                    }
 
                                     if (chosenRooms.sessionId !== randomId) {
                                     $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');

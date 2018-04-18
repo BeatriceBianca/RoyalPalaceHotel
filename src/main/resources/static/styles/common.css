@@ -402,6 +402,7 @@ div.tab .active {
 
 .reservations .reservations-menu {
     text-align: center;
+    height: 5%;
 }
 
 .reservations-menu button {
@@ -523,7 +524,9 @@ div.tab .active {
 }
 
 .reservations form {
-    height: 70%;
+    margin-top: 4%;
+    padding-top: 3.5%;
+    height: 85%;
     background-color: rgba(256, 256, 256, 0.5);
 }
 
