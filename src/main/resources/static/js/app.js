@@ -61,6 +61,9 @@
             .state('newOffer', {
                 templateUrl: 'manager/newOffer.html'
             })
+            .state('newPromotion', {
+                templateUrl: 'manager/newPromotion.html'
+            })
 
 
             //RECEPTIONIST

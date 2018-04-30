@@ -1,9 +1,11 @@
 package com.hotel.royalpalace.service.impl;
 
 import com.hotel.royalpalace.model.Offer;
+import com.hotel.royalpalace.model.Promotion;
 import com.hotel.royalpalace.model.Room;
 import com.hotel.royalpalace.model.RoomType;
 import com.hotel.royalpalace.repository.OfferRepository;
+import com.hotel.royalpalace.repository.PromotionRepository;
 import com.hotel.royalpalace.repository.RoomRepository;
 import com.hotel.royalpalace.repository.RoomTypeRepository;
 import com.hotel.royalpalace.service.OfferService;
@@ -20,8 +22,16 @@ public class OfferServiceImpl implements OfferService {
     @Autowired
     OfferRepository offerRepository;
 
+    @Autowired
+    PromotionRepository promotionRepository;
+
     @Override
     public void newOffer(Offer offer) {
         offerRepository.save(offer);
+    }
+
+    @Override
+    public void newPromotion(Promotion promotion) {
+        promotionRepository.save(promotion);
     }
 }

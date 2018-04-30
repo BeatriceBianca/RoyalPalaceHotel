@@ -1,8 +1,8 @@
-.newAccount-button, .newOffer-button {
+.newAccount-button, .newOffer-button, .newPromotion-button {
     text-align: right;
 }
 
-.newAccount, .newOffer {
+.newAccount, .newOffer, .newPromotion {
     display: flex;
 }
 
@@ -16,7 +16,7 @@
     padding: 3%;
 }
 
-.newAccountPage #title, .newOfferPage #title {
+.newAccountPage #title, .newOfferPage #title, .newPromotionPage #title {
     height: auto;
     text-align: center;
     color: black;
@@ -24,7 +24,7 @@
     vertical-align: middle;
 }
 
-.newOffer-button {
+.newOffer-button, .newPromotion-button {
     margin-top: -3%;
 }
 

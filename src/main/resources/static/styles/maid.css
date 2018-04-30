@@ -2,11 +2,15 @@
     display: flex;
 }
 
-.editAccount .form-control, .changePassword .form-control, .newAccountPage .form-control, .newOfferPage .form-control {
+.editAccount .form-control, .changePassword .form-control,
+.newAccountPage .form-control, .newOfferPage .form-control,
+.newPromotionPage .form-control {
     width: 80%;
 }
 
-.editAccount-button, .changePassword-button, .newAccount-button, .newOffer-button {
+.editAccount-button, .changePassword-button,
+.newAccount-button, .newOffer-button,
+.newPromotion-button {
     text-align: right;
 }
 
@@ -15,7 +19,9 @@
     margin-top: 10%;
 }
 
-.editAccount-button button, .changePassword-button button, .newAccount-button button, .newOffer-button button {
+.editAccount-button button, .changePassword-button button,
+.newAccount-button button, .newOffer-button button,
+.newPromotion-button button {
     min-width: 15%;
     height: 3em;
     margin-right: 10%;
@@ -24,17 +30,19 @@
     color: white;
 }
 
-.editAccount-button button:hover, .changePassword-button button:hover, .newAccount-button button:hover, .newOffer-button button:hover {
+.editAccount-button button:hover, .changePassword-button button:hover,
+.newAccount-button button:hover, .newOffer-button button:hover,
+.newPromotion-button button:hover {
     color: white;
 }
 
-.editPage, .newAccountPage, .newOfferPage {
+.editPage, .newAccountPage, .newOfferPage, .newPromotionPage {
     width: 80% !important;
     margin-left: 10%!important;
     height: 100%;
 }
 
-.editPage .account-menu, .newAccountPage h2, .newOfferPage h2 {
+.editPage .account-menu, .newAccountPage h2, .newOfferPage h2, .newPromotionPage h2 {
     text-align: center;
     height: 15%;
     width:100%;

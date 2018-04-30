@@ -49,6 +49,9 @@ public class ManagerController {
     @RequestMapping(value = "/newOffer")
     public String newOffer() { return "manager/newOffer"; }
 
+    @RequestMapping(value = "/newPromotion")
+    public String newPromotion() { return "manager/newPromotion"; }
+
     DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
     @RequestMapping(value = "/computePassword?password={password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -96,11 +99,6 @@ public class ManagerController {
     @RequestMapping(value = "/addOffer", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-//    public String addOfer(@RequestParam(value = "description") String description,
-//                          @RequestParam(value = "startDate") String startDate,
-//                          @RequestParam(value = "endDate") String endDate,
-//                          @RequestParam(value = "roomType") String roomType,
-//                          @RequestParam(value = "quantity") int quantity) {
     public String addOfer(@RequestParam(value = "description") String description,
                           @RequestParam(value = "startDate") String startDate,
                           @RequestParam(value = "endDate") String endDate,
@@ -109,6 +107,19 @@ public class ManagerController {
 
         Offer offer = new Offer(description, df.parse(startDate), df.parse(endDate), roomsService.findById(Long.parseLong(roomType)), quantity);
         offerService.newOffer(offer);
+        return "redirect:/manager";
+    }
+
+    @RequestMapping(value = "/addPromotion", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public String addPromotion(@RequestParam(value = "description") String name,
+                               @RequestParam(value = "description") String description,
+                               @RequestParam(value = "roomType") String roomType,
+                               @RequestParam(value = "quantity") int quantity) throws ParseException {
+
+        Promotion promotion = new Promotion(name, description, roomsService.findById(Long.parseLong(roomType)), quantity);
+        offerService.newPromotion(promotion);
         return "redirect:/manager";
     }
 }
