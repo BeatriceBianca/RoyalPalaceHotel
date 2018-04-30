@@ -2,11 +2,11 @@
     display: flex;
 }
 
-.editAccount .form-control, .changePassword .form-control, .newAccountPage .form-control {
+.editAccount .form-control, .changePassword .form-control, .newAccountPage .form-control, .newOfferPage .form-control {
     width: 80%;
 }
 
-.editAccount-button, .changePassword-button, .newAccount-button {
+.editAccount-button, .changePassword-button, .newAccount-button, .newOffer-button {
     text-align: right;
 }
 
@@ -15,7 +15,7 @@
     margin-top: 10%;
 }
 
-.editAccount-button button, .changePassword-button button, .newAccount-button button {
+.editAccount-button button, .changePassword-button button, .newAccount-button button, .newOffer-button button {
     min-width: 15%;
     height: 3em;
     margin-right: 10%;
@@ -24,17 +24,17 @@
     color: white;
 }
 
-.editAccount-button button:hover, .changePassword-button button:hover, .newAccount-button button:hover {
+.editAccount-button button:hover, .changePassword-button button:hover, .newAccount-button button:hover, .newOffer-button button:hover {
     color: white;
 }
 
-.editPage, .newAccountPage {
+.editPage, .newAccountPage, .newOfferPage {
     width: 80% !important;
     margin-left: 10%!important;
     height: 100%;
 }
 
-.editPage .account-menu, .newAccountPage h2 {
+.editPage .account-menu, .newAccountPage h2, .newOfferPage h2 {
     text-align: center;
     height: 15%;
     width:100%;

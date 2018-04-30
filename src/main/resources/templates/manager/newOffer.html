@@ -1,0 +1,64 @@
+<div ng-controller="managerController as manager">
+    <div class="col-md-6 col-md-offset-3 newOfferPage">
+        <h2 id="title">Create new offer</h2>
+        <form name="form" action="manager/addOffer" method="post" role="form" >
+
+            <div class="newOffer">
+                <div class="left-content">
+                    <div class="form-group" ng-class="{ 'has-error': form.description.$dirty &amp;&amp; form.description.$error.required }">
+                        <label for="description">Description</label>
+                        <textarea name="description" rows="3" id="description" class="form-control" ng-model="manager.newOffer.description" required="required" > </textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="startDate">Start date</label>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type="text" name="startDate" id="startDate" class="form-control" ng-model="manager.newOffer.startDate" required="required"/>
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endDate">End date</label>
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type="text" name="endDate" id="endDate" class="form-control" ng-model="manager.newOffer.endDate" required="required" />
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-content">
+                    <div class="form-group">
+                        <label for="roomType">Room type</label>
+                        <select name="roomType" id="roomType" class="form-control" ng-model="manager.newOffer.roomType" ng-init="manager.newOffer.roomType='null'">
+                            <option value="null">Any</option>
+                            <option value="8">Single</option>
+                            <option value="9">Double</option>
+                            <option value="10">Twin</option>
+                            <option value="11">Triple</option>
+                            <option value="12">Apartment 1</option>
+                            <option value="13">Apartment 2</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error': form.quantity.$dirty &amp;&amp; form.quantity.$error.required }">
+                        <label for="quantity">Quantity</label>
+                        <input type="text" name="quantity" id="quantity" class="form-control" ng-model="manager.newOffer.quantity" required="required"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions newOffer-button">
+                <button type="submit"  class="btn" ng-disabled="manager.disableNewOffer()"
+                        ng-click="manager.loading = true">
+                    Add</button>
+            </div>
+
+
+        </form>
+    </div>
+</div>

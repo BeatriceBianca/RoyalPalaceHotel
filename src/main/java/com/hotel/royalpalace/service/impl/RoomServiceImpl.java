@@ -58,4 +58,10 @@ public class RoomServiceImpl implements RoomsService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public RoomType findById(Long id) {
+
+        return roomTypeRepository.findById(id);
+    }
 }

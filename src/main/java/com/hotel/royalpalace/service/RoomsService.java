@@ -16,4 +16,6 @@ public interface RoomsService {
     void editRoomType(Room room);
 
     void editPrice(RoomType roomType);
+
+    RoomType findById(Long id);
 }

@@ -15,6 +15,8 @@
         _self.currentUserPassword = "";
         _self.currentState = 'homeManager';
 
+        _self.newOffer = null;
+
         $rootScope.user = null;
 
         _self.logout = function () {
@@ -45,9 +47,41 @@
 
             $('.menu-div a button').removeClass('active');
             $('#'+_self.currentState).addClass('active');
+
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY/MM/DD',
+                minDate: moment()
+            });
+
+            $('#datetimepicker2').datetimepicker({
+                format: 'YYYY/MM/DD',
+                minDate: moment()
+            });
+
+            $('#datetimepicker1').datetimepicker().on('dp.change', function (e) {
+                var incrementDay = moment(new Date(e.date));
+                incrementDay.add(1, 'days');
+                $('#datetimepicker2').data('DateTimePicker').minDate(incrementDay);
+                $(this).data("DateTimePicker").hide();
+
+            });
+
+            $('#datetimepicker2').datetimepicker().on('dp.change', function (e) {
+                var decrementDay = moment(new Date(e.date));
+                decrementDay.subtract(1, 'days');
+                $('#datetimepicker1').data('DateTimePicker').maxDate(decrementDay);
+                $(this).data("DateTimePicker").hide();
+            });
         }
 
         init();
+
+        _self.disableNewOffer = function() {
+            if (($('#startDate').val() !== "") && ($('#endDate').val() !== "") &&
+                _self.newOffer.description && _self.newOffer.quantity)
+                return false;
+            else return true;
+        }
 
     }
 

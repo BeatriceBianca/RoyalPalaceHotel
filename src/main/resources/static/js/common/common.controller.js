@@ -83,5 +83,9 @@
                 return false;
             return true;
         }
+
+        _self.goTo = function (state) {
+            $state.go(state);
+        }
     }
 })();

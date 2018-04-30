@@ -58,6 +58,9 @@
                 // url: '/manager/reports',
                 templateUrl: 'manager/reports.html'
             })
+            .state('newOffer', {
+                templateUrl: 'manager/newOffer.html'
+            })
 
 
             //RECEPTIONIST

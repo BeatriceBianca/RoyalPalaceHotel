@@ -1,10 +1,9 @@
 package controller;
 
 import com.hotel.royalpalace.auxiliary.Encryption;
-import com.hotel.royalpalace.model.Room;
-import com.hotel.royalpalace.model.RoomType;
-import com.hotel.royalpalace.model.User;
+import com.hotel.royalpalace.model.*;
 import com.hotel.royalpalace.model.info.UserInfo;
+import com.hotel.royalpalace.service.OfferService;
 import com.hotel.royalpalace.service.RoomsService;
 import com.hotel.royalpalace.service.UserService;
 import com.hotel.royalpalace.service.impl.RoomServiceImpl;
@@ -17,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
@@ -29,6 +31,9 @@ public class ManagerController {
     @Autowired
     RoomsService roomsService;
 
+    @Autowired
+    OfferService offerService;
+
     @RequestMapping(value = "")
     public String manager() { return "manager/manager"; }
 
@@ -40,6 +45,11 @@ public class ManagerController {
 
     @RequestMapping(value = "/reports")
     public String reports() { return "manager/reports"; }
+
+    @RequestMapping(value = "/newOffer")
+    public String newOffer() { return "manager/newOffer"; }
+
+    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
     @RequestMapping(value = "/computePassword?password={password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity computePassword(@PathVariable("password") String password,
@@ -80,6 +90,25 @@ public class ManagerController {
                             HttpServletRequest request) {
 
         roomsService.editPrice(roomType);
+        return "redirect:/manager";
+    }
+
+    @RequestMapping(value = "/addOffer", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+//    public String addOfer(@RequestParam(value = "description") String description,
+//                          @RequestParam(value = "startDate") String startDate,
+//                          @RequestParam(value = "endDate") String endDate,
+//                          @RequestParam(value = "roomType") String roomType,
+//                          @RequestParam(value = "quantity") int quantity) {
+    public String addOfer(@RequestParam(value = "description") String description,
+                          @RequestParam(value = "startDate") String startDate,
+                          @RequestParam(value = "endDate") String endDate,
+                          @RequestParam(value = "roomType") String roomType,
+                          @RequestParam(value = "quantity") int quantity) throws ParseException {
+
+        Offer offer = new Offer(description, df.parse(startDate), df.parse(endDate), roomsService.findById(Long.parseLong(roomType)), quantity);
+        offerService.newOffer(offer);
         return "redirect:/manager";
     }
 }
