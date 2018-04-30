@@ -20,6 +20,7 @@ public class RequestInfo {
     private boolean lateCheckout;
     private boolean lunch;
     private boolean dinner;
+    private int nrOfPerson;
 
     public Long getId() { return id; }
 
@@ -60,4 +61,8 @@ public class RequestInfo {
     public boolean getDinner() { return dinner; }
 
     public void setDinner(boolean dinner) { this.dinner = dinner; }
+
+    public int getNrOfPerson() { return nrOfPerson; }
+
+    public void setNrOfPerson(int nrOfPerson) { this.nrOfPerson = nrOfPerson; }
 }

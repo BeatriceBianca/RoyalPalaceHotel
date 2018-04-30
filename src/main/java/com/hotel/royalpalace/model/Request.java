@@ -54,6 +54,9 @@ public class Request {
     @Column(name = "dinner")
     private boolean dinner;
 
+    @Column(name = "nr_of_person")
+    private int nrOfPerson;
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -94,6 +97,10 @@ public class Request {
 
     public void setDinner(boolean dinner) { this.dinner = dinner; }
 
+    public int getNrOfPerson() { return nrOfPerson; }
+
+    public void setNrOfPerson(int nrOfPerson) { this.nrOfPerson = nrOfPerson; }
+
     public Request() {}
 
     public Request(RequestInfo request) throws ParseException {
@@ -110,5 +117,6 @@ public class Request {
         this.lateCheckout = request.getLateCheckout();
         this.lunch = request.getLunch();
         this.dinner = request.getDinner();
+        this.nrOfPerson = request.getNrOfPerson();
     }
 }

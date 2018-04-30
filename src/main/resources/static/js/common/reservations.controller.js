@@ -390,6 +390,8 @@
                                     mm = "0" + mm;
                                 }
 
+                                _self.request.nrOfPerson = _self.nrOfPerson;
+
                                 _self.request.requestDate = yyyy + "/" + mm + "/" + dd;
 
                                 _self.request.user = $rootScope.user;
