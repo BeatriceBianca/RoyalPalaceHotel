@@ -6,7 +6,11 @@
         .module('RoyalPalaceHotel')
         .factory('CommonService', ['$http', function($http) {
 
-            var baseTestContext = "http://" + location.host + '/common';
+            if (location.protocol === 'http:') {
+                var baseTestContext = "http://" + location.host + '/common';
+            } else {
+                var baseTestContext = "https://" + location.host + '/common';
+            }
 
             function getAllRooms() {
 

@@ -6,7 +6,11 @@
         .module('RoyalPalaceHotel')
         .factory('ReservationsService', ['$http', '$location', function($http, $location) {
 
-            var baseTestContext = "http://" + location.host + '/common';
+            if (location.protocol === 'http:') {
+                var baseTestContext = "http://" + location.host + '/common';
+            } else {
+                var baseTestContext = "https://" + location.host + '/common';
+            }
 
             function searchByEmail(email) {
                 var URL = baseTestContext + "/findByEmail";

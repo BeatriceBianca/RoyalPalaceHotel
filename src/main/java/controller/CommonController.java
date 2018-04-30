@@ -113,7 +113,13 @@ public class CommonController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String saveGuest(@RequestBody Guest guest) {
 
-        guest.setRegisterDate(new Date());
+        Guest g = guestService.getByGuestEmail(guest.getGuestEmail());
+        if (g == null) {
+            guest.setRegisterDate(new Date());
+        } else {
+            guest.setRegisterDate(g.getRegisterDate());
+            guest.setId(g.getId());
+        }
         requestService.saveGuest(guest);
         return redirectToPage();
     }

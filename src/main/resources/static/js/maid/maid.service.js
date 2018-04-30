@@ -6,11 +6,20 @@
         .module('RoyalPalaceHotel')
         .factory('MaidService', ['$http', function($http) {
 
-            var baseTestContext = "http://" + location.host + '/maid';
+            if (location.protocol === 'http:') {
+                var baseTestContext = "http://" + location.host + '/maid';
+            } else {
+                var baseTestContext = "https://" + location.host + '/maid';
+            }
 
             function getCurrentUser() {
 
-                var URL = "http://" + location.host + "/getCurrentUser";
+                if (location.protocol === 'http:') {
+                    var URL = "http://" + location.host + "/getCurrentUser";
+                } else {
+                    var URL = "https://" + location.host + "/getCurrentUser";
+                }
+
                 return $http.get(URL, null);
             }
 

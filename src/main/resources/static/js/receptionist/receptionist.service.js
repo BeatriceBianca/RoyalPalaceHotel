@@ -6,7 +6,11 @@
         .module('RoyalPalaceHotel')
         .factory('ReceptionistService', ['$http', function($http) {
 
-            var baseTestContext = "http://" + location.host + '/receptionist';
+            if (location.protocol === 'http:') {
+                var baseTestContext = "http://" + location.host + '/receptionist';
+            } else {
+                var baseTestContext = "https://" + location.host + '/receptionist';
+            }
 
             function getAllGuests() {
                 var URL = baseTestContext + "/getAllGuests";

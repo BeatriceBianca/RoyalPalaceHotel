@@ -6,7 +6,11 @@
         .module('RoyalPalaceHotel')
         .factory('ManagerService', ['$http', function($http) {
 
-            var baseTestContext = "http://" + location.host + '/manager';
+            if (location.protocol === 'http:') {
+                var baseTestContext = "http://" + location.host + '/manager';
+            } else {
+                var baseTestContext = "https://" + location.host + '/manager';
+            }
 
             function editRoomType(room) {
                 var URL = baseTestContext + "/editRoomType";

@@ -6,6 +6,7 @@
 #allReservationsTable_wrapper {
     background-color: rgba(256, 256, 256, 0.6);
     padding: 1%;
+    margin-top: 5%;
 }
 
 .pagination>.active>a,

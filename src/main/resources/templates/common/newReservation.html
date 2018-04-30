@@ -1,9 +1,10 @@
-<div ng-controller="reservationsController as res" ng-class="{'loadingScreen': res.loading}">
+<div>
+    <div class="col-md-6 col-md-offset-3 reservations"
+         ng-controller="reservationsController as res"
+         ng-class="{'loadingScreen': res.loading}">
 
-    <i class="fa fa-spinner fa-spin loading-spinner" style="font-size:30px"
-       ng-show="res.loading"></i>
-    <div class="col-md-6 col-md-offset-3 reservations">
-
+        <i class="fa fa-spinner fa-spin loading-spinner" style="font-size:30px"
+           ng-show="res.loading"></i>
         <div class="reservations-menu">
             <a ui-sref="viewReservations" ng-show="res.hasRole"><button id="viewRes">View Reservations</button></a>
             <a ui-sref="newReservation"><button id="newReservation" class="reservations-menu-activ">New Reservation</button></a>
@@ -32,13 +33,8 @@
                         <input type="email" ng-pattern = '/[a-zA-Z1-9]+@[a-zA-Z1-9]+\.[a-zA-Z1-9]+/g'
                                name="guestEmail" id="guestEmail" class="form-control"
                                ng-model="res.guest.guestEmail" required="required"
-                               ng-change="res.searchByEmail(res.guest.guestEmail)"
-                               ng-if="res.user"/>
-                        <input type="email" ng-pattern = '/[a-zA-Z1-9]+@[a-zA-Z1-9]+\.[a-zA-Z1-9]+/g'
-                               name="guestEmail" id="guestEmail2" class="form-control"
-                               ng-model="res.guest.guestEmail" required="required"
-                               ng-if="!res.user"/>
-                        </div>
+                               ng-change="res.searchByEmail(res.guest.guestEmail)"/>
+                    </div>
 
                 </div>
 
@@ -585,7 +581,7 @@
 
                 </div>
             </div>
-            
+
         </form>
     </div>
 </div>
