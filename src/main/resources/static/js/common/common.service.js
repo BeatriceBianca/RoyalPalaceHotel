@@ -23,10 +23,16 @@
                 var URL = baseTestContext + "/getAllRoomTypes";
                 return $http.get(URL, null);
             }
+            
+            function getAllOffers() {
+                var URL = baseTestContext + "/getAllOffers";
+                return $http.get(URL, null);
+            }
 
             return {
                 getAllRooms: getAllRooms,
-                getAllRoomTypes: getAllRoomTypes
+                getAllRoomTypes: getAllRoomTypes,
+                getAllOffers: getAllOffers
             };
 
         }]);

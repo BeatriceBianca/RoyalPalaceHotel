@@ -6,9 +6,9 @@
         .module('RoyalPalaceHotel')
         .controller('commonController', Controller);
 
-    Controller.$inject = ['$rootScope', '$scope', '$state', '$filter', '$window', 'MaidService'];
+    Controller.$inject = ['$rootScope', '$scope', '$state', '$filter', '$window', 'MaidService', 'CommonService'];
 
-    function Controller($rootScope, $scope, $state, $filter, $window, MaidService) {
+    function Controller($rootScope, $scope, $state, $filter, $window, MaidService, CommonService) {
         var _self = this;
 
         $rootScope.user = null;
@@ -33,6 +33,8 @@
                     }
 
                     $rootScope.user = _self.user;
+
+                    _self.hasRole = ($rootScope.user && ($rootScope.user.userRole == 'MANAGER'));
 
                     if ($rootScope.user) {
                         switch ($rootScope.user.userRole) {
@@ -61,6 +63,20 @@
                         format: 'YYYY/MM/DD'
                     });
                 });
+
+            _self.offers = [];
+            var nr = 0;
+            CommonService
+                .getAllOffers()
+                .then(function (response) {
+
+                    response.data.forEach(function (o) {
+                        o.nr = nr;
+                        nr++;
+                       _self.offers.push(o);
+                    });
+                });
+
         }
 
         init();

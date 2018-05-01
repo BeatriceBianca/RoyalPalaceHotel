@@ -549,3 +549,53 @@ div.tab .active {
 .help-block {
     font-size: 0.7em;
 }
+
+.newOffersButton {
+    text-align: right;
+    margin-right: 5%;
+}
+
+.carousel-indicators {
+    position: relative;
+    margin-top: 5%;
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+}
+
+.carousel-control {
+    opacity: .8;
+}
+
+.carousel-inner {
+    width: 70%;
+    margin: auto;
+    background-color: rgba(256, 256, 256, 0.6);
+    margin-top:3%;
+    height: 100%;
+}
+
+.offersPage .container {
+    height: 80%;
+}
+
+.offersPage .carousel {
+    height: 100%;
+}
+
+.offersPage .item>div {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    padding-left: 3%;
+}
+
+.item h2 {
+    text-align: center;
+}
+
+.newOfferPage form {
+    height: 85%;
+    overflow-y: scroll;
+}
+

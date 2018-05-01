@@ -83,11 +83,6 @@
             else return true;
         };
 
-        _self.disableNewPromotion = function () {
-            if (_self.newPromotion.description && _self.newPromotion.name && _self.newPromotion.quantity)
-                return false;
-            else return true;
-        }
     }
 
 })();

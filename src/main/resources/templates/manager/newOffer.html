@@ -5,9 +5,15 @@
 
             <div class="newOffer">
                 <div class="left-content">
+
+                    <div class="form-group" ng-class="{ 'has-error': form.name.$dirty &amp;&amp; form.name.$error.required }">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" class="form-control" ng-model="manager.newOffer.name" required="required"/>
+                    </div>
+
                     <div class="form-group" ng-class="{ 'has-error': form.description.$dirty &amp;&amp; form.description.$error.required }">
                         <label for="description">Description</label>
-                        <textarea name="description" rows="3" id="description" class="form-control" ng-model="manager.newOffer.description" required="required" > </textarea>
+                        <textarea name="description" rows="4" id="description" class="form-control" ng-model="manager.newOffer.description" required="required" > </textarea>
                     </div>
 
                     <div class="form-group">
@@ -29,9 +35,16 @@
                         </span>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="right-content">
+
+                    <div class="form-group">
+                        <label for="minDays">Min Days</label>
+                        <input type="text" name="minDays" id="minDays" class="form-control" ng-model="manager.newOffer.minDays"/>
+                    </div>
+
                     <div class="form-group">
                         <label for="roomType">Room type</label>
                         <select name="roomType" id="roomType" class="form-control" ng-model="manager.newOffer.roomType" ng-init="manager.newOffer.roomType='null'">
@@ -48,6 +61,23 @@
                     <div class="form-group" ng-class="{ 'has-error': form.quantity.$dirty &amp;&amp; form.quantity.$error.required }">
                         <label for="quantity">Quantity</label>
                         <input type="text" name="quantity" id="quantity" class="form-control" ng-model="manager.newOffer.quantity" required="required"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discount">Discount</label>
+                        <input type="text" name="discount" id="discount" class="form-control" ng-model="manager.newOffer.discount" required="required"/>
+                    </div>
+
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="lateCheckout" id="lateCheckout" ng-model="manager.newOffer.lateCheckout" />Late checkout</label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="lunch" id="lunch" ng-model="manager.newOffer.lunch"/>Lunch</label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="dinner" id="dinner" ng-model="manager.newOffer.dinner"/>Dinner</label>
                     </div>
                 </div>
             </div>

@@ -54,6 +54,9 @@ public class CommonController {
     SmtpMailSender smtpMailSender;
 
     @Autowired
+    OfferService offerService;
+
+    @Autowired
     PDF pdf;
 
 //    Pages Mapping
@@ -188,6 +191,11 @@ public class CommonController {
     public ResponseEntity getByGuestEmail(@RequestParam(value = "email") String email) {
 
         return new ResponseEntity<>(guestService.getByGuestEmail(email), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getAllOffers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAllOffers(HttpServletRequest request) {
+        return new ResponseEntity<>(offerService.getAllOffers(), HttpStatus.OK);
     }
 
     private String redirectToPage() {
