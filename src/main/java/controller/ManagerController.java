@@ -96,18 +96,22 @@ public class ManagerController {
     @RequestMapping(value = "/addOffer", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public String addOfer(@RequestParam(value = "name") String name,
+    public String addOffer(@RequestParam(value = "name") String name,
                           @RequestParam(value = "description") String description,
                           @RequestParam(value = "startDate") String startDate,
                           @RequestParam(value = "endDate") String endDate,
                           @RequestParam(value = "roomType") String roomType,
                           @RequestParam(value = "quantity") int quantity,
                           @RequestParam(value = "minDays") String minDays,
-                          @RequestParam(value = "discount") int discount) throws ParseException {
+                          @RequestParam(value = "discount") int discount,
+                          @RequestParam(value = "lateCheckout", required = false) boolean lateCheckout,
+                          @RequestParam(value = "lunch", required = false) boolean lunch,
+                          @RequestParam(value = "dinner", required = false) boolean dinner) throws ParseException {
 
         Offer offer = new Offer(name, description, df.parse(startDate), df.parse(endDate),
                 roomType.equals("null") ? null : roomsService.findById(Long.parseLong(roomType)),
-                quantity, minDays.equals("") ? 1 : Integer.parseInt(minDays), discount);
+                quantity, minDays.equals("") ? 1 : Integer.parseInt(minDays), discount,
+                lateCheckout && lateCheckout, lunch && lunch, dinner && dinner);
         offerService.newOffer(offer);
         return "redirect:/manager";
     }

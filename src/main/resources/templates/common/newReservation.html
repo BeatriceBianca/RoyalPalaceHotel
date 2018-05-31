@@ -111,6 +111,8 @@
                 </div>
             </div>
 
+            <div ng-if="res.offer" class="offerInfoPeriod"> * Promotion period is {{res.offer.startDate}} - {{res.offer.endDate}} </div>
+
         </form>
 
 
@@ -518,7 +520,7 @@
                     <button type="button" class="btn" ng-click="res.viewRoom=false;res.viewRequest=true;res.closeInterval()">
                         Previous </button>
                 </div>
-
+                <div ng-if="res.offer" class="offerInfoRoom"> * Promotion room type is {{res.offer.roomType.roomName}} </div>
                 <div class="form-actions saveReservation-button">
                     <button type="button" class="btn" ng-click="res.viewCustomReq=true;res.viewRoom=false;res.closeInterval()"
                             ng-disabled="res.selectedRooms.length == 0">
@@ -535,15 +537,15 @@
             <div class="saveRequest">
 
                 <div class="checkbox">
-                    <label><input type="checkbox" name="lateCheckout" id="lateCheckout" ng-model="res.lateCheckout" />Late checkout</label>
+                    <label><input type="checkbox" name="lateCheckout" id="lateCheckout" ng-model="res.lateCheckout" ng-checked="res.offer.lateCheckout"/>Late checkout</label>
                 </div>
 
                 <div class="checkbox">
-                    <label><input type="checkbox" name="lunch" id="lunch" ng-model="res.lunch"/>Lunch</label>
+                    <label><input type="checkbox" name="lunch" id="lunch" ng-model="res.lunch" ng-checked="res.offer.lunch"/>Lunch</label>
                 </div>
 
                 <div class="checkbox">
-                    <label><input type="checkbox" name="dinner" id="dinner" ng-model="res.dinner"/>Dinner</label>
+                    <label><input type="checkbox" name="dinner" id="dinner" ng-model="res.dinner" ng-checked="res.offer.dinner"/>Dinner</label>
                 </div>
 
             </div>

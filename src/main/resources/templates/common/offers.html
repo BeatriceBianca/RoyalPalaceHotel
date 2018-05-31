@@ -5,16 +5,20 @@
 
     <div class="container">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <!--<ol class="carousel-indicators">-->
-                <!--<li data-target="#myCarousel" ng-repeat="offer in commonCtrl.offers" data-slide-to="offer.nr" ng-class="{active:!$index}"></li>-->
-            <!--</ol>-->
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div ng-repeat="offer in commonCtrl.offers" class="item" ng-class="{active:!$index}">
-                    <h2> {{offer.name}}</h2>
-                    <div>{{offer.description}}</div>
+                    <h2> {{offer.name}} <span> - {{offer.discount}} %</span></h2>
+                    <div id="offerPeriod"> Period: {{offer.startDate}} - {{offer.endDate}} </div>
+
+                    <div id="offerRoom" ng-if="offer.roomType.roomName"> Room type: {{offer.roomType.roomName}} </div>
+                    <div id="offerDays"> <b>Minim {{offer.minDays}} days! </b></div>
+                    <br/>
+
+                    <div id="offerDescription">{{offer.description.substring(0,250)}}</div>
+
+                    <button id="makeRes" class="btn" ng-click="commonCtrl.makeRes(offer.id)"> Make reservation </button>
                 </div>
             </div>
 

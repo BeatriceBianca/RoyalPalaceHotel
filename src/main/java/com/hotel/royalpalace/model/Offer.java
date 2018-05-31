@@ -37,6 +37,15 @@ public class Offer {
     @Column(name = "discount")
     private int discount;
 
+    @Column(name = "late_checkout")
+    private boolean lateCheckout;
+
+    @Column(name = "lunch")
+    private boolean lunch;
+
+    @Column(name = "dinner")
+    private boolean dinner;
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -73,10 +82,23 @@ public class Offer {
 
     public void setDiscount(int discount) { this.discount = discount; }
 
+    public boolean getLateCheckout() { return lateCheckout; }
+
+    public void setLateCheckout(boolean lateCheckout) { this.lateCheckout = lateCheckout; }
+
+    public boolean getLunch() { return lunch; }
+
+    public void setLunch(boolean lunch) { this.lunch = lunch; }
+
+    public boolean getDinner() { return dinner; }
+
+    public void setDinner(boolean dinner) { this.dinner = dinner; }
+
     public Offer() {}
 
     public Offer(String name, String description, Date startDate, Date endDate,
-                 RoomType roomType, int quantity, int minDays, int discount) {
+                 RoomType roomType, int quantity, int minDays, int discount,
+                 boolean lateCheckout, boolean lunch, boolean dinner) {
         this.name = name;
         this.description = description;
         this.startDate = startDate;
@@ -85,5 +107,8 @@ public class Offer {
         this.quantity = quantity;
         this.minDays = minDays;
         this.discount = discount;
+        this.lateCheckout = lateCheckout;
+        this.lunch = lunch;
+        this.dinner = dinner;
     }
 }

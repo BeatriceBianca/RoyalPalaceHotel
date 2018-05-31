@@ -449,13 +449,13 @@ div.tab .active {
 /*Save Reservation page*/
 
 .saveGuest-button, .saveRequest-button, .saveReservation-button,
-.editGuest-button, .editRequest-button{
+.editGuest-button, .editRequest-button {
     text-align: right;
     margin-top: 3%;
 }
 
 .saveGuest-button button, .saveRequest-button button, .saveReservation-button button,
-.editGuest-button button, .editRequest-button button {
+.editGuest-button button, .editRequest-button button, #makeRes {
     min-width: 15%;
     height: 3em;
     margin-right: 10%;
@@ -465,7 +465,7 @@ div.tab .active {
 }
 
 .saveGuest-button button:hover, .saveRequest-button button:hover, .saveReservation-button button:hover,
-.editGuest-button button:hover, .editRequest-button button:hover {
+.editGuest-button button:hover, .editRequest-button button:hover, #makeRes:hover {
     color: white;
 }
 
@@ -577,14 +577,33 @@ div.tab .active {
 }
 
 .offersPage .container {
-    height: 80%;
+    height: 85%;
 }
 
 .offersPage .carousel {
     height: 100%;
 }
 
-.offersPage .item>div {
+.offersPage h2 span {
+    color: #996083;
+}
+
+.offerInfoPeriod, .offerInfoRoom {
+    font-size: 0.7em;
+    text-align: center;
+    margin-top: 12%;
+    color: darkred;
+    font-weight: 700;
+}
+
+.offerInfoRoom {
+    width: 100%;
+    margin-top: 5%;
+}
+
+.offersPage .item #offerDescription,
+.offersPage .item #offerDays,
+.offersPage .item #offerRoom {
     word-wrap: break-word;
     white-space: pre-wrap;
     padding-left: 3%;
@@ -592,6 +611,12 @@ div.tab .active {
 
 .item h2 {
     text-align: center;
+    margin-left: 10%;
+}
+
+.item h2 span {
+    float: right;
+    margin-right: 3%;
 }
 
 .newOfferPage form {
@@ -599,3 +624,13 @@ div.tab .active {
     overflow-y: scroll;
 }
 
+#offerPeriod {
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+#makeRes {
+    margin-top: 3%;
+    float: right;
+    margin-right: 5%;
+}

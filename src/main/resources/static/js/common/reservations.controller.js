@@ -154,6 +154,16 @@
                     .removeChosenRoom(value2);
             });
 
+            if ($rootScope.idOffer) {
+                CommonService
+                    .getAllOffers()
+                    .then(function (response) {
+
+                        _self.offer = response.data.find(r => r.id === $rootScope.idOffer);
+                        _self.offer.startDate = (new Date(_self.offer.startDate)).toLocaleDateString("ro-RO");
+                        _self.offer.endDate = (new Date(_self.offer.endDate)).toLocaleDateString("ro-RO");
+                    });
+            }
         }
 
         init();
@@ -473,6 +483,7 @@
         };
 
         _self.discardRes = function () {
+            $rootScope.idOffer = null;
             _self.closeInterval();
             _self.removeChosenRooms();
             if ($rootScope.user) {

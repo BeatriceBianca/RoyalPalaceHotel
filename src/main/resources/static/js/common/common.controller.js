@@ -13,6 +13,8 @@
 
         $rootScope.user = null;
 
+        $rootScope.idOffer = null;
+
         _self.username = "";
         _self.currentUserPassword = "";
 
@@ -71,9 +73,13 @@
                 .then(function (response) {
 
                     response.data.forEach(function (o) {
-                        o.nr = nr;
-                        nr++;
-                       _self.offers.push(o);
+                        if ((new Date(o.endDate)) >= (new Date())) {
+                            o.nr = nr;
+                            nr++;
+                            o.startDate = (new Date(o.startDate)).toLocaleDateString("ro-RO");
+                            o.endDate = (new Date(o.endDate)).toLocaleDateString("ro-RO");
+                            _self.offers.push(o);
+                        }
                     });
                 });
 
@@ -98,10 +104,15 @@
                 _self.newUser.lastName && _self.newUser.firstName && _self.newUser.userEmail && _self.newUser.phone)
                 return false;
             return true;
-        }
+        };
 
         _self.goTo = function (state) {
             $state.go(state);
-        }
+        };
+
+        _self.makeRes = function(idOffer) {
+            $rootScope.idOffer = idOffer;
+            $state.go('newReservation');
+        };
     }
 })();

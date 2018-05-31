@@ -21,11 +21,13 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     public void newGuest(Guest guest) {
-        guestRepository.save(guest);
+        this.guestRepository.save(guest);
     }
 
     @Override
     public List<Guest> getAll() {
         return (List<Guest>) guestRepository.findAll();
     }
+
+
 }
