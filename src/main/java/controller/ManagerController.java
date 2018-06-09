@@ -6,7 +6,6 @@ import com.hotel.royalpalace.model.info.UserInfo;
 import com.hotel.royalpalace.service.OfferService;
 import com.hotel.royalpalace.service.RoomsService;
 import com.hotel.royalpalace.service.UserService;
-import com.hotel.royalpalace.service.impl.RoomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

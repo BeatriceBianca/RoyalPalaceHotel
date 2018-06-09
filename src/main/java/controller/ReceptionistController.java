@@ -33,8 +33,6 @@ public class ReceptionistController {
     @RequestMapping(value = "/guests")
     public String guests() { return "receptionist/guests"; }
 
-    @RequestMapping(value = "/viewReservations")
-    public String viewReservations() { return "receptionist/viewReservations"; }
 
 //    ------------------------------------------------------------------------------
 

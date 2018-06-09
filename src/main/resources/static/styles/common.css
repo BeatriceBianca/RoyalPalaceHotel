@@ -634,3 +634,14 @@ div.tab .active {
     float: right;
     margin-right: 5%;
 }
+
+.fb-customerchat iframe[name='fb4ccec3a5cd24'] {
+    width: 20%;
+    height: 50%;
+    bottom: 20%;
+    right: 3%;
+}
+
+.fb-customerchat iframe[name='blank_fb4ccec3a5cd24'] body > div > svg:first-child {
+    width: 40px!important;
+}
