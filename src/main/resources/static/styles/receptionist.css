@@ -1,4 +1,21 @@
+#allReservationsTable {
+    padding: 3%;
+    width: auto!important;
+}
 
+#allReservationsTable_wrapper {
+    background-color: rgba(256, 256, 256, 0.6);
+    padding: 1%;
+    margin-top: 5%;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus, .pagination>.active>a:hover,
+.pagination>.active>span, .pagination>.active>span:focus,
+.pagination>.active>span:hover{
+    background-color: #996083;
+    border-color: #996083;
+}
 
 .guests #title {
     height: auto;

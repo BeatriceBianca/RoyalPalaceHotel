@@ -73,7 +73,7 @@
             })
             .state('viewReservations', {
                 // url: '/receptionist/viewReservations',
-                templateUrl: 'maid/viewReservations.html'
+                templateUrl: 'receptionist/viewReservations.html'
                 // controller: 'managerController'
             });
 

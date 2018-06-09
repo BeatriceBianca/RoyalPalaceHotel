@@ -1,15 +1,8 @@
 <div ng-controller="commonController as commonCtrl" class="homeCommon">
-
-    <!-- Your customer chat code -->
     <div class="fb-customerchat"
-         attribution="setup_tool"
          page_id="445680385845191"
-         theme_color="#a695c7"
          minimized="true">
     </div>
-
-    <div id="fb-root"></div>
-
     <script>
         window.fbAsyncInit = function() {
             FB.init({
@@ -27,5 +20,4 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
-
 </div>
