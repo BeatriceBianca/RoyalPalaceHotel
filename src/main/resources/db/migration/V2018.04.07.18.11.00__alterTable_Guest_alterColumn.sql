@@ -1,9 +1,4 @@
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_NAME = 'GUEST' AND COLUMN_NAME = 'GUEST_PHONE')
-  BEGIN
 
-    ALTER TABLE [dbo].[Guest]
+    ALTER TABLE Guest
       ALTER COLUMN
-      [Guest_Phone] VARCHAR(20)
-
-  END
+      Guest_Phone type varchar(20)
