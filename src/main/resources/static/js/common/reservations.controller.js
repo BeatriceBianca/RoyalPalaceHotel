@@ -293,18 +293,6 @@
                     })
             }
         };
-        
-        // _self.validateIdNumber = function () {
-        //     if (_self.guest.idNumber.length === 13) {
-        //         ReservationsService
-        //             .searchByIdNumber(_self.guest.idNumber)
-        //             .then(function (value) {
-        //                 if (value.data !== "") {
-        //                     guestAlreadyExist = true;
-        //                 }
-        //             })
-        //     }
-        // };
 
         function getRoomDetails(event) {
             _self.selectedRoom = allRooms.find(function (room) {
@@ -404,9 +392,11 @@
 
                                 _self.request.requestDate = yyyy + "/" + mm + "/" + dd;
 
-                                _self.request.user = $rootScope.user;
-                                _self.request.user.birthDate = new Date(_self.request.user.birthDate);
-                                _self.request.user.hireDate = new Date(_self.request.user.hireDate);
+                                if ($rootScope.user) {
+                                    _self.request.user = $rootScope.user;
+                                    _self.request.user.birthDate = new Date(_self.request.user.birthDate);
+                                    _self.request.user.hireDate = new Date(_self.request.user.hireDate);
+                                }
 
                                 _self.request.rooms = _self.selectedRooms;
                                 _self.request.lateCheckout = !!_self.lateCheckout;
@@ -422,48 +412,6 @@
                                     })
                             });
                     });
-            // } else {
-            //     ReservationsService
-            //         .searchByEmail(_self.guest.guestEmail)
-            //         .then(function (response) {
-            //
-            //             _self.request.customer = response.data;
-            //
-            //             var today = new Date();
-            //             var dd = today.getDate();
-            //             var mm = today.getMonth()+1;
-            //             var yyyy = today.getFullYear();
-            //
-            //             if (mm.toString().length === 1) {
-            //                 mm = "0" + mm;
-            //             }
-            //
-            //             _self.request.requestDate = yyyy + "/" + mm + "/" + dd;
-            //
-            //             MaidService
-            //                 .getCurrentUser()
-            //                 .then(function (currentUser) {
-            //                     if(currentUser.data) {
-            //                         _self.request.user = currentUser.data;
-            //                     } else {
-            //                         _self.request.user = null;
-            //                     }
-            //
-            //                     _self.request.rooms = _self.selectedRooms;
-            //                     _self.request.lateCheckout = !!_self.lateCheckout;
-            //                     _self.request.lunch = !!_self.lunch;
-            //                     _self.request.dinner = !!_self.dinner;
-            //                     ReservationsService
-            //                         .saveRequest(_self.request)
-            //                         .then(function () {
-            //                             _self.loading = false;
-            //
-            //                             _self.removeChosenRooms();
-            //                             $('#successModal').modal();
-            //                         })
-            //                 });
-            //         });
-            // }
         }
 
         _self.downloadInvoice = function () {
