@@ -312,6 +312,7 @@ div.tab .active {
 #myModal {
     margin: 10% auto;
     text-align: center;
+    height: 100%;
 }
 
 #successModal .modal-dialog {
@@ -633,4 +634,13 @@ div.tab .active {
     margin-top: 3%;
     float: right;
     margin-right: 5%;
+}
+
+#theImg {
+    width:25%;
+    height: 8em;
+}
+
+#theImg:hover {
+    transform: scale(2.5);
 }

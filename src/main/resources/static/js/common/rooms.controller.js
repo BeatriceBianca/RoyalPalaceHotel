@@ -78,6 +78,10 @@
             $('.modal-body p:nth-child(4)').html("");
             $('.modal-body p:nth-child(4)').append('Price: ' + _self.selectedRoom.roomType.price + " &euro;");
 
+            $('.modal-body p:nth-child(5)').html("");
+            $('.modal-body p:nth-child(5)').prepend('<img id="theImg" src="/img/room1.jpg" /> <img id="theImg" src="/img/room2.jpg" />');
+
+
             $('.modal-footer .editButton').html("Edit");
             $('#myModal').modal();
         }
