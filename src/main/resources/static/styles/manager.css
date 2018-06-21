@@ -27,3 +27,19 @@
 textarea {
     resize: none;
 }
+
+#myChart {
+    margin: auto;
+    margin-top: 2%;
+    height: 70%!important;
+    width: 65%!important;
+    padding: 1%;
+}
+
+#reports-select {
+    text-align: center;
+}
+
+#reports-select span {
+    color: white;
+}
