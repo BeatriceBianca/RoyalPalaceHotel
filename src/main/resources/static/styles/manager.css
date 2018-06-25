@@ -34,6 +34,7 @@ textarea {
     height: 70%!important;
     width: 65%!important;
     padding: 1%;
+    display: block;
 }
 
 #reports-select {
@@ -42,4 +43,10 @@ textarea {
 
 #reports-select span {
     color: white;
+}
+
+#addChart p {
+    position: absolute;
+    margin-left: 40%;
+    margin-top: 13%;
 }

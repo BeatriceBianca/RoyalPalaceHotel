@@ -86,12 +86,24 @@
         };
 
         _self.getReports = function () {
-            _self.changeChart('rooms', 0);
+            _self.loading = true;
+
+            ReservationsService
+                .getAllReservations()
+                .then(function (reservations) {
+                    _self.reservations = reservations;
+
+                    _self.changeChart('rooms', "0");
+                });
         };
 
         _self.changeChart = function(type, month) {
 
-            _self.loading = true;
+            if (!_self.loading) {
+                _self.loading = true;
+            }
+
+            $('#addChart p').css('display', 'none');
 
             $('#myChart').remove();
             $('#addChart').append('<canvas id="myChart"></canvas>');
@@ -101,71 +113,137 @@
                 month = _self.monthOption;
             }
 
-            ReservationsService
-                .getAllReservations()
-                .then(function (reservations) {
+            var ctx = document.getElementById("myChart");
 
-                    var ctx = document.getElementById("myChart");
+            if (type === 'rooms') {
+                var roomsType = {
+                    Single: 0,
+                    Double: 0,
+                    Triple: 0,
+                    Twin: 0,
+                    Apartment: 0
+                };
 
-                    if (type === 'rooms') {
-                        var roomsType = {
-                            Single: 0,
-                            Double: 0,
-                            Triple: 0,
-                            Twin: 0,
-                            Apartment: 0
-                        };
+                var tot = 0;
+                _self.reservations.data.forEach(function (reservation) {
 
-                        var tot = 0;
-                        reservations.data.forEach(function (reservation) {
+                    if ((month !== "0" && (((new Date(reservation.arrivalDate)).getMonth() + 1).toString() === month ||
+                            ((new Date(reservation.departureDate)).getMonth() + 1).toString() === month)) || month === "0") {
+                        reservation.rooms.forEach(function (room) {
+                            var roomName = room.roomType.roomName;
 
-                            if ((month !== "0" && ((new Date(reservation.arrivalDate)).getMonth() + 1).toString() === month) || month === 0) {
-                                reservation.rooms.forEach(function (room) {
-                                    var roomName = room.roomType.roomName;
-
-                                    if (roomName.includes('Apartment')) {
-                                        roomsType.Apartment++;
-                                        tot++;
-                                    } else {
-                                        roomsType[roomName]++;
-                                        tot++;
-                                    }
-                                });
+                            if (roomName.includes('Apartment')) {
+                                roomsType.Apartment++;
+                                tot++;
+                            } else {
+                                roomsType[roomName]++;
+                                tot++;
                             }
                         });
+                    }
+                });
 
-                        if (tot) {
-                            var data = {
-                                datasets: [{
-                                    backgroundColor: ['#7165b2', '#8c9de2', '#bea4d2', '#bdccff', '#f0e2f8'],
-                                    data: [roomsType.Single, roomsType.Double, roomsType.Triple, roomsType.Twin, roomsType.Apartment]
-                                }],
+                if (tot) {
 
-                                // These labels appear in the legend and in the tooltips when hovering different arcs
-                                labels: [
-                                    'Single',
-                                    'Double',
-                                    'Triple',
-                                    'Twin',
-                                    'Apartment'
-                                ]
-                            };
-                        } else {
-                            data = null;
-                        }
+                    $('#addChart p').css('display', 'none');
+                    var data = {
+                        datasets: [{
+                            backgroundColor: ['#7165b2', '#8c9de2', '#bea4d2', '#bdccff', '#f0e2f8'],
+                            data: [roomsType.Single, roomsType.Double, roomsType.Triple, roomsType.Twin, roomsType.Apartment]
+                        }],
 
-                        var myChart = new Chart(ctx, {
-                            type: 'doughnut',
-                            data: data
-                        });
+                        // These labels appear in the legend and in the tooltips when hovering different arcs
+                        labels: [
+                            'Single',
+                            'Double',
+                            'Triple',
+                            'Twin',
+                            'Apartment'
+                        ]
+                    };
+                } else {
+                    data = null;
 
-                    } else if (type === 'resByMonth') {
-                        var reservationsByMonths = [];
+                    $('#addChart p').css('display', 'block');
+                }
+
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: data
+                });
+
+            } else if (type === 'resByMonth') {
+                if (month === "0") {
+                    var reservationsByMonth = [];
+                    for (var i = 1; i <= 12; i++) {
+                        reservationsByMonth[i] = 0;
                     }
 
-                    $('#myChart').css('background-color', 'rgba(256, 256, 256, 0.6)');
-                    _self.loading = false;
-                })
+                    _self.reservations.data.forEach(function (reservation) {
+                        reservationsByMonth[((new Date(reservation.arrivalDate)).getMonth() + 1)]++;
+
+                        if (((new Date(reservation.arrivalDate)).getMonth() + 1) !==
+                            ((new Date(reservation.departureDate)).getMonth() + 1)) {
+                            reservationsByMonth[((new Date(reservation.departureDate)).getMonth() + 1)]++;
+                        }
+
+                        $('#addChart p').css('display', 'none');
+                        var data = {
+                            datasets: [{
+                                backgroundColor: ['#36213E', '#7165b2', '#734B5E', '#8c9de2', '#bea4d2', '#9E7682',
+                                    '#4D4861', '#bdccff', '#BAABBD', '#f0e2f8', '#554971', '#B486AB'],
+                                data: reservationsByMonth
+                            }],
+
+                            // These labels appear in the legend and in the tooltips when hovering different arcs
+                            labels: [
+                                'January',
+                                'February',
+                                'March',
+                                'April',
+                                'May',
+                                'June',
+                                'July',
+                                'August',
+                                'September',
+                                'October',
+                                'November',
+                                'December'
+                            ]
+                        };
+
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: data,
+                            options: {
+                                legend: { display: false },
+                                title: {
+                                    display: false
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            fontColor: "black",
+                                            fontSize: 16
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            fontColor: "black",
+                                            fontSize: 16
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    });
+                } else {
+                    console.log("else");
+                }
+            }
+
+            $('#myChart').css('background-color', 'rgba(256, 256, 256, 0.6)');
+            _self.loading = false;
         }
     }
 
