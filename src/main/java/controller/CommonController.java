@@ -1,5 +1,6 @@
 package controller;
 
+import com.hotel.royalpalace.auxiliary.Encryption;
 import com.hotel.royalpalace.auxiliary.PDF;
 import com.hotel.royalpalace.auxiliary.SmtpMailSender;
 import com.hotel.royalpalace.model.*;
@@ -26,6 +27,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,6 +62,10 @@ public class CommonController {
     @Autowired
     PDF pdf;
 
+    private static final String ALPHA_CAPS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String ALPHA = "abcdefghijklmnopqrstuvwxyz";
+    private static final String NUMERIC = "0123456789";
+
 //    Pages Mapping
 
     @RequestMapping(value = "/home")
@@ -75,12 +82,6 @@ public class CommonController {
 
     @RequestMapping(value = "/newReservation")
     public String getNewReservationContent() {
-//        try {
-//            smtpMailSender.sendToSingle("bianca.luca96@gmail.com", "Reservation request",
-//                    "Thank you for your request");
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
         return "common/newReservation";
     }
 
@@ -198,6 +199,35 @@ public class CommonController {
         return new ResponseEntity<>(offerService.getAllOffers(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/changePass", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public String changePassword(@RequestParam(value = "username") String email,
+                                 HttpServletRequest request) throws NoSuchAlgorithmException {
+
+        User user = userService.getByUserEmail(email);
+
+        if(user != null) {
+
+            String pass = generatePassword(6, ALPHA_CAPS + ALPHA + NUMERIC);
+            user.setUserPassword(Encryption.computeMD5(pass));
+
+            String message = "Dear " + user.getFirstName() + ",<br/><br/>"
+                    + "Your temporary password on Royal Palace Hotel is : "
+                    + pass + "<br/><br/> Please change your password at first use!";
+            try {
+                userService.saveUser(user);
+                smtpMailSender.sendToSingle(user.getUserEmail(), "Reset Password", message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return "login";
+        }
+
+        return redirectToPage();
+    }
+
     private String redirectToPage() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         authentication.getAuthorities();
@@ -220,5 +250,15 @@ public class CommonController {
         }
 
         return "index";
+    }
+
+    private static String generatePassword(int len, String dic) {
+        SecureRandom random = new SecureRandom();
+        String result = "";
+        for (int i = 0; i < len; i++) {
+            int index = random.nextInt(dic.length());
+            result += dic.charAt(index);
+        }
+        return result;
     }
 }

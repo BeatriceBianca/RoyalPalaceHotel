@@ -15,27 +15,49 @@
 <body ng-controller="loginController as lg">
 
 <div class="login-container">
-    <div class="login-top">
-        <img src="/img/hotel-logo.png"/>
-    </div>
-    <div class="login-bottom">
-        <form name="login" action="login" method="POST" class="loginForm">
-            <input name="username" type="text" placeholder="Email" /><br/><br/>
-            <input name="password" type="password" placeholder="Password" /><br/>
+    <div id="login-part">
+        <div class="login-top">
+            <img src="/img/hotel-logo.png"/>
+        </div>
+        <div class="login-bottom">
+            <form name="login" action="login" method="POST" class="loginForm">
+                <input name="username" type="text" placeholder="Email" /><br/><br/>
+                <input name="password" type="password" placeholder="Password" /><br/>
 
-            <button class="button" type="submit">Sign in</button>
-        </form>
+                <button class="button" type="submit">Sign in</button>
+            </form>
 
+        </div>
+        <div class="login-footer">
+            <div class="forgot-password">
+                <span ng-click="lg.forgotPass()">Forgot Password</span>?
+            </div>
+        </div>
     </div>
-    <div class="login-footer">
-        <div class="forgot-password">
-            <span ng-click="lg.forgotPass()">Forgot Password</span>?
+
+    <div id="password-part">
+        <div class="login-top">
+            <img src="/img/hotel-logo.png"/>
+        </div>
+        <div class="login-bottom">
+            <form name="changePass" action="common/changePass" method="POST" class="loginForm">
+                <input name="username" type="text" placeholder="Enter your email" /><br/><br/>
+                <div> You will receive an email with details. </div>
+                <button class="button" type="submit">Enter</button>
+            </form>
+
+        </div>
+        <div class="login-footer">
+            <div class="forgot-password">
+                <span ng-click="lg.forgotPass()">Forgot Password</span>?
+            </div>
         </div>
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angular-ui-router/1.0.0-rc.1/angular-ui-router.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="/js/module.js"></script>
 <script src="/js/login/login.controller.js"></script>
 <script src="/js/login/login.service.js"></script>

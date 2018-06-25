@@ -15,4 +15,6 @@ public interface UserService {
 
     void changePassword(User user,String newPassword) throws NoSuchAlgorithmException;
 
+    void saveUser(User user);
+
 }
