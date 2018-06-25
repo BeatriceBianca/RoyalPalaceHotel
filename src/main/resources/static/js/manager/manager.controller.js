@@ -114,8 +114,13 @@
             }
 
             var ctx = document.getElementById("myChart");
+            var ctx2D = ctx.getContext('2d');
 
             if (type === 'rooms') {
+
+                $('#monthSelection').css('background-color', 'white');
+                $('#monthSelection').prop('disabled', false);
+
                 var roomsType = {
                     Single: 0,
                     Double: 0,
@@ -173,73 +178,153 @@
                 });
 
             } else if (type === 'resByMonth') {
+
+                _self.monthOption = "0";
+                month = "0";
+                $('#monthSelection').css('background-color', 'lightgrey');
+                $('#monthSelection').prop('disabled', 'disabled');
+
                 if (month === "0") {
                     var reservationsByMonth = [];
-                    for (var i = 1; i <= 12; i++) {
+                    for (var i = 0; i <= 11; i++) {
                         reservationsByMonth[i] = 0;
                     }
 
                     _self.reservations.data.forEach(function (reservation) {
-                        reservationsByMonth[((new Date(reservation.arrivalDate)).getMonth() + 1)]++;
+                        reservationsByMonth[((new Date(reservation.arrivalDate)).getMonth())]++;
 
-                        if (((new Date(reservation.arrivalDate)).getMonth() + 1) !==
-                            ((new Date(reservation.departureDate)).getMonth() + 1)) {
-                            reservationsByMonth[((new Date(reservation.departureDate)).getMonth() + 1)]++;
+                        if (((new Date(reservation.arrivalDate)).getMonth()) !==
+                            ((new Date(reservation.departureDate)).getMonth())) {
+                            reservationsByMonth[((new Date(reservation.departureDate)).getMonth())]++;
                         }
-
-                        $('#addChart p').css('display', 'none');
-                        var data = {
-                            datasets: [{
-                                backgroundColor: ['#36213E', '#7165b2', '#734B5E', '#8c9de2', '#bea4d2', '#9E7682',
-                                    '#4D4861', '#bdccff', '#BAABBD', '#f0e2f8', '#554971', '#B486AB'],
-                                data: reservationsByMonth
-                            }],
-
-                            // These labels appear in the legend and in the tooltips when hovering different arcs
-                            labels: [
-                                'January',
-                                'February',
-                                'March',
-                                'April',
-                                'May',
-                                'June',
-                                'July',
-                                'August',
-                                'September',
-                                'October',
-                                'November',
-                                'December'
-                            ]
-                        };
-
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: data,
-                            options: {
-                                legend: { display: false },
-                                title: {
-                                    display: false
-                                },
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            fontColor: "black",
-                                            fontSize: 16
-                                        }
-                                    }],
-                                    xAxes: [{
-                                        ticks: {
-                                            fontColor: "black",
-                                            fontSize: 16
-                                        }
-                                    }]
-                                }
-                            }
-                        });
                     });
-                } else {
-                    console.log("else");
+
+                    var gradientStroke = ctx2D.createLinearGradient(0, 0, 700, 0);
+                    gradientStroke.addColorStop(0, "#f0e2f8");
+                    gradientStroke.addColorStop(0.25, "#e2d0ef");
+                    gradientStroke.addColorStop(0.5, "#bea4d2");
+                    gradientStroke.addColorStop(0.75, "#9f7abc");
+                    gradientStroke.addColorStop(1, "#2e0f2b");
+
+                    $('#addChart p').css('display', 'none');
+                    data = {
+                        datasets: [{
+                            backgroundColor: gradientStroke,
+                            hoverBackgroundColor: gradientStroke,
+                            data: reservationsByMonth
+                        }],
+
+                        // These labels appear in the legend and in the tooltips when hovering different arcs
+                        labels: [
+                            'January',
+                            'February',
+                            'March',
+                            'April',
+                            'May',
+                            'June',
+                            'July',
+                            'August',
+                            'September',
+                            'October',
+                            'November',
+                            'December'
+                        ]
+                    };
+
+                    myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: data,
+                        options: {
+                            legend: { display: false },
+                            title: {
+                                display: false
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        fontColor: "black",
+                                        fontSize: 16
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        fontColor: "black",
+                                        fontSize: 16
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
                 }
+                // else {
+                //     var monthlyReservations = [];
+                //     var daysLabel = [];
+                //
+                //     for (i = 0; i <= (new Date((new Date()).getFullYear(), parseInt(month) + 1, 0)).getDate() - 1; i++) {
+                //         monthlyReservations[i] = 0;
+                //         daysLabel[i] = i+1;
+                //     }
+                //
+                //     _self.reservations.data.forEach(function (reservation) {
+                //
+                //         if (((new Date(reservation.arrivalDate)).getMonth()).toString() === month ||
+                //                 ((new Date(reservation.departureDate)).getMonth()).toString() === month) {
+                //
+                //             monthlyReservations[((new Date(reservation.arrivalDate)).getMonth())]++;
+                //
+                //             if (((new Date(reservation.arrivalDate)).getMonth()) !==
+                //                 ((new Date(reservation.departureDate)).getMonth())) {
+                //                 monthlyReservations[((new Date(reservation.departureDate)).getMonth())]++;
+                //             }
+                //
+                //         }
+                //     });
+                //
+                //     gradientStroke = ctx2D.createLinearGradient(0, 0, 700, 0);
+                //     gradientStroke.addColorStop(0, "#f0e2f8");
+                //     gradientStroke.addColorStop(0.25, "#e2d0ef");
+                //     gradientStroke.addColorStop(0.5, "#bea4d2");
+                //     gradientStroke.addColorStop(0.75, "#9f7abc");
+                //     gradientStroke.addColorStop(1, "#2e0f2b");
+                //
+                //     $('#addChart p').css('display', 'none');
+                //     data = {
+                //         datasets: [{
+                //             backgroundColor: gradientStroke,
+                //             hoverBackgroundColor: gradientStroke,
+                //             data: monthlyReservations
+                //         }],
+                //
+                //         // These labels appear in the legend and in the tooltips when hovering different arcs
+                //         labels: daysLabel
+                //     };
+                //
+                //     myChart = new Chart(ctx, {
+                //         type: 'bar',
+                //         data: data,
+                //         options: {
+                //             legend: { display: false },
+                //             title: {
+                //                 display: false
+                //             },
+                //             scales: {
+                //                 yAxes: [{
+                //                     ticks: {
+                //                         fontColor: "black",
+                //                         fontSize: 16
+                //                     }
+                //                 }],
+                //                 xAxes: [{
+                //                     ticks: {
+                //                         fontColor: "black",
+                //                         fontSize: 16
+                //                     }
+                //                 }]
+                //             }
+                //         }
+                //     });
+                // }
             }
 
             $('#myChart').css('background-color', 'rgba(256, 256, 256, 0.6)');
