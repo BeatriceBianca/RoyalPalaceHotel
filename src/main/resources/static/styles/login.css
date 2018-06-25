@@ -129,3 +129,7 @@ body {
 .login-container .login-bottom .newAccountForm input:first-child {
     margin-top: 20%;
 }
+
+#password-part {
+    display: none;
+}

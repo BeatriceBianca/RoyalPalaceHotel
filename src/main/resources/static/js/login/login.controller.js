@@ -19,7 +19,6 @@
 
             $('#login-part').css('display', 'block');
             $('#login-part').css('height', '100%');
-            $('#password-part').css('display', 'none');
         }
 
         init();
