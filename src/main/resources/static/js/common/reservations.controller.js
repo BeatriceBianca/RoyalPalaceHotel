@@ -318,6 +318,9 @@
             $('#myModal .modal-body p:nth-child(4)').html("");
             $('#myModal .modal-body p:nth-child(4)').append('Price: ' + _self.selectedRoom.roomType.price + " &euro;");
 
+            $('#myModal .modal-body p:nth-child(5)').html("");
+            $('#myModal .modal-body p:nth-child(5)').prepend('<img class="theImg" src="/img/' + _self.selectedRoom.roomType.roomName + '1.jpg" /> <img class="theImg" src="/img/' + _self.selectedRoom.roomType.roomName + '2.jpg" />');
+
             if ($('.r'+_self.selectedRoom.roomNumber).hasClass('chosenRoom')) {
                 $('#myModal .modal-footer .chooseButton').html("Discard");
             } else {

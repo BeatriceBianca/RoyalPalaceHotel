@@ -312,6 +312,7 @@ div.tab .active {
 #myModal {
     margin: 10% auto;
     text-align: center;
+    height: 100%;
 }
 
 #successModal .modal-dialog {
@@ -445,6 +446,13 @@ div.tab .active {
     width: 10%;
 }
 
+.theImg {
+    width:25%;
+    height: 8em;
+}
+.theImg:hover {
+    transform: scale(2.5);
+}
 
 /*Save Reservation page*/
 

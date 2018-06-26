@@ -78,6 +78,9 @@
             $('.modal-body p:nth-child(4)').html("");
             $('.modal-body p:nth-child(4)').append('Price: ' + _self.selectedRoom.roomType.price + " &euro;");
 
+            $('.modal-body p:nth-child(5)').html("");
+            $('.modal-body p:nth-child(5)').prepend('<img class="theImg" src="/img/' + _self.selectedRoom.roomType.roomName + '1.jpg" /> <img class="theImg" src="/img/' + _self.selectedRoom.roomType.roomName + '2.jpg" />');
+
             $('.modal-footer .editButton').html("Edit");
             $('#myModal').modal();
         }
@@ -105,10 +108,12 @@
                         $('.modal-body p:first-child').html("");
                         $('.modal-body p:first-child').append("Room Type: " + "<select id='typesList'>" + options + "</select>");
 
-                        $('.modal-body p:last-child').html("");
-                        $('.modal-body p:last-child').append("Price: " + "<input type='text' id='price' value=" + _self.selectedRoom.roomType.price +
+                        $('.modal-body p:nth-child(4)').html("");
+                        $('.modal-body p:nth-child(4)').append("Price: " + "<input type='text' id='price' value=" + _self.selectedRoom.roomType.price +
                             " /> <br/> <span> * You will change the price of all " + _self.selectedRoom.roomType.roomName+ " rooms </span>");
 
+                        $('.modal-body p:nth-child(5)').html("");
+                        $('.modal-body p:nth-child(5)').prepend('<img class="theImg" src="/img/' + _self.selectedRoom.roomType.roomName + '1.jpg" /> <img class="theImg" src="/img/' + _self.selectedRoom.roomType.roomName + '2.jpg" />');
 
                         $('.modal-body select').val(_self.selectedRoom.roomType.id);
 
@@ -117,15 +122,16 @@
 
                         $('#typesList').on('change', updatePrice);
                     } else {
+
                         _self.selectedRoom.roomType = _self.roomTypes.find(function (r) {
                             if (r.id.toString() === $('.modal-body select').val()) {
                                 return r;
                             }
                         });
 
-                        if ($('.modal-body p:last-child input').val() !== _self.selectedRoom.roomType.price.toString()) {
+                        if ($('.modal-body p:nth-child(4) input').val() !== _self.selectedRoom.roomType.price.toString()) {
 
-                            _self.selectedRoom.roomType.price = $('.modal-body p:last-child input').val();
+                            _self.selectedRoom.roomType.price = $('.modal-body p:nth-child(4) input').val();
 
                             ManagerService
                                 .editPrice(_self.selectedRoom.roomType)
@@ -156,7 +162,7 @@
                     return type;
                 }
             });
-            $('.modal-body p:last-child input').val(selectedValue.price);
+            $('.modal-body p:nth-child(4) input').val(selectedValue.price);
         }
     }
 })();
