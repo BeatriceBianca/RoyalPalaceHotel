@@ -59,11 +59,11 @@
                         bLengthChange: false,
                         data: datasets,
                         columns: [
-                            { title: "Name" },
-                            { title: "Email" },
-                            { title: "Phone"},
-                            { title: "Address"},
-                            { title: "Register Date" }
+                            { title: "Name", type: "html" },
+                            { title: "Email", type: "html" },
+                            { title: "Phone", type: "html", orderable: false},
+                            { title: "Address", type: "html", orderable: false},
+                            { title: "Register Date", type: "date" }
                         ]
                     } );
                     _self.loading = false;

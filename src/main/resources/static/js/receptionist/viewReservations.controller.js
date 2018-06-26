@@ -45,11 +45,12 @@
                         bLengthChange: false,
                         data: datasets,
                         columns: [
-                            { title: "Name" },
-                            { title: "ArrivalDate" },
-                            { title: "DepartureDate"},
-                            { title: "Rooms." }
-                        ]
+                            { title: "Name", type: "html" },
+                            { title: "ArrivalDate", type: "date" },
+                            { title: "DepartureDate", type: "date"},
+                            { title: "Rooms.", type: "html", orderable: false }
+                        ],
+                        "order": [[ 1, "desc" ]]
                     } );
                     _self.loading = false;
                 });
