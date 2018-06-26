@@ -92,7 +92,7 @@
 
                 <div class="form-group" ng-class="{ 'has-error': requestForm.nrOfPerson.$dirty &amp;&amp; requestForm.nrOfPerson.$error.required }">
                     <label for="nrOfPerson">Number of person</label>
-                    <input type="text" name="nrOfPerson" id="nrOfPerson" class="form-control" ng-model="res.nrOfPerson" required="required"/>
+                    <input type="number" name="nrOfPerson" id="nrOfPerson" class="form-control" ng-model="res.nrOfPerson" required="required"/>
                 </div>
 
             </div>
@@ -535,7 +535,7 @@
 
         <form name="customRequestForm" role="form" ng-show="res.viewCustomReq">
 
-            <div class="saveRequest">
+            <div class="saveRequest optionalRequest">
 
                 <div class="checkbox">
                     <label><input type="checkbox" name="lateCheckout" id="lateCheckout" ng-model="res.lateCheckout" ng-checked="res.offer.lateCheckout"/>Late checkout</label>
@@ -551,7 +551,7 @@
 
             </div>
 
-            <div class="saveRoom-buttons">
+            <div class="saveRoom-buttons optionalRequest-buttons">
                 <div class="form-actions editRequest-button">
                     <button type="button" class="btn" ng-click="res.viewCustomReq=false;res.viewRoom=true;res.saveRequestedDate()">
                         Previous </button>

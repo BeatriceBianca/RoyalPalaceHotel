@@ -35,6 +35,7 @@
                 .getCurrentUser()
                 .then(function (response) {
                     _self.username = response.data.firstName;
+                    $('#welcomeSpan').html('Welcome, ' + response.data.firstName + '!');
                     if (response.data !== "") {
                         _self.user = response.data;
                         _self.user.birthDate = $filter('date')(response.data.birthDate, "yyyy/MM/dd");

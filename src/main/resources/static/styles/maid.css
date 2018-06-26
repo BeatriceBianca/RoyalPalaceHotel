@@ -7,6 +7,10 @@
     width: 80%;
 }
 
+.editAccount-button, .newAccount-button {
+    margin-top: -7%;
+}
+
 .editAccount-button, .changePassword-button,
 .newAccount-button, .newOffer-button {
     text-align: right;
@@ -14,7 +18,7 @@
 
 .changePassword-button {
     margin-right: 15%;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .editAccount-button button, .changePassword-button button,

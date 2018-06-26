@@ -508,6 +508,10 @@ div.tab .active {
     margin-top: -2%;
 }
 
+.optionalRequest-buttons {
+    margin-left: 15%;
+}
+
 .reservations .elevator {
     margin: 10% auto 10% auto;
 }
@@ -695,4 +699,9 @@ div.tab .active {
     background-color: #996083;
     color: white;
     font-size: 0.7em;
+}
+
+.optionalRequest {
+    margin-left: 35%;
+    margin-top: 5%;
 }
