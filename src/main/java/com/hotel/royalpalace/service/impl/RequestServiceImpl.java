@@ -37,6 +37,9 @@ public class RequestServiceImpl implements RequestService {
     @Override
     @Transactional(readOnly = true)
     public List<ChosenRooms> getAllRChosenRooms() {
+        for(ChosenRooms ch: chosenRoomRepository.findAll()) {
+            chosenRoomRepository.delete(ch);
+        }
         return chosenRoomRepository.findAll();
     }
 
