@@ -234,7 +234,7 @@ public class CommonController {
                                    @RequestParam(value = "message", required = false) String message,
                                  HttpServletRequest request) throws NoSuchAlgorithmException, MessagingException {
 
-        smtpMailSender.sendToSingle("royalpalace.service@gmail.com", name, message + "<br/><br/> Email address: " + email);
+        smtpMailSender.sendToSingle("royalpalace.service@gmail.com", name, message.replace("\n", "<br/>") + "<br/><br/> Email address: " + email);
 
         return redirectToPage();
     }
