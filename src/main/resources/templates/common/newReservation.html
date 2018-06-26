@@ -521,7 +521,7 @@
                     <button type="button" class="btn" ng-click="res.viewRoom=false;res.viewRequest=true;res.closeInterval()">
                         Previous </button>
                 </div>
-                <div ng-if="res.offer" class="offerInfoRoom"> * Promotion room type is {{res.offer.roomType.roomName}} </div>
+                <div ng-if="res.offer" class="offerInfoRoom"> * Promotion room type is {{res.offer.roomType ? res.offer.roomType.roomName : 'All' }} </div>
                 <div class="form-actions saveReservation-button">
                     <button type="button" class="btn" ng-click="res.viewCustomReq=true;res.viewRoom=false;res.closeInterval()"
                             ng-disabled="res.selectedRooms.length == 0">
