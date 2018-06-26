@@ -421,7 +421,7 @@
             ReservationsService
                 .getPdf(_self.request)
                 .then(function (response) {
-                    var fileName = "test.pdf";
+                    var fileName = "Invoice.pdf";
                     var a = document.createElement("a");
                     document.body.appendChild(a);
 
