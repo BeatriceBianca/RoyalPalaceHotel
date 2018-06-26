@@ -228,6 +228,17 @@ public class CommonController {
         return redirectToPage();
     }
 
+    @RequestMapping(value = "/sendContactEmail", method = RequestMethod.POST)
+    public String sendContactEmail(@RequestParam(value = "name", required = false) String name,
+                                   @RequestParam(value = "mail", required = false) String email,
+                                   @RequestParam(value = "message", required = false) String message,
+                                 HttpServletRequest request) throws NoSuchAlgorithmException, MessagingException {
+
+        smtpMailSender.sendToSingle("royalpalace.service@gmail.com", name, message + "<br/><br/> Email address: " + email);
+
+        return redirectToPage();
+    }
+
     private String redirectToPage() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         authentication.getAuthorities();

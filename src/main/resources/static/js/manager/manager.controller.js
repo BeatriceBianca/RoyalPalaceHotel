@@ -27,6 +27,10 @@
         
         function init() {
 
+            if($window.location.href.includes('sendContactEmail')) {
+                $window.location.href = '/manager';
+            }
+
             MaidService
                 .getCurrentUser()
                 .then(function (response) {

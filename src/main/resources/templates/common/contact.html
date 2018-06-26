@@ -1,3 +1,52 @@
 <div ng-controller="commonController as commonCtrl">
-    contact
+
+    <div id="contactPage">
+        <h2> Get in touch with us </h2>
+
+        <div>
+            Unirii Boulevard, Bucharest <br/>
+            royalpalace.service@gmail.com <br/>
+            +40727849165 <br/>
+        </div>
+        <button ng-click="commonCtrl.showMap()" id="showMap" class="btn"> View on map </button>
+        <iframe id="googleMaps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2849.347276150755!2d26.11203243416245!3d44.42603817946401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff189b1f32b1%3A0x77f1c4784b791f72!2sUnnamed+Road%2C+Bucure%C8%99ti+030167!5e0!3m2!1sro!2sro!4v1530022551917" width="600" height="450" frameborder="0" style="border:0" allowfullscreen="allowfullscreen"></iframe>
+        <br/><br/>
+        <div> Or send us an email: </div><br/>
+        <button ng-click="commonCtrl.sendEmail()" id="sendEmail" class="btn"> Send email </button> <br/>
+        <div id="emailPart">
+            <form action="common/sendContactEmail" method="post">
+                Title: &nbsp;&nbsp;&nbsp;
+                <input type="text" name="name" required="required"/>&nbsp;
+                Your E-mail: &nbsp;
+                <input type="text" name="mail" required="required"/><br/>
+                Message:<br/><br/>
+                <textarea rows="4" ng-model="commonCtrl.textareaInput" name="message" required="required"> </textarea><br/><br/>
+                <input type="submit" value="Send" class="btn"/>
+                <input type="reset" value="Reset" class="btn"/>
+            </form>
+        </div>
+    </div>
+
+    <div class="fb-customerchat"
+         page_id="445680385845191"
+         minimized="true"
+         theme_color="#a695c7">
+    </div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId            : '912333495590130',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v2.11'
+            });
+        };
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </div>

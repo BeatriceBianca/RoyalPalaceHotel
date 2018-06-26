@@ -642,3 +642,57 @@ div.tab .active {
     float: right;
     margin-right: 5%;
 }
+
+#googleMaps {
+    width: 60%;
+    height: 50%;
+    margin-left: 20%;
+    margin-top: 2%;
+    display: none;
+}
+
+#contactPage {
+    width: 80%;
+    margin: auto;
+    background-color: rgba(256, 256, 256, 0.6);
+}
+
+#contactPage h2 {
+    text-align: center;
+    padding-top: 3%;
+}
+
+#contactPage div {
+    text-align: center;
+    color: black;
+}
+
+#contactPage form {
+    text-align: center;
+    padding-bottom: 1%;
+}
+
+#showMap {
+    background-color: #996083;
+    color: white;
+    font-size: 0.7em;
+    margin-left: 45%;
+}
+
+#sendEmail {
+    display: none;
+    background-color: #996083;
+    color: white;
+    font-size: 0.7em;
+    margin-left: 45%;
+}
+
+#contactPage form textarea {
+    width: 60%;
+}
+
+#contactPage form input.btn {
+    background-color: #996083;
+    color: white;
+    font-size: 0.7em;
+}

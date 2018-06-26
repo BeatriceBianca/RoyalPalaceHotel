@@ -23,6 +23,10 @@
         _self.loading = false;
         function init() {
 
+            if($window.location.href.includes('sendContactEmail')) {
+                $window.location.href = '';
+            }
+
             MaidService
                 .getCurrentUser()
                 .then(function (response) {
@@ -82,10 +86,30 @@
                         }
                     });
                 });
-
         }
 
         init();
+
+        _self.showMap =function () {
+          if ($('#googleMaps').css('display') === 'none') {
+              $('#googleMaps').css('display', 'block');
+              $('#emailPart').css('display', 'none');
+              $('#sendEmail').css('display', 'block');
+              $('#showMap').html("Hide map");
+          } else {
+              $('#googleMaps').css('display', 'none');
+              $('#showMap').html("View on map");
+              $('#emailPart').css('display', 'block');
+              $('#sendEmail').css('display', 'none');
+          }
+        };
+
+        _self.sendEmail =function () {
+            $('#googleMaps').css('display', 'none');
+            $('#showMap').html("View on map");
+            $('#emailPart').css('display', 'block');
+            $('#sendEmail').css('display', 'none');
+        };
 
         _self.login = function () {
             $window.location.href = '/login';
