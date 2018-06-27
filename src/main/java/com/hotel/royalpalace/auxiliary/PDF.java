@@ -205,7 +205,7 @@ public class PDF extends HttpServlet {
                 table.addCell(cell);
             }
 
-            if (requestInfo.getLateCheckout() || currentOffer.size() != 0 ? currentOffer.get(0).getLateCheckout() : false) {
+            if (requestInfo.getLateCheckout() || (currentOffer.size() != 0 ? currentOffer.get(0).getLateCheckout() : false)) {
                 nrNo++;
                 cellText = new Phrase("" + nrNo);
                 cell = new PdfPCell(cellText);
@@ -241,7 +241,7 @@ public class PDF extends HttpServlet {
                 table.addCell(cell);
             }
 
-            if (requestInfo.getLunch() || currentOffer.size() != 0 ? currentOffer.get(0).getLunch() : false) {
+            if (requestInfo.getLunch() || (currentOffer.size() != 0 ? currentOffer.get(0).getLunch() : false)) {
                 nrNo++;
                 cellText = new Phrase("" + nrNo);
                 cell = new PdfPCell(cellText);
@@ -277,7 +277,7 @@ public class PDF extends HttpServlet {
                 table.addCell(cell);
             }
 
-            if (requestInfo.getDinner() || currentOffer.size() != 0 ? currentOffer.get(0).getDinner() : false) {
+            if (requestInfo.getDinner() || (currentOffer.size() != 0 ? currentOffer.get(0).getDinner() : false)) {
                 nrNo++;
                 cellText = new Phrase("" + nrNo);
                 cell = new PdfPCell(cellText);
@@ -549,7 +549,7 @@ public class PDF extends HttpServlet {
             table.addCell(cell);
         }
 
-        if (requestInfo.getLateCheckout() || currentOffer.size() != 0 ? currentOffer.get(0).getLateCheckout() : false) {
+        if (requestInfo.getLateCheckout() || (currentOffer.size() != 0 ? currentOffer.get(0).getLateCheckout() : false)) {
             nrNo++;
             cellText = new Phrase("" + nrNo);
             cell = new PdfPCell(cellText);
@@ -585,7 +585,7 @@ public class PDF extends HttpServlet {
             table.addCell(cell);
         }
 
-        if (requestInfo.getLunch() || currentOffer.size() != 0 ? currentOffer.get(0).getLunch() : false) {
+        if (requestInfo.getLunch() || (currentOffer.size() != 0 ? currentOffer.get(0).getLunch() : false)) {
             nrNo++;
             cellText = new Phrase("" + nrNo);
             cell = new PdfPCell(cellText);
@@ -621,7 +621,7 @@ public class PDF extends HttpServlet {
             table.addCell(cell);
         }
 
-        if (requestInfo.getDinner() || currentOffer.size() != 0 ? currentOffer.get(0).getDinner() : false) {
+        if (requestInfo.getDinner() || (currentOffer.size() != 0 ? currentOffer.get(0).getDinner() : false)) {
             nrNo++;
             cellText = new Phrase("" + nrNo);
             cell = new PdfPCell(cellText);
