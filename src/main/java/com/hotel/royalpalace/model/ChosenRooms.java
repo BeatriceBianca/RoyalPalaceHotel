@@ -3,7 +3,7 @@ package com.hotel.royalpalace.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "CHOSEN_ROOMS")
+@Table(name = "CHOSEN_ROOMS2")
 public class ChosenRooms {
 
     @Id
