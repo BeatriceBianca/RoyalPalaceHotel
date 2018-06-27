@@ -35,10 +35,10 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-//    @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<ChosenRooms> getAllRChosenRooms() {
 
-        chosenRoomRepository.deleteAll();
+//        chosenRoomRepository.deleteAll();
         return chosenRoomRepository.findAll();
     }
 
