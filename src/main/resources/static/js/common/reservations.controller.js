@@ -193,32 +193,37 @@
                         });
                     });
 
-                    ReservationsService
-                        .getAllChosenRooms()
-                        .then(function (response) {
+                    if (_self.user) {
+                        ReservationsService
+                            .getAllChosenRooms()
+                            .then(function (response) {
 
-                            $('.chosenRooms').on('click', getRoomDetails);
-                            $('.chosenRooms').css('cursor', 'pointer');
-                            $('.chosenRooms').removeClass('chosenRooms');
+                                $('.chosenRooms').on('click', getRoomDetails);
+                                $('.chosenRooms').css('cursor', 'pointer');
+                                $('.chosenRooms').removeClass('chosenRooms');
 
-                            response.data.forEach(function (chosenRooms) {
+                                response.data.forEach(function (chosenRooms) {
 
-                                if (_self.selectedRoom) {
-                                    if (_self.selectedRoom.id === chosenRooms.room.id) {
-                                        if (chosenRooms.sessionId !== randomId) {
-                                            $('#myModal').modal('toggle');
+                                    if (_self.selectedRoom) {
+                                        if (_self.selectedRoom.id === chosenRooms.room.id) {
+                                            if (chosenRooms.sessionId !== randomId) {
+                                                $('#myModal').modal('toggle');
+                                            }
                                         }
                                     }
-                                }
 
-                                if (chosenRooms.sessionId !== randomId) {
-                                    $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
-                                    $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
-                                    $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
-                                }
+                                    if (chosenRooms.sessionId !== randomId) {
+                                        $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
+                                        $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
+                                        $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
+                                    }
+                                });
+                                _self.loading = false;
                             });
-                            _self.loading = false;
-                        });
+                    } else {
+                        _self.loading = false;
+                    }
+
                 });
 
             refreshRooms = setInterval(function() {
@@ -247,32 +252,36 @@
                             });
                         });
 
-                        ReservationsService
-                            .getAllChosenRooms()
-                            .then(function (response) {
+                        if(_self.user) {
+                            ReservationsService
+                                .getAllChosenRooms()
+                                .then(function (response) {
 
-                                $('.chosenRooms').on('click', getRoomDetails);
-                                $('.chosenRooms').css('cursor', 'pointer');
-                                $('.chosenRooms').removeClass('chosenRooms');
+                                    $('.chosenRooms').on('click', getRoomDetails);
+                                    $('.chosenRooms').css('cursor', 'pointer');
+                                    $('.chosenRooms').removeClass('chosenRooms');
 
-                                response.data.forEach(function (chosenRooms) {
+                                    response.data.forEach(function (chosenRooms) {
 
-                                    if (_self.selectedRoom) {
-                                        if (_self.selectedRoom.id === chosenRooms.room.id) {
-                                            if (chosenRooms.sessionId !== randomId) {
-                                                $('#myModal').modal('toggle');
+                                        if (_self.selectedRoom) {
+                                            if (_self.selectedRoom.id === chosenRooms.room.id) {
+                                                if (chosenRooms.sessionId !== randomId) {
+                                                    $('#myModal').modal('toggle');
+                                                }
                                             }
                                         }
-                                    }
 
-                                    if (chosenRooms.sessionId !== randomId) {
-                                    $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
-                                    $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
-                                    $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
-                                    }
+                                        if (chosenRooms.sessionId !== randomId) {
+                                            $('.r'+chosenRooms.room.roomNumber).addClass('chosenRooms');
+                                            $('.r'+chosenRooms.room.roomNumber).off('click', getRoomDetails);
+                                            $('.r'+chosenRooms.room.roomNumber).css('cursor', 'context-menu');
+                                        }
+                                    });
+                                    _self.loading = false;
                                 });
-                                _self.loading = false;
-                            });
+                        } else {
+                            _self.loading = false;
+                        }
                     })
             },5000);
         };
