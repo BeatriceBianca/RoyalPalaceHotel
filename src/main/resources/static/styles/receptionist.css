@@ -9,6 +9,16 @@
     margin-top: 5%;
 }
 
+#allGuestsTable_wrapper {
+    background-color: rgba(256, 256, 256, 0.6);
+    padding: 1%;
+}
+
+#allGuestsTable {
+    width: auto!important;
+    padding: 3%;
+}
+
 .pagination>.active>a,
 .pagination>.active>a:focus, .pagination>.active>a:hover,
 .pagination>.active>span, .pagination>.active>span:focus,

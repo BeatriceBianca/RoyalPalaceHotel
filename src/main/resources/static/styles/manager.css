@@ -6,16 +6,6 @@
     display: flex;
 }
 
-#allGuestsTable_wrapper {
-    background-color: rgba(256, 256, 256, 0.6);
-    padding: 1%;
-}
-
-#allGuestsTable {
-    width: auto!important;
-    padding: 3%;
-}
-
 .newAccountPage #title, .newOfferPage #title {
     height: auto;
     text-align: center;
