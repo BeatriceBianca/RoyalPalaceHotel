@@ -67,7 +67,7 @@ public class ManagerController {
                           @RequestParam(value = "birthDate") Date birthDate,
                           @RequestParam(value = "hireDate") Date hireDate,
                           @RequestParam(value = "phone") String phone) throws NoSuchAlgorithmException {
-//        TODO
+//        TODO - add user role
         UserInfo userInfo = new UserInfo(lastName, firstName, null, birthDate, hireDate, phone, email, null);
         userService.createUser(userInfo);
 

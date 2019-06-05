@@ -38,15 +38,6 @@ public class ReceptionistController {
 
 //    ------------------------------------------------------------------------------
 
-    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
-//    @RequestMapping(value = "/findByIdNumber", method = RequestMethod.GET)
-//    public ResponseEntity findByIdNumber(@RequestParam(value = "idNumber") String idNumber,
-//                                    HttpServletRequest request) {
-//
-//        return new ResponseEntity<>(null, HttpStatus.OK);
-//    }
-
     @RequestMapping(value = "/getAllGuests", method = RequestMethod.GET)
     public ResponseEntity getAllReservations() {
 

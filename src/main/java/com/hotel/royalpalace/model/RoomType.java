@@ -1,5 +1,7 @@
 package com.hotel.royalpalace.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,11 +27,13 @@ public class RoomType {
     @Column(name = "price")
     private float price;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "roomType")
     private Set<Offer> offers = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "roomType")

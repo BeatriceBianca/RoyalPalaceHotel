@@ -41,9 +41,8 @@ public class RoomServiceImpl implements RoomsService {
     @Override
     public void editRoomType(Room room) {
 
-        Room newRoom = room;
         try {
-            roomRepository.save(newRoom);
+            roomRepository.save(room);
         } catch (Exception e) {
             e.printStackTrace();
         }

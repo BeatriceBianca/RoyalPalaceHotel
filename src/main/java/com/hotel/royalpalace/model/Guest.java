@@ -1,5 +1,7 @@
 package com.hotel.royalpalace.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -36,6 +38,7 @@ public class Guest {
     @Column(name = "register_date")
     private Date registerDate;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "customer")

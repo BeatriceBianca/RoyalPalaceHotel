@@ -1,5 +1,6 @@
 package com.hotel.royalpalace.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hotel.royalpalace.model.info.UserInfo;
 
 import javax.persistence.*;
@@ -48,6 +49,7 @@ public class User {
     @Column(name = "user_password")
     private String userPassword;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "user")

@@ -92,12 +92,14 @@ public class CommonController {
 
     @RequestMapping(value = "/getAllRooms", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllRooms(HttpServletRequest request) {
-        return new ResponseEntity<>(roomsService.getAllRooms(), HttpStatus.OK);
+        List<Room> rooms = roomsService.getAllRooms();
+        return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getAllRoomTypes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllRoomTypes(HttpServletRequest request) {
-        return new ResponseEntity<>(roomsService.getAllRoomTypes(), HttpStatus.OK);
+        List<RoomType> rooms = roomsService.getAllRoomTypes();
+        return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getReservationsBetweenDates", method = RequestMethod.GET)

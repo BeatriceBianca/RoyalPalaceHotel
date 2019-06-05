@@ -1,5 +1,7 @@
 package com.hotel.royalpalace.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +22,7 @@ public class Room {
     @Column(name = "room_number")
     private int roomNumber;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "room")
