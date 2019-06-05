@@ -1,6 +1,8 @@
 package com.hotel.royalpalace.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "HOTEL_ROOMS")
@@ -18,6 +20,11 @@ public class Room {
     @Column(name = "room_number")
     private int roomNumber;
 
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "room")
+    private Set<ChosenRooms> chosenRooms = new HashSet<>();
+
     public RoomType getRoomType() { return roomType; }
 
     public void setRoomType(RoomType roomType) { this.roomType = roomType; }
@@ -29,6 +36,14 @@ public class Room {
     public int getRoomNumber() { return roomNumber; }
 
     public void setRoomNumber(int roomNumber) { this.roomNumber = roomNumber; }
+
+    public Set<ChosenRooms> getChosenRooms() {
+        return chosenRooms;
+    }
+
+    public void setChosenRooms(Set<ChosenRooms> chosenRooms) {
+        this.chosenRooms = chosenRooms;
+    }
 
     public Room() {}
 

@@ -30,7 +30,7 @@ public class RoyalPalaceAuthenticationProvider implements AuthenticationProvider
         try {
             if (user != null && Encryption.computeMD5(password).equals(user.getUserPassword())) {
                 List<GrantedAuthority> grantedAuths = new ArrayList<>();
-                grantedAuths.add(new SimpleGrantedAuthority(user.getUserRole()));
+                grantedAuths.add(new SimpleGrantedAuthority(user.getUserRole().getName()));
                 return new UsernamePasswordAuthenticationToken(email, password, grantedAuths);
             } else {
                 return null;

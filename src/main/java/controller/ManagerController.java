@@ -67,7 +67,8 @@ public class ManagerController {
                           @RequestParam(value = "birthDate") Date birthDate,
                           @RequestParam(value = "hireDate") Date hireDate,
                           @RequestParam(value = "phone") String phone) throws NoSuchAlgorithmException {
-        UserInfo userInfo = new UserInfo(lastName, firstName, role, birthDate, hireDate, phone, email, null);
+//        TODO
+        UserInfo userInfo = new UserInfo(lastName, firstName, null, birthDate, hireDate, phone, email, null);
         userService.createUser(userInfo);
 
         return "redirect:/manager";

@@ -1,7 +1,7 @@
 package controller;
 
-import com.hotel.royalpalace.model.Guest;
 import com.hotel.royalpalace.model.User;
+import com.hotel.royalpalace.model.enums.Roles;
 import com.hotel.royalpalace.service.GuestService;
 import com.hotel.royalpalace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,27 +29,7 @@ public class BaseController {
 
     @RequestMapping(value = "/")
     public String redirectToIndex() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        authentication.getAuthorities();
-        String email;
-        if (authentication.getPrincipal() instanceof User) {
-            email = ((User) authentication.getPrincipal()).getUserEmail();
-        } else {
-            email = authentication.getName();
-        }
-        if (!email.equals("anonymousUser")) {
-            User user = userService.getByUserEmail(email);
-
-            if (user.getUserRole().equals("MANAGER")) {
-                return "redirect:/manager";
-            } else if (user.getUserRole().equals("RECEPTIONIST")) {
-                return "redirect:/receptionist";
-            } else if (user.getUserRole().equals("MAID")) {
-                return "redirect:/maid";
-            }
-        }
-
-        return "index";
+        return userService.redirect();
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -57,52 +37,14 @@ public class BaseController {
                                HttpServletRequest request) {
         if (logout != null) {
             request.getSession().invalidate();
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            authentication.getAuthorities();
-            String email;
-            if (authentication.getPrincipal() instanceof User) {
-                email = ((User) authentication.getPrincipal()).getUserEmail();
-            } else {
-                email = authentication.getName();
-            }
-            if (!email.equals("anonymousUser")) {
-                User user = userService.getByUserEmail(email);
 
-                if (user.getUserRole().equals("MANAGER")) {
-                    return "redirect:/manager";
-                } else if (user.getUserRole().equals("RECEPTIONIST")) {
-                    return "redirect:/receptionist";
-                } else if (user.getUserRole().equals("MAID")) {
-                    return "redirect:/maid";
-                }
-            }
-
-            return "index";
         }
         return "login";
     }
 
     @RequestMapping(value = "/success", method = RequestMethod.GET)
-    public String successRedirect() throws NoSuchAlgorithmException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        authentication.getAuthorities();
-        String email;
-        if (authentication.getPrincipal() instanceof User) {
-            email = ((User) authentication.getPrincipal()).getUserEmail();
-        } else {
-            email = authentication.getName();
-        }
-        User user = userService.getByUserEmail(email);
-
-        if (user.getUserRole().equals("MANAGER")) {
-            return "redirect:/manager";
-        } else if (user.getUserRole().equals("RECEPTIONIST")) {
-            return "redirect:/receptionist";
-        } else if (user.getUserRole().equals("MAID")) {
-            return "redirect:/maid";
-        }
-
-        return "redirect:/error";
+    public String successRedirect() {
+        return userService.redirect();
     }
 
     @RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,4 +1,4 @@
 
     ALTER TABLE Guest
-      ALTER COLUMN
-      Guest_Phone type varchar(20)
+      MODIFY
+      Guest_Phone varchar(20)

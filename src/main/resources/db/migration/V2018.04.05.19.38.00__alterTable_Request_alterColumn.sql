@@ -1,4 +1,4 @@
 
     ALTER TABLE Request
-    ALTER COLUMN USER_ID type INT;
+    MODIFY USER_ID INT;
 

@@ -43,10 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Auth
                 .antMatchers("/").permitAll()
                 .antMatchers("/offers").permitAll()
                 .antMatchers("/rooms").permitAll()
-                .antMatchers("/manager/**").hasAuthority("MANAGER")
-                .antMatchers("/receptionist/**").hasAnyAuthority("MANAGER","RECEPTIONIST")
-                .antMatchers("/maid/**").hasAnyAuthority("MANAGER","RECEPTIONIST","MAID")
-                .antMatchers("/guest/**").hasAnyAuthority("MANAGER","RECEPTIONIST","MAID","GUEST")
+                .antMatchers("/manager/**").hasAuthority("Manager")
+                .antMatchers("/receptionist/**").hasAnyAuthority("Manager","Receptionist")
+                .antMatchers("/maid/**").hasAnyAuthority("Manager","Receptionist","Maid")
+                .antMatchers("/guest/**").hasAnyAuthority("Manager","Receptionist","Maid","GUEST")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
@@ -84,13 +84,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Auth
         boolean isMaid = false;
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("MANAGER")) {
+            if (grantedAuthority.getAuthority().equals("Manager")) {
                 isManager = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("RECEPTIONIST")) {
+            } else if (grantedAuthority.getAuthority().equals("Receptionist")) {
                 isReceptionist = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("MAID")) {
+            } else if (grantedAuthority.getAuthority().equals("Maid")) {
                 isMaid = true;
                 break;
             }

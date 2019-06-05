@@ -4,6 +4,8 @@ import com.hotel.royalpalace.model.info.UserInfo;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Beatrice Bianca on 16-Jul-17.
@@ -24,8 +26,9 @@ public class User {
     @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "user_role")
-    private String userRole;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_role", referencedColumnName = "id")
+    private Role userRole;
 
     @Column(name = "birth_date")
     private Date birthDate;
@@ -39,14 +42,16 @@ public class User {
     @Column(name = "phone_number")
     private String phone;
 
-//    @Column(columnDefinition = "varchar(255)")
-//    private String imagePath;
-
     @Column(name = "user_email")
     private String userEmail;
 
     @Column(name = "user_password")
     private String userPassword;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user")
+    private Set<Request> requests = new HashSet<>();
 
     public Long getId() { return id; }
 
@@ -60,9 +65,13 @@ public class User {
 
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public String getUserRole() { return userRole; }
+    public Role getUserRole() {
+        return userRole;
+    }
 
-    public void setUserRole(String userRole) { this.userRole = userRole; }
+    public void setUserRole(Role userRole) {
+        this.userRole = userRole;
+    }
 
     public Date getBirthDate() { return birthDate; }
 
@@ -79,10 +88,6 @@ public class User {
     public String getPhone() { return phone; }
 
     public void setPhone(String phone) { this.phone = phone; }
-//
-//    public String getImagePath() { return imagePath; }
-//
-//    public void setImagePath(String imagePath) { this.imagePath = imagePath; }
 
     public String getUserEmail() { return userEmail; }
 
@@ -91,6 +96,14 @@ public class User {
     public String getUserPassword() { return userPassword; }
 
     public void setUserPassword(String userPassword) { this.userPassword = userPassword; }
+
+    public Set<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Set<Request> requests) {
+        this.requests = requests;
+    }
 
     public User() {}
 

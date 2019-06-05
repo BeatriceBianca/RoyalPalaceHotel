@@ -1,12 +1,14 @@
 package com.hotel.royalpalace.model.info;
 
+import com.hotel.royalpalace.model.Role;
+
 import java.util.Date;
 
 public class UserInfo {
 
     private String lastName;
     private String firstName;
-    private String userRole;
+    private Role userRole;
     private Date birthDate;
     private Date hireDate;
     private String phone;
@@ -29,11 +31,11 @@ public class UserInfo {
         this.firstName = firstName;
     }
 
-    public String getUserRole() {
+    public Role getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(String userRole) {
+    public void setUserRole(Role userRole) {
         this.userRole = userRole;
     }
 
@@ -81,7 +83,7 @@ public class UserInfo {
 
     }
 
-    public UserInfo(String lastName, String firstName, String userRole, Date birthDate, Date hireDate, String phone, String userEmail, String password) {
+    public UserInfo(String lastName, String firstName, Role userRole, Date birthDate, Date hireDate, String phone, String userEmail, String password) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.userRole = userRole;

@@ -1,6 +1,7 @@
 package controller;
 
 import com.hotel.royalpalace.model.User;
+import com.hotel.royalpalace.model.enums.Roles;
 import com.hotel.royalpalace.model.info.UserInfo;
 import com.hotel.royalpalace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,26 +74,6 @@ public class MaidController {
     }
 
     private String redirectToPage() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        authentication.getAuthorities();
-        String email;
-        if (authentication.getPrincipal() instanceof User) {
-            email = ((User) authentication.getPrincipal()).getUserEmail();
-        } else {
-            email = authentication.getName();
-        }
-        if (!email.equals("anonymousUser")) {
-            User user = userService.getByUserEmail(email);
-
-            if (user.getUserRole().equals("MANAGER")) {
-                return "redirect:/manager";
-            } else if (user.getUserRole().equals("RECEPTIONIST")) {
-                return "redirect:/receptionist";
-            } else if (user.getUserRole().equals("MAID")) {
-                return "redirect:/maid";
-            }
-        }
-
-        return "index";
+        return userService.redirect();
     }
 }

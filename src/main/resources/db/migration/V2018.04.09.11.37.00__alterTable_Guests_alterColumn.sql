@@ -1,4 +1,4 @@
 
     ALTER TABLE Guest
-      ALTER COLUMN
-      Guest_Email type VARCHAR(100)
+      MODIFY
+      Guest_Email VARCHAR(100)

@@ -2,6 +2,8 @@ package com.hotel.royalpalace.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Beatrice Bianca on 04-Mar-17.
@@ -34,6 +36,11 @@ public class Guest {
     @Column(name = "register_date")
     private Date registerDate;
 
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "customer")
+    private Set<Request> requests = new HashSet<>();
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -61,6 +68,14 @@ public class Guest {
     public Date getRegisterDate() { return registerDate; }
 
     public void setRegisterDate(Date registerDate) { this.registerDate = registerDate; }
+
+    public Set<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Set<Request> requests) {
+        this.requests = requests;
+    }
 
     public Guest() {}
 

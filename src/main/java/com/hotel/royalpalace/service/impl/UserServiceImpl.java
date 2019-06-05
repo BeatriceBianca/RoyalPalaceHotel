@@ -3,10 +3,13 @@ package com.hotel.royalpalace.service.impl;
 import com.hotel.royalpalace.auxiliary.Encryption;
 import com.hotel.royalpalace.auxiliary.SmtpMailSender;
 import com.hotel.royalpalace.model.User;
+import com.hotel.royalpalace.model.enums.Roles;
 import com.hotel.royalpalace.model.info.UserInfo;
 import com.hotel.royalpalace.repository.UserRepository;
 import com.hotel.royalpalace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -85,6 +88,31 @@ public class UserServiceImpl implements UserService{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String redirect() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        authentication.getAuthorities();
+        String email;
+        if (authentication.getPrincipal() instanceof User) {
+            email = ((User) authentication.getPrincipal()).getUserEmail();
+        } else {
+            email = authentication.getName();
+        }
+        if (!email.equals("anonymousUser")) {
+            User user = getByUserEmail(email);
+
+            if (user.getUserRole().getName().equals(Roles.MANAGER.getDescription())) {
+                return "redirect:/manager";
+            } else if (user.getUserRole().getName().equals(Roles.RECEPTIONIST.getDescription())) {
+                return "redirect:/receptionist";
+            } else if (user.getUserRole().getName().equals(Roles.MAID.getDescription())) {
+                return "redirect:/maid";
+            }
+        }
+
+        return "index";
     }
 
     private static String generatePassword(int len, String dic) {
